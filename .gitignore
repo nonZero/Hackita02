@@ -1,0 +1,9 @@
+*.orig
+*.py[cod]
+/hackita02/local_settings.py
+/node_modules/
+/bower_components/
+/dumps/
+/uploads/
+*~
+*.pot

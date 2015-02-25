@@ -1,0 +1,15 @@
+# Tools
+ipython==3.0.0rc1
+
+# General libs
+pytz==2014.10
+bleach==1.4.1
+Markdown==2.6
+Pillow==2.7.0
+
+# Django
+Django==1.7.5
+django-authtools==1.1.0
+django-braces==1.4.0
+django-extensions==1.5.0
+django-floppyforms==1.3.0

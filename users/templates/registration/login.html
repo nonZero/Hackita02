@@ -1,0 +1,28 @@
+{% extends "registration/base.html" %}
+
+{% block content %}
+
+    <form class="form-signin" role="form"
+          method="post" action="{% url 'login' %}">
+        <h2 class="form-signin-heading">LMS Login</h2>
+        {% if form.errors %}
+            <div class="alert alert-danger">Your username and password didn't
+                match. Please try again.
+            </div>
+        {% endif %}
+
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+            in
+        </button>
+        <input type="hidden" name="next" value="{{ next }}"/>
+
+        <p class="help">
+            <i>Need help? Contact <a href="mailto:udi@10x.org.il">udi@10x.org.il</a>
+            </i></p>
+    </form>
+
+{% endblock %}
