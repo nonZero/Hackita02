@@ -1,0 +1,10 @@
+{% load hackita %}
+<a href="{% url "projects:create" %}">Create</a>
+<ul>
+    {% for object in object_list %}
+        <li>
+            <b>{{ object|u }}</b>
+            {{ object.created_by }}
+        </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,74 @@
+{% extends 'website/base.html' %}
+{% load i18n %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/user.css">
+    {% block page_css %}
+    {% endblock %}
+{% endblock %}
+
+{% block content_container %}
+    <div class="user-container">
+        <div class="container user-container">
+
+            {% if user.id %}
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-right">
+                            <form method="post"
+                                  action="{% url 'users:logout' %}">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="btn-sm btn btn-default">{% trans 'Sign Out' %}</button>
+                            </form>
+                        </div>
+                        {% trans "You are logged in as" %} {{ user.email }}
+                        {#                        {% if user.community_member or user.is_staff %}#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "community" %}">{% trans "Community" %}</a>#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "project:list" %}">{% trans "Projects" %}</a>#}
+                        {#                        {% endif %}#}
+                        {#                        {% if user.is_staff %}#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "users" %}">{% trans "Users" %}</a>#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "cohorts" %}">{% trans "Cohorts" %}</a>#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "events" %}">{% trans "Events" %}</a>#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "surveys" %}">{% trans "Surveys" %}</a>#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "users_log" %}">{% trans "Log" %}</a>#}
+                        {#                            &bull;#}
+                        {#                            <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>#}
+                        {#                        {% endif %}#}
+                    </div>
+                </div>
+
+                {% if breadcrumbs %}
+                    <ul class="breadcrumbs">
+                        {% for title, url in breadcrumbs %}
+                            <li>
+                                <a href="{{ url }}">{{ title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+
+
+            {% endif %}
+
+            {% include 'users/_messages.html' %}
+
+            <div>
+                {% block content %}
+                {% endblock %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

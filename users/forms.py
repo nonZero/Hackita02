@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import ugettext_lazy as _
-import floppyforms as forms
+import floppyforms.__future__ as forms
+from . import models
 
 
 class BetterEmailInput(forms.EmailInput):
@@ -21,18 +22,27 @@ class BetterPasswordInput(forms.PasswordInput):
         return ctx
 
 
-class CustomAuthenticationForm(forms.Form, AuthenticationForm):
+class LoginForm(forms.Form, AuthenticationForm):
     username = forms.CharField(max_length=254, widget=BetterEmailInput)
     password = forms.CharField(label=_("Password"),
                                widget=BetterPasswordInput)
 
 
-class ImportUsersForm(forms.Form):
-    program = forms.ModelChoiceField(Program.objects.all(),
-                                     label=_("Program"),
-                                     widget=forms.Select)
-    password = forms.CharField(label=_("Password"),
-                               widget=forms.PasswordInput)
-    text = forms.CharField(label=_("TSV Text"), widget=forms.Textarea,
-                           help_text=_("First row must be columns, and should"
-                                       " contain email and name"))
+class PersonalInfoForm(forms.ModelForm):
+    class Meta:
+        model = models.PersonalInfo
+        exclude = (
+            'user',
+        )
+        # fields = (
+        #     'hebrew_first_name',
+        #     'hebrew_last_name',
+        #     'english_first_name',
+        #     'english_last_name',
+        #     'main_phone',
+        #     'alt_phone',
+        #     'city',
+        #     'address',
+        #     'gender',
+        #     'skype_username',
+        # )

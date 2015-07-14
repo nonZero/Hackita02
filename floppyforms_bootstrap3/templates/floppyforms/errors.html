@@ -1,0 +1,8 @@
+{% if errors %}
+    <ul class="list-unstyled text-danger">
+        {% for error in errors %}
+            <li><i class="glyphicon glyphicon-warning-sign"></i>
+                <b>{{ error }}</b></li>
+        {% endfor %}
+    </ul>
+{% endif %}

@@ -1,0 +1,111 @@
+{% extends 'website/base.html' %}
+{% block content_container %}
+
+    <div>
+        <div id="intro" class="pull-up">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7 col-md-6 col-lg-5">
+                        <div class="shady">
+
+                            <h1>הכיתה Hackita 02</h1>
+
+                            <h3>
+                                שמונה שבועות של
+                        <span class="things">
+                            <span class="active">
+                                עשיה
+                            </span>
+                            <span>
+                                פיתוח תוכנה
+                            </span>
+                            <span>
+                                יצירה
+                            </span>
+                            <span>
+                                בניה
+                            </span>
+                            <span>
+                                למידה
+                            </span>
+                            <span>
+                                תרומה
+                            </span>
+                            <span>
+                                עבודת צוות
+                            </span>
+                            <span>
+                                יזמות
+                            </span>
+                        </span>
+
+                            </h3>
+
+                            <h3>
+                                מחזור שני
+                                -
+                                חורף 2015
+                                -
+                                ירושלים
+                            </h3>
+
+                            <ul class="list-unstyled">
+                                <li>
+                                    תמיד רצית לכתוב תוכנה למען החברה?
+                                </li>
+                                <li>
+                                    ללמוד לעבוד עם כלי קוד פתוח?
+                                </li>
+                                <li>
+                                    לפתח יישומי Web מתקדמים?
+                                </li>
+                                <li>
+                                    מעוניין לעבוד יחד עם עוד מפתחים וללמוד אחד
+                                    מהשני?
+                                </li>
+                                <li>
+                                    <b>זאת ההזדמנות שלך!</b>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="teaser">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <p>
+                            הסדנא לידע ציבורי מזמינה אותך לתכנית יחודית למפתחי
+                            תוכנה.
+                            <br/>
+                            הצטרף אלינו לשמונה שבועות של יצירה בסתיו הקרוב,
+                            ותוכל
+                            גם אתה להגשים חלום.
+                        </p>
+                    </div>
+
+                    <div class="col-sm-5 text-center">
+                        <a href="{% url 'program' %}" class="btn btn-primary"> לפרטים
+                            נוספים &raquo; </a>&nbsp;
+                        <a href="{% url 'sa:dashboard' %}" class="btn btn-primary">
+                            להרשמה
+                            לתכנית &raquo; </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ STATIC_URL }}js/home.js"></script>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'website/base.html' %}
+{% block content_container %}
+
+    <div>
+
+        <div id="howitworks"  class="pull-up">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h1> איך זה עובד? </h1>
+
+                        <p>
+                            <b>
+                                החל מה-21/10/2015 ולמשך שמונה שבועות נפגש יחד,
+                                קבוצה של כעשרים מפתחי תוכנה ונעבוד בצוותא בימי
+                                רביעי
+                                בספריה הלאומית בירושלים,
+                                נלמד זה ומזה ונבנה מיזמים נבחרים בתחום המידע
+                                הפתוח, על בסיס מאגרי המידע של הספריה.
+                            </b>
+                        </p>
+
+                        <p>
+                            התכנית מיועדת למפתחים המעוניינים לפתח פרויקט אישי
+                            ומוכנים להתחייב להגיע ל-8 שעות לפחות מדי שבוע,
+                            ותכלול ליווי והנחיה רצופה ממפתחים פעילים מהסדנא.
+                            בהמשך נשתף פעולה גם עם מעצבים ואנשי תוכן מתנדבים
+                            בסדנא,
+                            ונכיר גם את פרויקטים הקיימים של הסדנא כמו כנסת
+                            פתוחה או
+                            רשויות מקומיות פתוחות.
+                        </p>
+                        <a class="btn btn-primary navbar-btn btn-lg"
+                           href="{% url 'sa:dashboard' %}">
+                            <b>להרשמה</b>
+                            <i class="fa fa-play fa-flip-horizontal"></i>
+                        </a>
+                    </div>
+                    <div class="col-sm-5">
+                        {% include "website/_techs.html" %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="luz">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="box">
+                            <h2> לוח זמנים
+                            </h2>
+                            <ul>
+                                <li>
+                                    <b>הרשמה ובחירת פרויקטים:</b>
+                                    יולי-אוגוסט
+                                </li>
+
+                                <li>
+                                    <b>ימי מיון, שיבוץ לפרויקטים והכנות
+                                        מוקדמות:</b>
+                                    ספטמבר-אוקטובר
+                                </li>
+                                <li>
+                                    <b>תחילת התכנית:</b>
+                                    21/10
+                                </li>
+                                <li>
+                                    <b>שבועות 1-2:</b>
+                                    הכרות עם הסדנא, עם מאגרי המידע של הספריה
+                                    ווהתנסות בטכנולוגיות בשימוש הסדנא
+                                </li>
+                                <li>
+                                    <b>שבועות 3-8:</b>
+                                    עבודה על מיזמים בזוגות
+                                </li>
+                                <li>
+                                    <b>
+                                        הצגת תוצרי הכיתה:
+                                    </b>
+                                    ינואר 2016 - אירוע פתוח לציבור
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="box">
+
+                            <h2> תאריכים חשובים </h2>
+                            <b>ימי מיון</b>
+                            <ul>
+                                <li>3/9, 16:00-20:30</li>
+                                <li>9/9, 10:00-14:30</li>
+                            </ul>
+
+
+                            <b>
+                                מפגשי התכנית
+                            </b>
+                            <ul>
+
+                                <li>ימי רביעי, 10:00-18:00</li>
+
+                                <li>21/10, 28/10, 4/11, 11/11,
+                                    <br/>
+                                    18/11, 25/11, 2/12, 16/12.
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        {% comment %}
+      <div id="mentors">
+          <div class="row">
+              <div class="large-12 columns">
+                  <h2> צוות מלווה </h2>
+              </div>
+          </div>
+          <div class="row">
+              <div class="large-3 small-6 columns text-center">
+                  <div class="circular einstein"></div>
+              </div>
+              <div class="large-3 small-6 columns text-center">
+                  <div class="circular einstein"></div>
+              </div>
+              <div class="large-3 small-6 columns text-center">
+                  <div class="circular einstein"></div>
+              </div>
+              <div class="large-3 small-6 columns text-center">
+                  <div class="circular einstein"></div>
+              </div>
+          </div>
+      
+      </div>
+      
+    {% endcomment %}
+    </div>
+{% endblock %}

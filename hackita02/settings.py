@@ -2,18 +2,10 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-
 DEBUG = False
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
-
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -29,6 +21,10 @@ INSTALLED_APPS = (
 
     'users',
 
+    'website',
+    'projects',
+    'q13es',
+    'student_applications',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,14 +45,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'hackita02',
-        'USER': 'hackita02',
-        'PASSWORD': 'hackita02',
-        'HOST': 'localhost',
+        # 'USER': 'hackita02',
+        # 'PASSWORD': 'hackita02',
+        # 'HOST': 'localhost',
     }
 }
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'he-il'
 
@@ -74,6 +67,10 @@ LOGIN_REDIRECT_URL = "home"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected-static')
 STATIC_URL = '/static/'
@@ -136,9 +133,11 @@ LOGGING = {
         },
         'py.warnings': {
             'handlers': ['console'],
+            'level': 'ERROR',
         },
     }
 }
 
 
-from local_settings import *
+from .local_settings import *
+

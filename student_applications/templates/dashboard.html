@@ -1,0 +1,94 @@
+{% extends 'users/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                {% trans "Registration" %}
+            </h1>
+        </div>
+
+        {% comment %}
+        <div class="panel-body">
+            <p>
+
+            </p>
+        </div>
+        {% endcomment %}
+
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <i class="fa {% if needs_personal_details %}fa-square-o{% else %}fa-check{% endif %}"></i>
+                {% trans "Part" %} 1:
+                {% trans "Personal details" %}
+                {% if needs_personal_details %}
+                    <div class="registration-step">
+                        <a href="{% url "sa:personal_details" %}"
+                           class="btn btn-primary btn-lg">
+                            {% trans "Enter Personal Details" %}
+                            &nbsp;
+                            <i class="fa fa-play fa-flip-horizontal"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </li>
+
+            <li class="list-group-item">
+                <i class="fa {% if not registered %}fa-square-o{% else %}fa-check{% endif %}"></i>
+                {% trans "Part" %} 2:
+                {% trans "Registration Questionnaire" %}
+                {% if not needs_personal_details %}
+                    <div class="registration-step">
+                        {% if registered %}
+                            <a href="{% url "sa:review" %}"
+                               class="btn btn-default">
+                                {% trans "Review your answers" %}
+                            </a>
+                        {% else %}
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <a href="{% url "sa:register" %}"
+                                       class="btn btn-primary btn-lg">
+                                        {% if filled_count %}
+                                            {% trans "Continue Questionnaire" %}
+                                        {% else %}
+                                            {% trans "Start Questionnaire" %}
+                                        {% endif %}
+                                        &nbsp;
+                                        <i class="fa fa-play fa-flip-horizontal"></i>
+                                    </a>
+                                </div>
+
+                                {% if filled_count %}
+                                    <div class="col-md-4">
+                                        {% include 'student_applications/_progress.html' %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </li>
+
+            <li class="list-group-item">
+                <i class="fa {% if True %}fa-square-o{% else %}fa-check{% endif %}"></i>
+                {% trans "Part" %} 3:
+                {% trans "Choose projects" %}
+                <div class="registration-step">
+                    {% trans "This section will open during August." %}
+                </div>
+
+            </li>
+
+        </ul>
+    </div>
+
+
+
+
+
+{% endblock %}

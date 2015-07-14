@@ -1,16 +1,17 @@
 from __future__ import unicode_literals
 
-from authtools.admin import NamedUserAdmin
+from authtools.admin import UserAdmin
 from django.contrib import admin
 
 from users import models
 
 
-class LMSUserAdmin(NamedUserAdmin):
+class UserAdmin(UserAdmin):
     list_display = (
-        'name',
-        'is_active',
         'email',
+        'hebrew_display_name',
+        'english_display_name',
+        'is_active',
         'is_staff',
         'is_superuser',
         'last_login',
@@ -19,4 +20,4 @@ class LMSUserAdmin(NamedUserAdmin):
     date_hierarchy = "last_login"
 
 
-admin.site.register(models.User, LMSUserAdmin)
+admin.site.register(models.User, UserAdmin)

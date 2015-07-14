@@ -1,0 +1,24 @@
+{% extends 'website/base.html' %}
+
+{% block content_container %}
+
+    <div id="faq">
+        <div class="container">
+
+
+            <h1> שאלות ותשובות </h1>
+
+
+            <div class="row">
+                <dl>
+                    {% for col in faq %}
+                        <div class="col-sm-6">
+                            {{ col|safe }}
+                        </div>
+                    {% endfor %}
+                </dl>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

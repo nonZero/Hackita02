@@ -1,0 +1,308 @@
+body {
+    font-family: 'Alef', sans-serif;
+    direction: rtl;
+}
+
+.ib {
+    display: inline-block;
+}
+
+.top-bar {
+}
+
+.pull-up {
+    margin-top: -20px;
+}
+
+.top-bar.navbar {
+    border-radius: 0;
+}
+
+.top-bar .navbar-brand {
+    text-shadow: 2px 2px black;
+    color: white;
+    font-weight: bold;
+}
+
+.top-bar .navbar-brand.active {
+    background: black;
+}
+
+
+h2 {
+    margin-top: 35px;
+    color: white;
+}
+
+.title-area h1 {
+    font-family: 'Montserrat', 'Alef', sans-serif;
+}
+
+#intro {
+    padding: 30px 0 0;
+    background: url('../img/top-bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: #eee;
+}
+
+#intro .shady {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin: 0 0 30px 0;
+}
+
+#intro .shady ul {
+    font-size: larger;
+}
+
+
+#intro h1 {
+    margin-top: 5px;
+    margin-bottom: 0;
+    text-shadow: 2px 2px black;
+    color: white;
+    font-weight: bold;
+}
+
+#intro h3 {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    color: white;
+    font-weight: bold;
+}
+
+#intro h1, #intro h3 {
+    color: white;
+    font-family: 'Montserrat', 'Alef', sans-serif;
+}
+
+.things {
+    position: relative;
+    display: inline-block;
+    width: 42%;
+    height: 1em;
+}
+
+.things span {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    transition: opacity 0.8s ease-out;
+    -webkit-transition: opacity 1s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.things span.active {
+    opacity: 1;
+    height: auto;
+}
+
+.toolbar {
+    background: black;
+}
+
+#teaser {
+    background: #672115;
+    color: white !important;
+    padding: 15px 0 5px;
+}
+
+#teaser p {
+    margin-bottom: 5px;
+}
+
+#teaser .button {
+}
+
+#howitworks {
+    background: url('../img/program-bg.png') no-repeat center center;
+    background-size: cover;
+    color: white !important;
+    padding: 10px 0;
+}
+
+#howitworks p{
+    font-size: larger;
+}
+
+#suggest {
+    background: green;
+    color: white !important;
+    padding: 10px 0;
+}
+
+#luz {
+    background: url('../img/program2-bg.png') no-repeat center center;
+    background-size: cover;
+    color: white !important;
+    padding: 10px 0;
+}
+
+#techs {
+}
+
+#techs .box {
+    background: none;
+}
+
+#techs .box li {
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 0 15px;
+}
+
+.box h2 {
+    color: black;
+    margin-bottom: 0;
+}
+
+.box ul {
+    padding: 0 20px;
+}
+
+.box li {
+    margin: 0;
+    padding: 0 0 3px;
+}
+
+#howitworks .box ul {
+    padding: 0 5px;
+}
+
+#howitworks .box li {
+    padding: 0.6em 0;
+}
+
+#howitworks .box li:last-child {
+}
+
+#howitworks .box li b {
+    font-size: 1.2em;
+}
+
+#luz .tech .techs li {
+    text-align: center;
+}
+
+#mentors {
+    background: yellow;
+    color: white !important;
+    padding: 10px 0;
+}
+
+.circular {
+    width: 200px;
+    height: 200px;
+    border-radius: 200px;
+    -webkit-border-radius: 200px;
+    -moz-border-radius: 200px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    margin: 0 auto;
+}
+
+#sponsors {
+    padding: 20px;
+    color: black;
+    border-bottom: #f7f7f7 15px solid;
+}
+
+.b4hasadna, .hasadna {
+    font-size: 36px;
+}
+
+.b4hasadna {
+    color: #444;
+}
+
+.hasadna img {
+    width: 30px;
+    height: 30px;
+}
+
+#sponsors .x {
+    background: white;
+    border: 1px solid #eee;
+    padding: 5px;
+}
+
+#sponsors .ctlvtxt {
+    line-height: 80px;
+}
+
+#sponsors .ctlv {
+    height: 80px;
+}
+
+#sponsors .sponsor {
+    text-align: center;
+}
+
+#faq {
+    color: black;
+    padding: 10px 0;
+}
+
+#faq h2, #sponsors h2 {
+    color: black;
+}
+
+#faq dl {
+    font-size: larger;
+}
+
+#faq dd {
+    margin-bottom: 30px;
+}
+
+.htmlcontent {
+
+}
+
+.htmlcontent p {
+    margin-bottom: 0.25em;
+}
+
+.htmlcontent ul {
+    padding: 0 1.5em;
+}
+
+.panel.problem {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #c60f13;
+    margin-bottom: 1.25em;
+    padding: 1.25em;
+    background: #d59392;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+#blog_list {
+    color: black;
+    padding: 10px 0;
+}
+
+.blog h2 {
+    color: black;
+}
+
+.breadcrumbs {
+    font-size: 1.4em;
+    margin-bottom: 9px;
+}
+
+.small-block-grid-5 li {
+    float:right;
+    width: 20%;
+    list-style: none;
+}
+.small-block-grid-5 li img {
+    width: 100%;
+}

@@ -1,0 +1,126 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="rtl">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>
+        הכיתה / Hackita
+    </title>
+
+    <link rel="stylesheet"
+          href="{% static "vendor/bootstrap/css/bootstrap-rtl.css" %}">
+    <link rel="stylesheet"
+          href="{% static "vendor/font-awesome/css/font-awesome.css" %}">
+    <link rel="stylesheet" href="{% static "css/hackita02.css" %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700&subset=latin'
+          rel='stylesheet' type='text/css'>
+    <link href='{{ STATIC_URL }}css/fonts/alef.css' rel='stylesheet'
+          type='text/css'>
+
+    <link href="{{ STATIC_URL }}img/favicon.ico" rel="icon" type="image/png"/>
+
+</head>
+<body dir="rtl">
+
+<nav class="navbar navbar-inverse top-bar">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand{% if view.name == 'home' %} active{% endif %}"
+               href="{% url 'home' %}">
+                הכיתה
+                Hackita
+                02
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse"
+             id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li{% if view.name == 'program' %} class="active"{% endif %}>
+                    <a href="{% url 'program' %}">איך זה עובד?</a>
+                </li>
+                <li{% if view.name == 'faq' %} class="active"{% endif %}>
+                    <a href="{% url 'faq' %}">שאלות ותשובות</a>
+                </li>
+            </ul>
+            <a class="btn btn-primary navbar-btn"
+               href="{% url 'sa:dashboard' %}">
+                <b>להרשמה</b>
+                <i class="fa fa-play fa-flip-horizontal"></i>
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+{% block content_container %}
+{% endblock %}
+
+<div id="sponsors">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <p>
+                    <b>
+                        כל התכנים באתר מיועדים לנשים ולגברים כאחד
+                    </b>
+
+                    &nbsp;&bull;&nbsp;
+
+                                    <span>
+                                        Inspired by <a
+                                            href="https://www.recurse.com/"
+                                            title="Hacker School">
+                                        Recurse Center
+                                    </a>
+                                    </span>
+                </p>
+                                        <span class="b4hasadna ib">
+                                        עוד מיזם של
+                                        </span>
+                <a href="http://www.hasadna.org.il/" class="hasadna ib">
+                    <img src="{% static "img/hasadna-logo.png" %}"
+                         height="20">
+                    הסדנא לידע ציבורי
+                </a>
+            </div>
+            <div class="col-sm-3 ctlvtxt text-center">
+                <a href="http://web.nli.org.il/">
+                    <img class="ctlv"
+                         src="{{ STATIC_URL }}img/nli.jpg"
+                         height="20">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="{% static "vendor/jquery/jquery.js" %}"></script>
+<script src="{% static "vendor/bootstrap/js/bootstrap.js" %}"></script>
+
+{% block scripts %}
+{% endblock %}
+
+{% include "website/_analytics.html" %}
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% load hackita %}
+<h1>{{ object|u }}</h1>
+<p>{{ object.created_by }}</p>
+
+<blockquote>
+    {{ object.content_text|linebreaksbr }}
+</blockquote>
+<hr/>
+<blockquote>
+    {{ object.content_html|safe }}
+</blockquote>

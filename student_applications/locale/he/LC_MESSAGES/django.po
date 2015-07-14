@@ -1,0 +1,202 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-14 12:48+0300\n"
+"PO-Revision-Date: 2015-07-14 12:48+0300\n"
+"Last-Translator: Udi Oron <udioron@gmail.com>\n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.2\n"
+
+#: consts.py:7
+msgid "Required field"
+msgstr "שדה חובה"
+
+#: consts.py:19
+msgid "control"
+msgstr "שליטה"
+
+#: consts.py:22
+msgid "0 - No knowledge"
+msgstr "0 - ללא ידע בתחום"
+
+#: consts.py:23
+msgid "1"
+msgstr "1"
+
+#: consts.py:24
+msgid "2 - Some knowledge"
+msgstr "2 - הכרות מסוימת"
+
+#: consts.py:25
+msgid "3"
+msgstr "3"
+
+#: consts.py:26
+msgid "4 - Good informal knowledge or Formal Education"
+msgstr "4 - ידע פורמלי בלבד"
+
+#: consts.py:27
+msgid "5"
+msgstr "5"
+
+#: consts.py:28
+msgid "6 - Some parctical work experience"
+msgstr "6 - נסיון פרקטי מועט"
+
+#: consts.py:29
+msgid "7"
+msgstr "7"
+
+#: consts.py:30
+msgid "8 - Considerable work experience (2+ years)"
+msgstr "8 - נסיון משמעותי (2+ שנים)"
+
+#: consts.py:31
+msgid "9"
+msgstr "9"
+
+#: consts.py:32
+msgid "10 - Full control of the technology"
+msgstr "10 - שליטה מוחלטת"
+
+#: templates/dashboard.html:9
+msgid "Registration"
+msgstr "הרשמה"
+
+#: templates/dashboard.html:26 templates/dashboard.html.py:42
+#: templates/dashboard.html:80
+msgid "Part"
+msgstr "חלק"
+
+#: templates/dashboard.html:27
+msgid "Personal details"
+msgstr "פרטים אישיים"
+
+#: templates/dashboard.html:32
+msgid "Enter Personal Details"
+msgstr "מילוי פרטים אישיים"
+
+#: templates/dashboard.html:43
+msgid "Registration Questionnaire"
+msgstr "שאלון הרשמה"
+
+#: templates/dashboard.html:49
+msgid "Review your answers"
+msgstr "הצגת התשובות שמילאת לשאלונים"
+
+#: templates/dashboard.html:58
+msgid "Continue Questionnaire"
+msgstr "המשך בשאלון ההרשמה"
+
+#: templates/dashboard.html:60
+msgid "Start Questionnaire"
+msgstr "התחל את שאלון ההרשמה"
+
+#: templates/dashboard.html:81
+msgid "Choose projects"
+msgstr "בחירת פרוייקטים"
+
+#: templates/dashboard.html:83
+msgid "This section will open during August."
+msgstr "רשימת הפרויקט תפתח לעיון במהלך חודש אוגוסט"
+
+#: templates/register.html:37
+#: templates/student_applications/cohort_detail.html:56
+msgid "Send"
+msgstr "שלח"
+
+#: templates/review.html:8
+msgid "Registration Details"
+msgstr "פרטי ההרשמה"
+
+#: templates/student_applications/_progress.html:7
+msgid "Questionnare"
+msgstr "שאלון"
+
+#: templates/student_applications/_progress.html:7
+msgid "of"
+msgstr "מתוך"
+
+#: templates/student_applications/cohort_detail.html:36
+#: templates/student_applications/usercohort_formset.html:15
+msgid "Edit"
+msgstr "עריכה"
+
+#: templates/student_applications/cohort_list.html:10
+msgid "Cohorts"
+msgstr "דבוקות"
+
+#: templates/student_applications/usercohort_formset.html:11
+msgid "Users"
+msgstr "משתמשים"
+
+#: templates/student_applications/usercohort_formset.html:28
+msgid "Save"
+msgstr "שמירה"
+
+#: views.py:132
+msgid "Registration completed! Thank you very much!"
+msgstr "ההרשמה הסתיימה! תודה רבה!"
+
+#: views.py:139
+#, python-format
+msgid "'%s' was saved."
+msgstr "'%s' נשמר בהצלחה."
+
+#: views.py:145
+msgid "Problems detected in form. Please fix your errors and try again."
+msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
+
+#~ msgid "Invited"
+#~ msgstr "הוזמן"
+
+#~ msgid "Unavailable"
+#~ msgstr "לא פנוי"
+
+#~ msgid "Available"
+#~ msgstr "פנוי"
+
+#~ msgid "Invited to interview"
+#~ msgstr "מוזמן לראיון"
+
+#~ msgid "Rejected"
+#~ msgstr "נדחה"
+
+#~ msgid "Accepted"
+#~ msgstr "התקבל"
+
+#~ msgid "Accepted to another cohort"
+#~ msgstr "התקבל לדבוקה אחרת"
+
+#~ msgid "Registered"
+#~ msgstr "נרשם"
+
+#~ msgid "In process"
+#~ msgstr "במסלול"
+
+#~ msgid "Graduated"
+#~ msgstr "סיים"
+
+#~ msgid "New User"
+#~ msgstr "משתמש חדש"
+
+#~ msgid "User registered: %s"
+#~ msgstr "המשתמש נרשם: %s"
+
+#~ msgid "Sent"
+#~ msgstr "נשלח"
+
+#~ msgid "Already sent"
+#~ msgstr "כבר נשלח"
+
+#~ msgid "Already invited"
+#~ msgstr "כבר נשלח"
+
+#~ msgid "Continue Registration"
+#~ msgstr "המשך בהרשמה"
