@@ -28,7 +28,6 @@ body {
     background: black;
 }
 
-
 h2 {
     margin-top: 35px;
     color: white;
@@ -45,11 +44,12 @@ h2 {
 #intro {
     padding: 30px 0 0;
     background: url('../img/intro.jpg') no-repeat center center;
-    max-width: 900px;
+    max-width: 1200px;
+    min-height: 400px;
     background-size: cover;
     color: #eee;
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
 }
 
@@ -57,12 +57,12 @@ h2 {
     background: rgba(0, 0, 0, 0.5);
     padding: 10px;
     margin: 0 0 30px 0;
+    text-align: right;
 }
 
 #intro .shady ul {
     font-size: larger;
 }
-
 
 #intro h1 {
     margin-top: 5px;
@@ -131,7 +131,7 @@ h2 {
     padding: 10px 0;
 }
 
-#howitworks p{
+#howitworks p {
     font-size: larger;
 }
 
@@ -221,17 +221,43 @@ h2 {
     border-bottom: #f7f7f7 15px solid;
 }
 
-.b4hasadna, .hasadna {
-    font-size: 36px;
+.inspired {
+    font-size: larger;
 }
+
+.hasadna-block {
+    max-width: 350px;
+    text-align: center;
+    margin: 0 auto 15px;
+}
+
+
+.b4hasadna, .hasadna {
+    font-size: 19px;
+    line-height: 1.4em;
+}
+
 
 .b4hasadna {
     color: #444;
+    padding-right: 0;
+    vertical-align: middle;
 }
 
-.hasadna img {
-    width: 30px;
-    height: 30px;
+.hasadna-block img {
+    width: 60px;
+    height: 60px;
+}
+
+@media (min-width: 992px) {
+    .b4hasadna, .hasadna {
+        font-size: 26px;
+        line-height: 1.4em;
+    }
+    .hasadna-block img {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 #sponsors .x {
@@ -240,12 +266,11 @@ h2 {
     padding: 5px;
 }
 
-#sponsors .ctlvtxt {
-    line-height: 80px;
+#sponsors .nli {
+    /*line-height: 80px;*/
 }
 
-#sponsors .ctlv {
-    height: 80px;
+#sponsors .nli img {
 }
 
 #sponsors .sponsor {
@@ -307,10 +332,11 @@ h2 {
 }
 
 .small-block-grid-5 li {
-    float:right;
+    float: right;
     width: 20%;
     list-style: none;
 }
+
 .small-block-grid-5 li img {
     width: 100%;
 }
