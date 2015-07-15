@@ -336,3 +336,7 @@ h2 {
 .small-block-grid-5 li img {
     width: 100%;
 }
+
+.login-buttons .btn {
+    white-space: normal;
+}

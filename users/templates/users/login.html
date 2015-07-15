@@ -8,29 +8,25 @@
     <div id="page-login" class="row">
 
         <div class="col-sm-6">
-            <div class="panel panel-info">
+            <div class="panel panel-info login-buttons">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         {% trans "Quick passwordless login/registration" %}
                     </h3>
                 </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
+                <div class="panel-body">
+                    <p><a class="btn btn-block btn-success btn-lg"
+                          href="{% url "social:begin" "google-oauth2" %}">
+                        <i class="fa fa-google"></i>
+                        {% trans "Using gmail based emails" %}
+                    </a></p>
 
-                        <a class="btn btn-block btn-success btn-lg"
-                           href="{% url "social:begin" "google-oauth2" %}">
-                            <i class="fa fa-google"></i>
-                            {% trans "Using gmail based emails" %}
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="btn btn-block btn-primary btn-lg"
-                           href="{% url "social:begin" "email" %}">
-                            <i class="fa fa-inbox"></i>
-                            {% trans "Using other email providers" %}
-                        </a>
-                    </li>
-                </ul>
+                    <p><a class="btn btn-block btn-primary btn-lg"
+                          href="{% url "social:begin" "email" %}">
+                        <i class="fa fa-inbox"></i>
+                        {% trans "Using other email providers" %}
+                    </a></p>
+                </div>
             </div>
         </div>
 
