@@ -10,11 +10,11 @@ urlpatterns = [
     url(r'^register/$', views.RegisterView.as_view(), name='register'),
     url(r'^review/$', views.ReviewView.as_view(), name='review'),
 
-    # # STAFF ONLY
-    #
-    # url(r'^users/$', users_views.UsersListView.as_view(), name='users'),
-    # url(r'^users/(?P<pk>\d+)/$', users_views.UserView.as_view(),
-    #     name='user_dashboard'),
+    # STAFF ONLY
+
+    url(r'^app/$', views.ApplicationListView.as_view(), name='app_list'),
+    url(r'^app/(?P<pk>\d+)/$', views.ApplicationDetailView.as_view(),
+        name='app_detail'),
     # url(r'^users/(?P<pk>\d+)/add-note/$', users_views.CreateUserNoteView.as_view(),
     #     name='user_add_note'),
     # url(r'^users/(?P<pk>\d+)/edit/$', sa_views.UserCohortUpdateView.as_view(),

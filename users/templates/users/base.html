@@ -25,10 +25,27 @@
                         </div>
                         {% if not user.has_password %}
                             <div class="pull-right">
-                                <a href="{% url "users:set_password" %}" class="btn btn-warning btn-sm">
+                                <a href="{% url "users:set_password" %}"
+                                   class="btn btn-warning btn-sm">
                                     {% trans "Set password" %}
                                 </a>
                                 &nbsp;
+                            </div>
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <div class="pull-right text-danger">
+                                <a href="{% url "sa:app_list" %}">{% trans "Applications" %}</a>
+                                &bull;
+                                {# <a href="{% url "cohorts" %}">{% trans "Cohorts" %}</a>#}
+                                {# &bull;#}
+                                {# <a href="{% url "events" %}">{% trans "Events" %}</a>#}
+                                {# &bull;#}
+                                {# <a href="{% url "surveys" %}">{% trans "Surveys" %}</a>#}
+                                {# &bull;#}
+                                {# <a href="{% url "users_log" %}">{% trans "Log" %}</a>#}
+                                {# &bull;#}
+                                <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
+                            &nbsp;
                             </div>
                         {% endif %}
 
@@ -39,20 +56,6 @@
                         {#                            <a href="{% url "community" %}">{% trans "Community" %}</a>#}
                         {#                            &bull;#}
                         {#                            <a href="{% url "project:list" %}">{% trans "Projects" %}</a>#}
-                        {#                        {% endif %}#}
-                        {#                        {% if user.is_staff %}#}
-                        {#                            &bull;#}
-                        {#                            <a href="{% url "users" %}">{% trans "Users" %}</a>#}
-                        {#                            &bull;#}
-                        {#                            <a href="{% url "cohorts" %}">{% trans "Cohorts" %}</a>#}
-                        {#                            &bull;#}
-                        {#                            <a href="{% url "events" %}">{% trans "Events" %}</a>#}
-                        {#                            &bull;#}
-                        {#                            <a href="{% url "surveys" %}">{% trans "Surveys" %}</a>#}
-                        {#                            &bull;#}
-                        {#                            <a href="{% url "users_log" %}">{% trans "Log" %}</a>#}
-                        {#                            &bull;#}
-                        {#                            <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>#}
                         {#                        {% endif %}#}
                     </div>
                 </div>

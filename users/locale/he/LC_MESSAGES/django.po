@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-15 02:29+0300\n"
-"PO-Revision-Date: 2015-07-15 02:30+0300\n"
+"POT-Creation-Date: 2015-07-15 11:42+0300\n"
+"PO-Revision-Date: 2015-07-15 11:45+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -114,11 +114,19 @@ msgstr "אופציונלי, לשם קיום ראיון בשיחת וידאו"
 msgid "Sign Out"
 msgstr "יציאה"
 
-#: templates/users/base.html:29
+#: templates/users/base.html:30
 msgid "Set password"
 msgstr "קביעת סיסמא"
 
-#: templates/users/base.html:35
+#: templates/users/base.html:37
+msgid "Applications"
+msgstr "מועמדים"
+
+#: templates/users/base.html:47
+msgid "Admin"
+msgstr "אדמין"
+
+#: templates/users/base.html:52
 msgid "You are logged in as"
 msgstr "אתה מחובר למערכת כ-"
 
@@ -182,7 +190,7 @@ msgstr "אנא בדוק את תיבת הדואר שלך."
 msgid "Mail was sent from"
 msgstr "ההודעה נשלחה מהכתובת"
 
-#: views.py:57
+#: views.py:59
 msgid "Password was set succesfully"
 msgstr "הסיסמא נקבעה בהצלחה."
 

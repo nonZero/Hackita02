@@ -1,0 +1,32 @@
+{% extends 'users/base.html' %}
+{% load i18n humanize %}
+
+{% block content %}
+    
+    <h1 class="page-title">
+        {% trans "Applications" %}
+    </h1>
+    
+    <ul class="list-group">
+        {% for app in object_list %}
+            {% with app.user as u %}
+
+                <li class="list-group-item">
+
+                    <span class="badge">{{ app.forms_filled }}</span>
+
+                    <a href="{% url "sa:app_detail" app.id %}"
+                       title="#{{ u.id }} {{ u.email }}">
+                        <span dir="rtl">{{ u.hebrew_display_name }}</span>
+                        <span dir="ltr">&lt;{{ u.email }}&gt;</span>
+                    </a>
+
+                    <span title="{{ app.last_form_filled }}">
+                        {{ app.last_form_filled|naturaltime }}
+                    </span>
+                </li>
+            {% endwith %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

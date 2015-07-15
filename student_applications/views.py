@@ -8,17 +8,20 @@ from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
 from django.shortcuts import redirect
+from django.template import loader
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
 
+from . import models
+
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES, get_user_pretty_answers
-from student_applications.models import Answer
-from users.base_views import ProtectedMixin
+from users.base_views import ProtectedMixin, StaffOnlyMixin
 from users.forms import PersonalInfoForm
-from users.models import PersonalInfo
+from users.models import PersonalInfo, User
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +44,8 @@ class Dashboard(UserViewMixin, TemplateView):
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
         d['registered'] = get_user_next_form(self.request.user) is None
-        d['needs_personal_details'] = not hasattr(self.request.user, 'personalinfo')
+        d['needs_personal_details'] = not hasattr(self.request.user,
+                                                  'personalinfo')
         return d
 
 
@@ -89,8 +93,8 @@ class ReviewView(UserViewMixin, TemplateView):
 
         d['registered'] = get_user_next_form(self.request.user) is None
 
-        if d['registered']:
-            d['answers'] = get_user_pretty_answers(self.request.user)
+        # if d['registered']:
+        #     d['answers'] = get_user_pretty_answers(self.request.user)
 
         return d
 
@@ -120,25 +124,38 @@ class RegisterView(UserViewMixin, FormView):
 
         logger.info("User %s filled %s" % (u, form_name))
 
-        a = Answer.objects.create(user=u, q13e_slug=form_name, data=data)
+        a = models.Answer.objects.create(user=u, q13e_slug=form_name,
+                                         data=data)
 
-        # update denormalized index fields
-        u.forms_filled = u.answers.count()
-        u.last_form_filled = a.created_at
-        u.save()
+        try:
+            app = u.application
+        except models.Application.DoesNotExist:
+            app = models.Application(user=u)
+        app.forms_filled = u.answers.count()
+        app.last_form_filled = a.created_at
+        app.save()
 
         if get_user_next_form(u) is None:
             messages.success(self.request,
                              _("Registration completed! Thank you very much!"))
-            # TODO
-            # url = self.request.build_absolute_uri(reverse('sa:user_dashboard',
-            #                                               args=(u.id,)))
-            # mail_managers(_("User registered: %s") % u.email, url)
+            text, html = self.get_summary_email(u)
+            mail_managers(_("User registered: %s") % u.email, text,
+                          html_message=html)
             return redirect('sa:dashboard')
 
         messages.success(self.request, _("'%s' was saved.") % form.form_title)
 
         return redirect(reverse('sa:register'))
+
+    def get_summary_email(self, u):
+        url = self.request.build_absolute_uri(reverse('sa:app_detail',
+                                                      args=(u.id,)))
+        html = loader.render_to_string(
+            "student_applications/_answers.html", {
+                'u': u,
+                'url': url
+            }, request=self.request)
+        return url, html
 
     def form_invalid(self, form):
         messages.warning(self.request,
@@ -154,6 +171,15 @@ class AllFormsView(TemplateView, ProtectedMixin):
         d = super().get_context_data(**kwargs)
         d['forms'] = [(k, FORMS[k]) for k in FORM_NAMES]
         return d
+
+
+class ApplicationListView(StaffOnlyMixin, ListView):
+    model = models.Application
+    ordering = ('-forms_filled', '-last_form_filled')
+
+
+class ApplicationDetailView(StaffOnlyMixin, DetailView):
+    model = models.Application
 
 # class UserCohortUpdateView(StaffOnlyMixin, InlineFormSetView):
 #     model = HackitaUser

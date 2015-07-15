@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 12:48+0300\n"
-"PO-Revision-Date: 2015-07-14 12:48+0300\n"
+"POT-Creation-Date: 2015-07-15 11:40+0300\n"
+"PO-Revision-Date: 2015-07-15 11:45+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -123,6 +123,10 @@ msgstr "שאלון"
 msgid "of"
 msgstr "מתוך"
 
+#: templates/student_applications/application_detail.html:11
+msgid "Applications"
+msgstr "מועמדים"
+
 #: templates/student_applications/cohort_detail.html:36
 #: templates/student_applications/usercohort_formset.html:15
 msgid "Edit"
@@ -140,16 +144,21 @@ msgstr "משתמשים"
 msgid "Save"
 msgstr "שמירה"
 
-#: views.py:132
+#: views.py:140
 msgid "Registration completed! Thank you very much!"
 msgstr "ההרשמה הסתיימה! תודה רבה!"
 
-#: views.py:139
+#: views.py:142
+#, python-format
+msgid "User registered: %s"
+msgstr "המשתמש נרשם: %s"
+
+#: views.py:145
 #, python-format
 msgid "'%s' was saved."
 msgstr "'%s' נשמר בהצלחה."
 
-#: views.py:145
+#: views.py:161
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
 
@@ -185,9 +194,6 @@ msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא ת�
 
 #~ msgid "New User"
 #~ msgstr "משתמש חדש"
-
-#~ msgid "User registered: %s"
-#~ msgstr "המשתמש נרשם: %s"
 
 #~ msgid "Sent"
 #~ msgstr "נשלח"

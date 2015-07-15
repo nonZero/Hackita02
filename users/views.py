@@ -58,3 +58,4 @@ class SetPasswordView(FormView):
         update_session_auth_hash(self.request, self.request.user)
         messages.success(self.request, _("Password was set succesfully"))
         return super().form_valid(form)
+

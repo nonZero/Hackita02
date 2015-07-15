@@ -1,9 +1,17 @@
 from django.conf import settings
 from django.db import models
 from django_extensions.db.fields.json import JSONField
+from . import consts
 
 # from users.models import UserLogOperation, UserLog
 from q13es.forms import get_pretty_answer
+
+
+class Application(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    forms_filled = models.IntegerField(default=0, db_index=True)
+    last_form_filled = models.DateTimeField(null=True, blank=True,
+                                            db_index=True)
 
 
 class Answer(models.Model):
@@ -18,8 +26,10 @@ class Answer(models.Model):
     def __str__(self):
         return "%s: %s (%s)" % (self.user, self.q13e_slug, self.created_at)
 
-    def get_pretty(self, form):
+    def get_pretty(self):
+        form = consts.FORMS[self.q13e_slug]
         return dict(get_pretty_answer(form, self.data), answer=self)
+
 #
 #
 # class Cohort(models.Model):

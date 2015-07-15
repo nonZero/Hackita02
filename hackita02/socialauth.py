@@ -1,7 +1,7 @@
 from pprint import pprint
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, mail_managers
 from django.core.urlresolvers import reverse
 from social.backends.email import EmailAuth
 from social.exceptions import AuthMissingParameter, AuthException
@@ -59,6 +59,15 @@ def associate_by_email(backend, details, user=None, *args, **kwargs):
             )
         else:
             return {'user': users[0]}
+
+
+def notify_managers(backend, details, user=None, *args, is_new=False,
+                    **kwargs):
+    if not is_new:
+        return
+
+    title = "New {} User: {}".format(backend.name, user.email)
+    mail_managers(title, title)
 
 
 @partial
