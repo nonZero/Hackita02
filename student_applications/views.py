@@ -82,7 +82,7 @@ class PersonalDetailsView(UserViewMixin, CreateView):
             resp = super().form_valid(form)
 
         messages.info(self.request, _("Personal details saved successfully."))
-        
+
         return resp
 
 
@@ -152,7 +152,7 @@ class RegisterView(UserViewMixin, FormView):
         url = self.request.build_absolute_uri(reverse('sa:app_detail',
                                                       args=(u.id,)))
         html = loader.render_to_string(
-            "student_applications/_answers.html", {
+            "student_applications/application_summary_email.html", {
                 'u': u,
                 'url': url
             }, request=self.request)
