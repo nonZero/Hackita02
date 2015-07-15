@@ -150,7 +150,7 @@ class RegisterView(UserViewMixin, FormView):
 
     def get_summary_email(self, u):
         url = self.request.build_absolute_uri(reverse('sa:app_detail',
-                                                      args=(u.id,)))
+                                                      args=(u.application.id,)))
         html = loader.render_to_string(
             "student_applications/application_summary_email.html", {
                 'u': u,
