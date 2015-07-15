@@ -7,102 +7,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 02:55+0300\n"
-"PO-Revision-Date: 2015-07-14 03:02+0300\n"
+"POT-Creation-Date: 2015-07-15 02:29+0300\n"
+"PO-Revision-Date: 2015-07-15 02:30+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.2\n"
 
-#: forms.py:27
+#: forms.py:29
 msgid "Password"
 msgstr "סיסמא"
 
-#: models.py:30
+#: forms.py:59
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: forms.py:62
+msgid "password"
+msgstr "סיסמא"
+
+#: forms.py:65
+msgid "Minimum 6 characters"
+msgstr "לפחות 6 תווים"
+
+#: forms.py:66
+msgid "password confirmation"
+msgstr "סיסמא (פעם שניה)"
+
+#: models.py:11
+msgid "display name (Hebrew)"
+msgstr "שם לתצוגה בעברית"
+
+#: models.py:14
+msgid "display name (English)"
+msgstr "שם לתצוגה באנגלית"
+
+#: models.py:41
 msgid "first name (Hebrew)"
 msgstr "שם פרטי בעברית"
 
-#: models.py:32
+#: models.py:43
 msgid "last name (Hebrew)"
 msgstr "שם משפחה בעברית"
 
-#: models.py:34
+#: models.py:45
 msgid "first name (English)"
 msgstr "שם פרטי באנגלית"
 
-#: models.py:36
+#: models.py:47
 msgid "last name (English)"
 msgstr "שם משפחה באנגלית"
 
-#: models.py:39
-msgid "main phone number"
-msgstr "מספר טלפון"
-
-#: models.py:40
-msgid "alternate phone number"
-msgstr "מספר טלפון נוסף"
-
-#: models.py:42
-msgid "city"
-msgstr "עיר / ישוב"
-
-#: models.py:43
-msgid "address"
-msgstr "כתובת"
-
-#: models.py:44
-msgid "street and number"
-msgstr "רחוב ומספר"
-
-#: models.py:49
+#: models.py:54
 msgid "female"
 msgstr "נקבה"
 
-#: models.py:50
+#: models.py:55
 msgid "male"
 msgstr "זכר"
 
-#: models.py:51
+#: models.py:56
 msgid "prefer not to answer"
 msgstr "מעדיף לא לענות"
 
-#: models.py:54
+#: models.py:59
 msgid "gender"
 msgstr "מגדר"
 
-#: models.py:55
+#: models.py:60
 msgid "we would like to create a diverse group."
 msgstr "הידעת? חשוב לנו לבנות קבוצה מעורבת מגדרית, עם יצוג גבוה לנשים."
 
-#: models.py:58
+#: models.py:62
+msgid "main phone number"
+msgstr "מספר טלפון"
+
+#: models.py:63
+msgid "alternate phone number"
+msgstr "מספר טלפון נוסף"
+
+#: models.py:65
+msgid "city"
+msgstr "עיר / ישוב"
+
+#: models.py:66
+msgid "address"
+msgstr "כתובת"
+
+#: models.py:67
+msgid "street and number"
+msgstr "רחוב ומספר"
+
+#: models.py:70
 msgid "skype username"
 msgstr "שם משתמש ב-skype"
 
-#: models.py:59
+#: models.py:71
 msgid "optional, for conducting a video interview."
 msgstr "אופציונלי, לשם קיום ראיון בשיחת וידאו"
 
-#: templates/users/base.html:23 templates/users/basebase.html:22
-msgid "You are logged in as"
-msgstr "אתה מחובר למערכת כ-"
-
-#: templates/users/basebase.html:19
+#: templates/users/base.html:23
 msgid "Sign Out"
 msgstr "יציאה"
 
-#: templates/users/login.html:5
-msgid "Timi"
-msgstr ""
+#: templates/users/base.html:29
+msgid "Set password"
+msgstr "קביעת סיסמא"
 
-#: templates/users/login.html:19
-msgid "Timi Login"
-msgstr ""
+#: templates/users/base.html:35
+msgid "You are logged in as"
+msgstr "אתה מחובר למערכת כ-"
 
-#: templates/users/login.html:25
+#: templates/users/login.html:14
+msgid "Quick passwordless login/registration"
+msgstr "כניסה/הרשמה מהירה ללא סיסמא"
+
+#: templates/users/login.html:23
+msgid "Using gmail based emails"
+msgstr "כניסה מהירה לבעלי דואל מבוסס gmail"
+
+#: templates/users/login.html:30
+msgid "Using other email providers"
+msgstr "כניסה/הרשמה לבעלי שירות דואל אחר"
+
+#: templates/users/login.html:41
+msgid "Password Login"
+msgstr "כניסה באמצעות סיסמא"
+
+#: templates/users/login.html:48
 msgid "Login"
 msgstr "כניסה"
 
@@ -113,3 +149,42 @@ msgstr "פרטים אישיים"
 #: templates/users/personalinfo_form.html:29
 msgid "Send"
 msgstr "שלח"
+
+#: templates/users/set-password.html:11 templates/users/set-password.html:20
+msgid "Set Password"
+msgstr "קביעת סיסמא"
+
+#: templates/users/signup.html:11
+msgid "Email Registration / Login"
+msgstr "כניסה / הרשמה מהירה ללא סיסמא"
+
+#: templates/users/signup.html:20
+msgid "Email"
+msgstr "דואל"
+
+#: templates/users/signup.html:39
+msgid "Send me a quick login link"
+msgstr "שלח לי קישור לכניסה מהירה ללא סיסמא"
+
+#: templates/users/validation-sent.html:9
+msgid "Validation email sent"
+msgstr "נשלחה אליך הודעה עם קישור לכניסה מהירה לאתר."
+
+#: templates/users/validation-sent.html:13
+msgid "Validation mail sent to"
+msgstr "ההודעה נשלחה אל"
+
+#: templates/users/validation-sent.html:17
+msgid "Please check your email."
+msgstr "אנא בדוק את תיבת הדואר שלך."
+
+#: templates/users/validation-sent.html:21
+msgid "Mail was sent from"
+msgstr "ההודעה נשלחה מהכתובת"
+
+#: views.py:57
+msgid "Password was set succesfully"
+msgstr "הסיסמא נקבעה בהצלחה."
+
+#~ msgid "email"
+#~ msgstr "דואל"

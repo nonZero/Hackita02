@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from authtools.models import AbstractNamedUser, AbstractEmailUser
+from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
@@ -11,8 +12,8 @@ class User(AbstractEmailUser):
                                            max_length=200, null=True,
                                            blank=True)
     english_display_name = models.CharField(_("display name (English)"),
-                                           max_length=200, null=True,
-                                           blank=True)
+                                            max_length=200, null=True,
+                                            blank=True)
 
     class Meta:
         db_table = 'auth_user'
@@ -26,6 +27,10 @@ class User(AbstractEmailUser):
 
     def get_absolute_url(self):
         return "/users/%d/" % self.id
+
+    def has_password(self):
+        return self.password and not self.password.startswith(
+            UNUSABLE_PASSWORD_PREFIX)
 
     def __unicode__(self):
         return self.email

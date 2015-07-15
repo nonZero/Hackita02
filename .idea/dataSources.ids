@@ -2451,6 +2451,7 @@
       <exported-key name="auth_user_user_permiss_user_id_1924db98ca8dc97d_fk_auth_user_id" table="auth_user_user_permissions" schema="public" catalog="hackita02" columns="user_id"/>
       <exported-key name="django_admin_log_user_id_4a918e83deecbe5c_fk_auth_user_id" table="django_admin_log" schema="public" catalog="hackita02" columns="user_id"/>
       <exported-key name="projects_project_created_by_id_7a433ef840929d99_fk_auth_user_id" table="projects_project" schema="public" catalog="hackita02" columns="created_by_id"/>
+      <exported-key name="social_auth_usersocial_user_id_4b507344c5243e12_fk_auth_user_id" table="social_auth_usersocialauth" schema="public" catalog="hackita02" columns="user_id"/>
       <exported-key name="student_applications_a_user_id_1b378eb5d6bfa4c0_fk_auth_user_id" table="student_applications_answer" schema="public" catalog="hackita02" columns="user_id"/>
       <exported-key name="users_personalinfo_user_id_eb65336e6da9bc8_fk_auth_user_id" table="users_personalinfo" schema="public" catalog="hackita02" columns="user_id"/>
       <index name="auth_user_email_key" unique="true" columns="email"/>
@@ -2604,6 +2605,93 @@
       <index name="projects_project_e93cb7eb" unique="false" columns="created_by_id"/>
     </table>
     <table name="projects_project_id_seq" schema="public" catalog="hackita02" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="social_auth_association" schema="public" catalog="hackita02" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnc29jaWFsX2F1dGhfYXNzb2NpYXRpb25faWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="server_url" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="handle" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="secret" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="issued" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="lifetime" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="assoc_type" sqlType="varchar" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="social_auth_association_pkey" columns="id"/>
+    </table>
+    <table name="social_auth_association_id_seq" schema="public" catalog="hackita02" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="social_auth_code" schema="public" catalog="hackita02" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnc29jaWFsX2F1dGhfY29kZV9pZF9zZXEnOjpyZWdjbGFzcyk=" autoIncrement="true"/>
+      <column name="email" sqlType="varchar" precision="254" scale="0" nullable="false" jdbcType="12"/>
+      <column name="code" sqlType="varchar" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="verified" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <primary-key name="social_auth_code_pkey" columns="id"/>
+      <index name="social_auth_code_email_53af9d51729e856a_uniq" unique="true" columns="email,code"/>
+      <index name="social_auth_code_c1336794" unique="false" columns="code"/>
+      <index name="social_auth_code_code_718012ad3e88a7b7_like" unique="false" columns="code"/>
+    </table>
+    <table name="social_auth_code_id_seq" schema="public" catalog="hackita02" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="social_auth_nonce" schema="public" catalog="hackita02" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnc29jaWFsX2F1dGhfbm9uY2VfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="server_url" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="timestamp" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="salt" sqlType="varchar" precision="65" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="social_auth_nonce_pkey" columns="id"/>
+      <index name="social_auth_nonce_server_url_1fa1657edaebf816_uniq" unique="true" columns="server_url,timestamp,salt"/>
+    </table>
+    <table name="social_auth_nonce_id_seq" schema="public" catalog="hackita02" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="increment_by" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="max_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="min_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="cache_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="log_cnt" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="is_cycled" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+      <column name="is_called" sqlType="bool" precision="1" scale="0" nullable="false" jdbcType="-7"/>
+    </table>
+    <table name="social_auth_usersocialauth" schema="public" catalog="hackita02" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnc29jaWFsX2F1dGhfdXNlcnNvY2lhbGF1dGhfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="provider" sqlType="varchar" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="uid" sqlType="varchar" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="extra_data" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="social_auth_usersocialauth_pkey" columns="id"/>
+      <foreign-key name="social_auth_usersocial_user_id_4b507344c5243e12_fk_auth_user_id" columns="user_id" ref-table="auth_user" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="social_auth_usersocialauth_provider_223901df41f9f63c_uniq" unique="true" columns="provider,uid"/>
+      <index name="social_auth_usersocialauth_e8701ad4" unique="false" columns="user_id"/>
+    </table>
+    <table name="social_auth_usersocialauth_id_seq" schema="public" catalog="hackita02" type="SEQUENCE">
       <column name="sequence_name" sqlType="name" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
       <column name="last_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>
       <column name="start_value" sqlType="int8" precision="19" scale="0" nullable="false" jdbcType="-5"/>

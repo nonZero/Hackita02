@@ -23,7 +23,17 @@
                                         class="btn-sm btn btn-default">{% trans 'Sign Out' %}</button>
                             </form>
                         </div>
+                        {% if not user.has_password %}
+                            <div class="pull-right">
+                                <a href="{% url "users:set_password" %}" class="btn btn-warning btn-sm">
+                                    {% trans "Set password" %}
+                                </a>
+                                &nbsp;
+                            </div>
+                        {% endif %}
+
                         {% trans "You are logged in as" %} {{ user.email }}
+
                         {#                        {% if user.community_member or user.is_staff %}#}
                         {#                            &bull;#}
                         {#                            <a href="{% url "community" %}">{% trans "Community" %}</a>#}

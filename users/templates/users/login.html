@@ -1,12 +1,44 @@
-{% extends 'website/base.html' %}
+{% extends 'users/base.html' %}
 {% load i18n staticfiles %}
-{% block content_container %}
+{% block content %}
+
+
+
 
     <div id="page-login" class="row">
-        <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-            <div class="panel panel-primary">
+
+        <div class="col-sm-6">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h1 class="panel-title">{% trans "Login" %}</h1>
+                    <h3 class="panel-title">
+                        {% trans "Quick passwordless login/registration" %}
+                    </h3>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">
+
+                        <a class="btn btn-block btn-success btn-lg"
+                           href="{% url "social:begin" "google-oauth2" %}">
+                            <i class="fa fa-google"></i>
+                            {% trans "Using gmail based emails" %}
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="btn btn-block btn-primary btn-lg"
+                           href="{% url "social:begin" "email" %}">
+                            <i class="fa fa-inbox"></i>
+                            {% trans "Using other email providers" %}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h1 class="panel-title">{% trans "Password Login" %}</h1>
                 </div>
                 <div class="panel-body">
                     <form method="post">
@@ -19,7 +51,7 @@
                 </div>
 
             </div>
-
         </div>
+
     </div>
 {% endblock %}

@@ -13,9 +13,12 @@ urlpatterns = [
     url(r'^faq$', views.FAQView.as_view(), name='faq'),
     # url(r'^$', views.CreateProjectView.as_view(), name='home'),
     # url(r'^blog/', include('blog.urls')),
-    i("projects"),
+    # i("projects"),
     i("users"),
     i("student_applications", "sa"),
 
-    url(r'^admin/', include(admin.site.urls)),
+    url('^social/',
+        include('social.apps.django_app.urls', namespace='social')),
+
+    url(r'^hadmin/', include(admin.site.urls)),
 ]
