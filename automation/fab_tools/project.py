@@ -48,8 +48,7 @@ def deploy(restart=True, quick=False):
     with virtualenv(env.code_dir):
         run("git pull")
         if not quick:
-            # run("pip install -r requirements.txt -q")
-            run("pip install -r requirements.txt")
+            run("pip install -r requirements.txt -q")
             run("python manage.py migrate --noinput")
             # run("python manage.py createcachetable --database=cache")
             run("python manage.py update_permissions")
