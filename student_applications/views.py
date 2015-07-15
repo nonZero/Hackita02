@@ -16,12 +16,11 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
 
 from . import models
-
 from student_applications.consts import get_user_progress, FORMS, \
-    get_user_next_form, FORM_NAMES, get_user_pretty_answers
+    get_user_next_form, FORM_NAMES
 from users.base_views import ProtectedMixin, StaffOnlyMixin
 from users.forms import PersonalInfoForm
-from users.models import PersonalInfo, User
+from users.models import PersonalInfo
 
 logger = logging.getLogger(__name__)
 
@@ -81,7 +80,9 @@ class PersonalDetailsView(UserViewMixin, CreateView):
             if dirty:
                 user.save()
             resp = super().form_valid(form)
-        messages.info(self.request, ("Personal details saved successfully."))
+
+        messages.info(self.request, _("Personal details saved successfully."))
+        
         return resp
 
 
