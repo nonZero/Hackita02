@@ -38,11 +38,19 @@ h2 {
     font-family: 'Montserrat', 'Alef', sans-serif;
 }
 
+.home-top {
+    background: black;
+}
+
 #intro {
     padding: 30px 0 0;
-    background: url('../img/top-bg.jpg') no-repeat center center;
+    background: url('../img/intro.jpg') no-repeat center center;
+    max-width: 900px;
     background-size: cover;
     color: #eee;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
 }
 
 #intro .shady {
