@@ -7,7 +7,7 @@ import markdown
 
 
 def read_faq(n):
-    with open(os.path.join(os.path.dirname(__file__), 'faq%d.md' % n)) as f:
+    with open(os.path.join(os.path.dirname(__file__), 'faq%d.md' % n), encoding="utf8") as f:
         return markdown.markdown(f.read())
 
 
