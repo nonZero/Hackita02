@@ -287,7 +287,8 @@ h2 {
 }
 
 #faq dl {
-    font-size: larger;
+    font-size: medium;
+    text-align: justify;
 }
 
 #faq dd {
