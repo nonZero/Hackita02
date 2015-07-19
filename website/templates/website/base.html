@@ -60,6 +60,11 @@
                 <li{% if view.name == 'faq' %} class="active"{% endif %}>
                     <a href="{% url 'faq' %}">שאלות ותשובות</a>
                 </li>
+                <li{% if view.name == 'about' %} class="active"{% endif %}>
+                    <a href="{% url 'about' %}">
+                        על אודות
+                    </a>
+                </li>
             </ul>
             <a class="btn btn-primary navbar-btn"
                href="{% url 'sa:dashboard' %}">

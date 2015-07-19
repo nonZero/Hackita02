@@ -158,6 +158,32 @@ h2 {
 #techs .box li {
 }
 
+#about {
+    background: #45061b;
+}
+
+#about p, #about h1 {
+    color: white;
+}
+#about .logos {
+    float:left;
+    margin-top: 50px;
+}
+
+
+@media (min-width: 768px) {
+    #about .logos {
+        float:right;
+        margin-top: 90px;
+        text-align: left;
+    }
+    #about .logos img {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+
 .box {
     background: rgba(255, 255, 255, 0.8);
     color: black;
@@ -198,7 +224,7 @@ h2 {
 }
 
 #mentors {
-    background: yellow;
+    background: #3e1780;
     color: white !important;
     padding: 10px 0;
 }
@@ -231,12 +257,10 @@ h2 {
     margin: 0 auto 15px;
 }
 
-
 .b4hasadna, .hasadna {
     font-size: 19px;
     line-height: 1.4em;
 }
-
 
 .b4hasadna {
     color: #444;
@@ -254,6 +278,7 @@ h2 {
         font-size: 26px;
         line-height: 1.4em;
     }
+
     .hasadna-block img {
         width: 80px;
         height: 80px;
@@ -326,7 +351,6 @@ h2 {
 .blog h2 {
     color: black;
 }
-
 
 .small-block-grid-5 li {
     float: right;
