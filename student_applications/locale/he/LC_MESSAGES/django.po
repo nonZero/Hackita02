@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-15 11:59+0300\n"
-"PO-Revision-Date: 2015-07-15 11:59+0300\n"
+"PO-Revision-Date: 2015-07-19 14:38+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -92,11 +92,11 @@ msgstr "הצגת התשובות שמילאת לשאלונים"
 
 #: templates/dashboard.html:58
 msgid "Continue Questionnaire"
-msgstr "המשך בשאלון ההרשמה"
+msgstr "לחצ/י להמשך שאלון ההרשמה"
 
 #: templates/dashboard.html:60
 msgid "Start Questionnaire"
-msgstr "התחל את שאלון ההרשמה"
+msgstr "לחצ/י להתחלת שאלון ההרשמה"
 
 #: templates/dashboard.html:81
 msgid "Choose projects"
@@ -104,12 +104,12 @@ msgstr "בחירת פרוייקטים"
 
 #: templates/dashboard.html:83
 msgid "This section will open during August."
-msgstr "רשימת הפרויקט תפתח לעיון במהלך חודש אוגוסט"
+msgstr "רשימת הפרויקטים תפתח לעיון במהלך חודש אוגוסט"
 
 #: templates/register.html:37
 #: templates/student_applications/cohort_detail.html:56
 msgid "Send"
-msgstr "שלח"
+msgstr "שלח/י"
 
 #: templates/review.html:8
 msgid "Registration Details"
@@ -156,7 +156,7 @@ msgstr "ההרשמה הסתיימה! תודה רבה!"
 #: views.py:143
 #, python-format
 msgid "User registered: %s"
-msgstr "המשתמש נרשם: %s"
+msgstr "המשתמש/ת נרשמ/ה: %s"
 
 #: views.py:147
 #, python-format
@@ -165,7 +165,7 @@ msgstr "'%s' נשמר בהצלחה."
 
 #: views.py:163
 msgid "Problems detected in form. Please fix your errors and try again."
-msgstr "חלק מהשדות בטופס חסרים או שגויים.  אנא תקן את הבעיה ונסה שוב"
+msgstr "נמצאו בעיות בטופס. אנא תקנ/י את הבעיות, ונסה/י שנית"
 
 #~ msgid "Invited"
 #~ msgstr "הוזמן"

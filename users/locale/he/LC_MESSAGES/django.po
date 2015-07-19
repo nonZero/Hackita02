@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-15 11:42+0300\n"
-"PO-Revision-Date: 2015-07-15 11:45+0300\n"
+"PO-Revision-Date: 2015-07-19 14:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -72,7 +72,7 @@ msgstr "זכר"
 
 #: models.py:56
 msgid "prefer not to answer"
-msgstr "מעדיף לא לענות"
+msgstr "ברצוני שלא לענות"
 
 #: models.py:59
 msgid "gender"
@@ -128,7 +128,7 @@ msgstr "אדמין"
 
 #: templates/users/base.html:52
 msgid "You are logged in as"
-msgstr "אתה מחובר למערכת כ-"
+msgstr "את/ה מחובר/ת למערכת כ-"
 
 #: templates/users/login.html:14
 msgid "Quick passwordless login/registration"
