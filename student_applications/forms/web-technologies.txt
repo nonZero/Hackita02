@@ -11,12 +11,23 @@ CSS
 שליטה
 
 [javascript]
-Javascript
+JavaScript
 
 שליטה
 
+[javascript_fe]
+(..Javascript-Based Front-End Frameworks (AngularJS, JQuery
+
+שליטה
+
+[javascript_be]
+(Javascript-Based Back-End Frameworks (Node.js
+
+שליטה
+
+
 [php]
-php
+PHP
 
 שליטה
 
@@ -25,8 +36,19 @@ Django
 
 שליטה
 
+[django]
+(Non-Django Python-based Web Frameworks (Bottle, Flask, Web2py
+
+שליטה
+
+
 [rails]
 Ruby On Rails
+
+שליטה
+
+[wordpress]
+Wordpress, or Other CMS Framework
 
 שליטה
 
