@@ -43,8 +43,8 @@ h2 {
 
 #intro {
     padding: 30px 0 0;
-    background: url('../img/intro.jpg') no-repeat center center;
-    max-width: 1200px;
+    background: url('../img/background-levels-bc-cb.jpg') no-repeat center center;
+    max-width: 100%;
     min-height: 400px;
     background-size: cover;
     color: #eee;
@@ -112,8 +112,8 @@ h2 {
 }
 
 #teaser {
-    background: #672115;
-    color: white !important;
+    background-color: #222222;
+    color : white !important;
     padding: 15px 0 5px;
 }
 
@@ -159,28 +159,31 @@ h2 {
 }
 
 #about {
-    background: #45061b;
+    background: #ffffff;
 }
 
-#about p, #about h1 {
-    color: white;
+#about p, #about h1, #about h2 {
+    color: black;
 }
+
 #about .logos {
-    float:left;
+    float: left;
     margin-top: 50px;
 }
 
 
 @media (min-width: 768px) {
     #about .logos {
-        float:right;
+        float: right;
         margin-top: 90px;
         text-align: left;
     }
+
     #about .logos img {
         margin-right: auto;
         margin-left: auto;
     }
+
 
 }
 
@@ -224,7 +227,7 @@ h2 {
 }
 
 #mentors {
-    background: #3e1780;
+    background: #222222;
     color: white !important;
     padding: 10px 0;
 }
@@ -364,4 +367,8 @@ h2 {
 
 .login-buttons .btn {
     white-space: normal;
+}
+
+#registration-btn {
+    margin-right: 4px;
 }

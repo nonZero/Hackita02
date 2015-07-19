@@ -55,18 +55,18 @@
              id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li{% if view.name == 'program' %} class="active"{% endif %}>
-                    <a href="{% url 'program' %}">איך זה עובד?</a>
+                    <a href="{% url 'program' %}">על התכנית</a>
+                </li>
+                <li{% if view.name == 'about' %} class="active"{% endif %}>
+                    <a href="{% url 'about' %}">
+                        עלינו
+                    </a>
                 </li>
                 <li{% if view.name == 'faq' %} class="active"{% endif %}>
                     <a href="{% url 'faq' %}">שאלות ותשובות</a>
                 </li>
-                <li{% if view.name == 'about' %} class="active"{% endif %}>
-                    <a href="{% url 'about' %}">
-                        על אודות
-                    </a>
-                </li>
             </ul>
-            <a class="btn btn-primary navbar-btn"
+            <a id="registration-btn" class="btn btn-primary navbar-btn"
                href="{% url 'sa:dashboard' %}">
                 <b>להרשמה</b>
                 <i class="fa fa-play fa-flip-horizontal"></i>

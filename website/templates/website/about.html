@@ -2,19 +2,24 @@
 {% load staticfiles %}
 {% block content_container %}
 
+
     <div>
 
         <div id="about" class="pull-up">
             <div class="container">
-
+        <div class=row>
+        <div class="col-sm-2">
+        </div>
+                    <div class="col-sm-10 col-md-8 col-lg-6">
                 <h1>
-                    על אודות
+                    עלינו
                 </h1>
-
+                </div>
+        </div>
                 <div class="row">
                     <div class="col-sm-2 logos">
-                        <img class="img-responsive"
-                             src="{% static "img/hasadna-logo.png" %}" alt="">
+                        <a href="http://www.hasadna.org.il"><img class="img-responsive"
+                             src="{% static "img/hasadna-logo.png" %}" alt=""></a>
 
                     </div>
                     <div class="col-sm-10 col-md-8 col-lg-6">
@@ -68,8 +73,8 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-2 logos">
-                        <img class="img-responsive"
-                             src="{% static "img/nli.png" %}" alt="">
+                        <a href="http://web.nli.org.il"><img class="img-responsive"
+                             src="{% static "img/nli.jpg" %}" alt=""></a>
 
                     </div>
                     <div class="col-sm-10 col-md-8 col-lg-6">
@@ -124,10 +129,14 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-sm-2 logos">
+                        <img class="img-responsive"
+                             src="{% static "img/nli.png" %}" alt="">
 
-                    <div class="col-sm-10 col-md-8 col-lg-6 col-sm-push-2">
+                    </div>
+                    <div class="col-sm-10 col-md-8 col-lg-6">
 
-                        <h2> הכיתה </h2>
+                        <h2>הכיתה 02</h2>
 
                         <p>
                             <b>אודי יכתוב</b>
@@ -157,7 +166,13 @@
 
                         </p>
 
+                        <p><a class="btn btn-primary"
+                              href="{% url 'sa:dashboard' %}">
+                            הרשמה לתכנית
+                            &nbsp;
+                            <i class="fa fa-play fa-flip-horizontal"></i>
 
+                        </a></p>
                     </div>
 
 
@@ -174,12 +189,12 @@
 
                 <div class="row">
                     <div class="col-sm-6">
-                        <h3>
+<h3>
                             אודי אורון
                         </h3>
 
                         <div class="col-xs-4">
-
+                        
                             <img
                                     class="img-thumbnail img-responsive"
                                     {#                                    src="{% static "img/udi.jpg" %}"#}
@@ -214,12 +229,11 @@
 
                         </div>
                         <div class="col-xs-8">
-                            לורם איפסום דולור סיט אמט,
-                            קונסקטורר אדיפיסינג אלית לורם איפסום דולור סיט אמט,
-                            גולר מונפרר סוברט לורם שבצק יהול, לכנוץ בעריר גק
-                            ליץ, צש בליא, מנסוטו צמלח לביקו ננבי, צמוקו בלוקריה
-                            הבקיץ אפאח דלאמת יבש, כאנה ניצאחו נמרגי שהכים תוק,
-                            הדש שנרא התידם הכייר וק.
+יותם, בוגר המחזור הראשון של הכיתה, ומוביל פרוייקט <a href="www.kikar.org">כיכר המדינה</a> בסדנא לידע ציבורי.
+חוץ מזה, הוא מנחה ומפיק אירועי <a href="www.poetryslam.org.il">פואטרי סלאם</a> מנסה להתפרנס מתכנות כשאודי מרשה לו, ובזמנו הפנוי לומד לתואר ראשון בתכנית פכ"ם.
+<br/>   
+<br/>
+יותם הוא הרכז הפדגוגי של התכנית. אנחנו לא משוכנעים למה בחרנו לתת לו את הטייטל הזה.
                         </div>
                     </div>
                 </div>
