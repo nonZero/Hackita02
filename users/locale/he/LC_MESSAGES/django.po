@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-15 11:42+0300\n"
-"PO-Revision-Date: 2015-07-19 14:35+0300\n"
+"POT-Creation-Date: 2015-07-22 02:27+0300\n"
+"PO-Revision-Date: 2015-07-22 02:24+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -18,181 +18,161 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.2\n"
 
-#: forms.py:29
 msgid "Password"
 msgstr "סיסמא"
 
-#: forms.py:59
-msgid "The two password fields didn't match."
-msgstr ""
+msgid "email"
+msgstr "דואל"
 
-#: forms.py:62
+msgid "The two password fields didn't match."
+msgstr "שדות הסיסמא אינם תואמים"
+
 msgid "password"
 msgstr "סיסמא"
 
-#: forms.py:65
 msgid "Minimum 6 characters"
 msgstr "לפחות 6 תווים"
 
-#: forms.py:66
 msgid "password confirmation"
 msgstr "סיסמא (פעם שניה)"
 
-#: models.py:11
 msgid "display name (Hebrew)"
 msgstr "שם לתצוגה בעברית"
 
-#: models.py:14
 msgid "display name (English)"
 msgstr "שם לתצוגה באנגלית"
 
-#: models.py:41
 msgid "first name (Hebrew)"
 msgstr "שם פרטי בעברית"
 
-#: models.py:43
 msgid "last name (Hebrew)"
 msgstr "שם משפחה בעברית"
 
-#: models.py:45
 msgid "first name (English)"
 msgstr "שם פרטי באנגלית"
 
-#: models.py:47
 msgid "last name (English)"
 msgstr "שם משפחה באנגלית"
 
-#: models.py:54
 msgid "female"
 msgstr "נקבה"
 
-#: models.py:55
 msgid "male"
 msgstr "זכר"
 
-#: models.py:56
 msgid "prefer not to answer"
 msgstr "ברצוני שלא לענות"
 
-#: models.py:59
 msgid "gender"
 msgstr "מגדר"
 
-#: models.py:60
 msgid "we would like to create a diverse group."
 msgstr "הידעת? חשוב לנו לבנות קבוצה מעורבת מגדרית, עם יצוג גבוה לנשים."
 
-#: models.py:62
 msgid "main phone number"
 msgstr "מספר טלפון"
 
-#: models.py:63
 msgid "alternate phone number"
 msgstr "מספר טלפון נוסף"
 
-#: models.py:65
 msgid "city"
 msgstr "עיר / ישוב"
 
-#: models.py:66
 msgid "address"
 msgstr "כתובת"
 
-#: models.py:67
 msgid "street and number"
 msgstr "רחוב ומספר"
 
-#: models.py:70
 msgid "skype username"
 msgstr "שם משתמש ב-skype"
 
-#: models.py:71
 msgid "optional, for conducting a video interview."
 msgstr "אופציונלי, לשם קיום ראיון בשיחת וידאו"
 
-#: templates/users/base.html:23
+msgid "Your Hackita 02 Login Link"
+msgstr "קישור כניסה שלך לאתר הכיתהHackita02"
+
+msgid "To login to Hackita 02, click here"
+msgstr "על מנת להכנס לאתר הכיתה 02 Hackita, יש ללחוץ כאן"
+
 msgid "Sign Out"
 msgstr "יציאה"
 
-#: templates/users/base.html:30
 msgid "Set password"
 msgstr "קביעת סיסמא"
 
-#: templates/users/base.html:37
 msgid "Applications"
 msgstr "מועמדים"
 
-#: templates/users/base.html:47
 msgid "Admin"
 msgstr "אדמין"
 
-#: templates/users/base.html:52
 msgid "You are logged in as"
 msgstr "את/ה מחובר/ת למערכת כ-"
 
-#: templates/users/login.html:14
 msgid "Quick passwordless login/registration"
 msgstr "כניסה/הרשמה מהירה ללא סיסמא"
 
-#: templates/users/login.html:23
 msgid "Using gmail based emails"
 msgstr "כניסה מהירה לבעלי דואל מבוסס gmail"
 
-#: templates/users/login.html:30
 msgid "Using other email providers"
 msgstr "כניסה/הרשמה לבעלי שירות דואל אחר"
 
-#: templates/users/login.html:41
+msgid "Forgot your password?"
+msgstr "שכחת את הסיסמא שלך?"
+
 msgid "Password Login"
 msgstr "כניסה באמצעות סיסמא"
 
-#: templates/users/login.html:48
 msgid "Login"
 msgstr "כניסה"
 
-#: templates/users/personalinfo_form.html:13
 msgid "Personal Details"
 msgstr "פרטים אישיים"
 
-#: templates/users/personalinfo_form.html:29
 msgid "Send"
 msgstr "שלח"
 
-#: templates/users/set-password.html:11 templates/users/set-password.html:20
 msgid "Set Password"
 msgstr "קביעת סיסמא"
 
-#: templates/users/signup.html:11
 msgid "Email Registration / Login"
 msgstr "כניסה / הרשמה מהירה ללא סיסמא"
 
-#: templates/users/signup.html:20
-msgid "Email"
-msgstr "דואל"
-
-#: templates/users/signup.html:39
 msgid "Send me a quick login link"
 msgstr "שלח לי קישור לכניסה מהירה ללא סיסמא"
 
-#: templates/users/validation-sent.html:9
 msgid "Validation email sent"
 msgstr "נשלחה אליך הודעה עם קישור לכניסה מהירה לאתר."
 
-#: templates/users/validation-sent.html:13
 msgid "Validation mail sent to"
 msgstr "ההודעה נשלחה אל"
 
-#: templates/users/validation-sent.html:17
 msgid "Please check your email."
 msgstr "אנא בדוק את תיבת הדואר שלך."
 
-#: templates/users/validation-sent.html:21
 msgid "Mail was sent from"
 msgstr "ההודעה נשלחה מהכתובת"
 
-#: views.py:59
+msgid "validation code too old. Please generate a new code"
+msgstr "הקישור ישן מדי - אנא צור/צרי קישור כניסה חדש דרך מסך ההרשמה."
+
+msgid "Invalid validation code."
+msgstr "קוד הכניסה שגוי."
+
+msgid "Inactive user."
+msgstr "חשבון זה אינו פעיל."
+
+msgid "Welcome back!"
+msgstr "שלום שוב!"
+
+msgid "Welcome! You can set your password any time from the menu above."
+msgstr "שלום! ניתן לקבוע סיסמא דרך הקישור בתפריט העליון."
+
 msgid "Password was set succesfully"
 msgstr "הסיסמא נקבעה בהצלחה."
 
-#~ msgid "email"
+#~ msgid "Email"
 #~ msgstr "דואל"

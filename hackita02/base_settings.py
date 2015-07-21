@@ -71,6 +71,8 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "sa:dashboard"
 LOGIN_ERROR_URL = "users:login"
+VALIDATE_LINK_DAYS = 7
+
 SOCIAL_AUTH_RAISE_EXCEPTIONS = False
 # SOCIAL_AUTH_EMAIL_FORM_URL = "users:signup"
 SOCIAL_AUTH_EMAIL_FORM_HTML = "users/signup.html"
@@ -79,13 +81,9 @@ SOCIAL_AUTH_EMAIL_VALIDATION_URL = 'users:validation_sent'
 
 EMAIL_FROM = "Hackita02 <noreply@hackita02.hasadna.org.il>"
 
-# SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
-#     'social.backends.google.GoogleOAuth2',
-# )
 # SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
-    'hackita02.socialauth.HackitaEmailAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -135,13 +133,11 @@ AUTHENTICATION_BACKENDS = (
 # )
 SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.social_details',
-    'hackita02.socialauth.mail_validation',
     'social.pipeline.social_auth.social_uid',
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    # 'hackita02.socialauth.require_email',
-    'hackita02.socialauth.associate_by_email',
+    'social.pipeline.social_auth.associate_by_email',
     'hackita02.socialauth.create_user',
     'social.pipeline.social_auth.associate_user',
     'social.pipeline.social_auth.load_extra_data',
@@ -167,10 +163,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'hackita02.context_processors.hackita_processor',
 )
 
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

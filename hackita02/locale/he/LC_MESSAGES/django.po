@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-15 11:43+0300\n"
+"POT-Creation-Date: 2015-07-22 02:27+0300\n"
 "PO-Revision-Date: 2015-07-19 14:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,19 +18,36 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.2\n"
 
-#: base_views.py:79
 msgid "Page is not 'last', nor can it be converted to an int."
 msgstr ""
 
-#: base_views.py:84
 #, python-format
 msgid "Invalid page (%(page_number)s): %(message)s"
 msgstr ""
 
-#: socialauth.py:29
-msgid "Your Hackita 02 Login Link"
-msgstr "קישור כניסה שלך לאתר הכיתהHackita02"
+msgid "Bad URL"
+msgstr ""
 
-#: socialauth.py:30
-msgid "To login to Hackita 02, click here"
-msgstr "על מנת להכנס לאתר הכיתה 02 Hackita, יש ללחוץ כאן"
+msgid "google doc url"
+msgstr ""
+
+msgid "title"
+msgstr ""
+
+msgid "summary"
+msgstr ""
+
+msgid "content text"
+msgstr ""
+
+msgid "content html"
+msgstr ""
+
+msgid "EDIT ME"
+msgstr ""
+
+#~ msgid "Your Hackita 02 Login Link"
+#~ msgstr "קישור כניסה שלך לאתר הכיתהHackita02"
+
+#~ msgid "To login to Hackita 02, click here"
+#~ msgstr "על מנת להכנס לאתר הכיתה 02 Hackita, יש ללחוץ כאן"

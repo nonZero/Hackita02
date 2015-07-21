@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-15 11:43+0300\n"
+"POT-Creation-Date: 2015-07-22 02:27+0300\n"
 "PO-Revision-Date: 2015-07-14 11:06+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,23 +18,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.2\n"
 
-#: forms.py:25 forms.py:117
 msgid "general"
 msgstr "כללי"
 
-#: forms.py:26
 msgid "english"
 msgstr "אנגלית"
 
-#: forms.py:29
 msgid "text"
 msgstr "טקסט"
 
-#: forms.py:32
 msgid "code"
 msgstr "קוד"
 
-#: forms.py:35
 msgid "radio"
 msgstr "רדיו"
 

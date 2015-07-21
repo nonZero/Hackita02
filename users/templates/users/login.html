@@ -2,9 +2,6 @@
 {% load i18n staticfiles %}
 {% block content %}
 
-
-
-
     <div id="page-login" class="row">
 
         <div class="col-sm-6">
@@ -22,10 +19,16 @@
                     </a></p>
 
                     <p><a class="btn btn-block btn-primary btn-lg"
-                          href="{% url "social:begin" "email" %}">
+                          href="{% url "users:signup" %}">
                         <i class="fa fa-inbox"></i>
                         {% trans "Using other email providers" %}
                     </a></p>
+
+                    <div class="text-center">
+                        <a href="{% url "users:signup" %}">
+                            {% trans "Forgot your password?" %}
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

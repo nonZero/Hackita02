@@ -3,6 +3,11 @@ body {
     direction: rtl;
 }
 
+
+input[type=email] {
+    direction: ltr !important;
+}
+
 .ib {
     display: inline-block;
 }

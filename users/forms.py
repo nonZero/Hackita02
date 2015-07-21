@@ -50,10 +50,15 @@ class PersonalInfoForm(forms.ModelForm):
         # )
 
 
-# class SignupForm(forms.Form):
-#     email = forms.EmailField(label=_("email"))
-#
-#
+class SignupForm(forms.Form):
+    email = forms.EmailField(label=_("email"))
+
+    def form_valid(self):
+        models.Code.objects.create(
+
+        )
+
+
 class SetPasswordForm(forms.Form):
     error_messages = {
         'password_mismatch': _("The two password fields didn't match."),
