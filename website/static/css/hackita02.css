@@ -171,6 +171,16 @@ h2 {
     margin-top: 50px;
 }
 
+#about .logos .hackita {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    border: 3px solid #333;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 5px 10px;
+}
+
 
 @media (min-width: 768px) {
     #about .logos {
@@ -182,6 +192,18 @@ h2 {
     #about .logos img {
         margin-right: auto;
         margin-left: auto;
+    }
+
+    #about .logos .hackita {
+        font-size: 24px;
+    }
+
+
+}
+
+@media (min-width: 1024px) {
+    #about .logos .hackita {
+        font-size: 36px;
     }
 
 
