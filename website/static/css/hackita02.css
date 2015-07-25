@@ -3,7 +3,6 @@ body {
     direction: rtl;
 }
 
-
 input[type=email] {
     direction: ltr !important;
 }
@@ -222,8 +221,8 @@ h2 {
 
 .team-member i {
     position: absolute;
-    right:8px;
-    bottom:8px;
+    right: 8px;
+    bottom: 8px;
     background: rgba(255, 255, 255, 0.1);
     padding: 1px 3px;
     border-radius: 4px;
@@ -294,6 +293,7 @@ h2 {
 
 .inspired {
     font-size: larger;
+    padding-top: 5px;
 }
 
 .hasadna-block {
@@ -314,8 +314,8 @@ h2 {
 }
 
 .hasadna-block img {
-    width: 60px;
-    height: 60px;
+    width: 180px;
+    height: 90px;
 }
 
 @media (min-width: 992px) {
@@ -325,8 +325,16 @@ h2 {
     }
 
     .hasadna-block img {
-        width: 80px;
-        height: 80px;
+        width: 200px;
+        height: 100px;
+    }
+
+    #sponsors .nli {
+        padding-top: 20px;
+    }
+
+    .inspired {
+        padding-top: 15px;
     }
 }
 
@@ -336,9 +344,9 @@ h2 {
     padding: 5px;
 }
 
-#sponsors .nli {
-    /*line-height: 80px;*/
-}
+/*#sponsors .nli {*/
+    /*padding-top: 0;*/
+/*}*/
 
 #sponsors .nli img {
 }
