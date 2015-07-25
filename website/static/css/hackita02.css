@@ -314,8 +314,8 @@ h2 {
 }
 
 .hasadna-block img {
-    width: 180px;
-    height: 90px;
+    width: 160px;
+    height: 80px;
 }
 
 @media (min-width: 992px) {
@@ -325,17 +325,14 @@ h2 {
     }
 
     .hasadna-block img {
-        width: 200px;
-        height: 100px;
+        width: 160px;
+        height: 80px;
     }
 
-    #sponsors .nli {
-        padding-top: 20px;
-    }
 
-    .inspired {
-        padding-top: 15px;
-    }
+    /*.inspired {*/
+        /*padding-top: 15px;*/
+    /*}*/
 }
 
 #sponsors .x {
@@ -344,9 +341,9 @@ h2 {
     padding: 5px;
 }
 
-/*#sponsors .nli {*/
-    /*padding-top: 0;*/
-/*}*/
+#sponsors .nli {
+    padding-top: 5px;
+}
 
 #sponsors .nli img {
 }
