@@ -39,6 +39,7 @@ class UserViewMixin(ProtectedMixin):
 
 class Dashboard(UserViewMixin, TemplateView):
     template_name = 'dashboard.html'
+    page_title = _("Registration")
 
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
@@ -51,6 +52,7 @@ class Dashboard(UserViewMixin, TemplateView):
 class PersonalDetailsView(UserViewMixin, CreateView):
     model = PersonalInfo
     form_class = PersonalInfoForm
+    page_title = _("Personal Details")
     success_url = reverse_lazy("sa:dashboard")
 
     def dispatch(self, request, *args, **kwargs):
@@ -88,6 +90,7 @@ class PersonalDetailsView(UserViewMixin, CreateView):
 
 class ReviewView(UserViewMixin, TemplateView):
     template_name = 'review.html'
+    page_title = _("Registration Details")
 
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
@@ -108,6 +111,7 @@ class RegisterView(UserViewMixin, FormView):
         form = self.get_form_class()
         if form is None:
             return redirect('sa:dashboard')
+        self.page_title = "{}: {}".format(_("Registration"), form.form_title)
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -150,7 +154,8 @@ class RegisterView(UserViewMixin, FormView):
 
     def get_summary_email(self, u):
         url = self.request.build_absolute_uri(reverse('sa:app_detail',
-                                                      args=(u.application.id,)))
+                                                      args=(
+                                                      u.application.id,)))
         html = loader.render_to_string(
             "student_applications/application_summary_email.html", {
                 'u': u,
@@ -176,11 +181,13 @@ class AllFormsView(TemplateView, ProtectedMixin):
 
 class ApplicationListView(StaffOnlyMixin, ListView):
     model = models.Application
+    page_title = _("Applications")
     ordering = ('-forms_filled', '-last_form_filled')
 
 
 class ApplicationDetailView(StaffOnlyMixin, DetailView):
     model = models.Application
+
 
 # class UserCohortUpdateView(StaffOnlyMixin, InlineFormSetView):
 #     model = HackitaUser

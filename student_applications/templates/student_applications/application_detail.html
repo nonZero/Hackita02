@@ -1,6 +1,13 @@
 {% extends 'users/base.html' %}
 {% load i18n humanize %}
 
+{% block page_title %}
+    {{ object.user.hebrew_display_name }}
+    |
+    {% trans "Applications" %}
+    |
+{% endblock %}
+
 {% block content %}
 
     {% with u=object.user %}
