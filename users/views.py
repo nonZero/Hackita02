@@ -21,6 +21,7 @@ from . import models
 class LoginView(authtools.views.LoginView):
     template_name = "users/login.html"
     form_class = forms.LoginForm
+    page_title = _("Login")
 
 
 class LogoutView(authtools.views.LogoutView):
@@ -30,6 +31,7 @@ class LogoutView(authtools.views.LogoutView):
 class SignupView(FormView):
     template_name = "users/signup.html"
     form_class = forms.SignupForm
+    page_title = _("Signup")
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated():
@@ -48,6 +50,7 @@ class SignupView(FormView):
 
 class ValidationSentView(TemplateView):
     template_name = "users/validation-sent.html"
+    page_title = _("Validation Sent")
 
     def get(self, request, *args, **kwargs):
         self.email = request.session.get('validation_sent_to')
@@ -96,6 +99,7 @@ class ValidateView(View):
 class SetPasswordView(FormView):
     template_name = "users/set-password.html"
     form_class = forms.SetPasswordForm
+    page_title = _("Set Password")
     success_url = reverse_lazy(settings.LOGIN_REDIRECT_URL)
 
     @method_decorator(login_required)

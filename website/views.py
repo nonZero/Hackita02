@@ -1,3 +1,4 @@
+# encoding: utf-8
 import os.path
 
 from django.conf import settings
@@ -29,10 +30,12 @@ class HomeView(WebsiteView):
 
 class ProgramView(WebsiteView):
     name = 'program'
+    page_title = "על התכנית"
 
 
 class FAQView(WebsiteView):
     name = 'faq'
+    page_title = "שאלות ותשובות"
 
     def get_context_data(self, **kwargs):
         d = super(FAQView, self).get_context_data(**kwargs)
@@ -42,7 +45,9 @@ class FAQView(WebsiteView):
 
 class AboutView(WebsiteView):
     name = 'about'
+    page_title = "עלינו"
 
 
 class TermsView(WebsiteView):
     name = 'terms'
+    page_title = "הצהרת פרטיות"
