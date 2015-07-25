@@ -21,7 +21,12 @@ class Answer(models.Model):
     data = JSONField()
 
     class Meta:
-        unique_together = (('user', 'q13e_slug'),)
+        unique_together = (
+            ('user', 'q13e_slug'),
+        )
+        ordering = (
+            'created_at',
+        )
 
     def __str__(self):
         return "%s: %s (%s)" % (self.user, self.q13e_slug, self.created_at)
