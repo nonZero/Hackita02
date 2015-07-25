@@ -42,3 +42,7 @@ class FAQView(WebsiteView):
 
 class AboutView(WebsiteView):
     name = 'about'
+
+
+class TermsView(WebsiteView):
+    name = 'terms'

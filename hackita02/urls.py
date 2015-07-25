@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^program/$', views.ProgramView.as_view(), name='program'),
     url(r'^faq/$', views.FAQView.as_view(), name='faq'),
     url(r'^about/$', views.AboutView.as_view(), name='about'),
+    url(r'^terms/$', views.TermsView.as_view(), name='terms'),
     # url(r'^$', views.CreateProjectView.as_view(), name='home'),
     # url(r'^blog/', include('blog.urls')),
     # i("projects"),
