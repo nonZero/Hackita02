@@ -27,7 +27,7 @@
 
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="icon" type="image/png"/>
 
-    <meta property="og:image" content="{% static "img/hackita-02-screenshot.png" %}" />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static "img/hackita-02-screenshot.png" %}" />
 
 </head>
 <body dir="rtl">
