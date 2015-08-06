@@ -111,7 +111,7 @@ def generate_code(length=32):
 
 class CodeManager(models.Manager):
     def generate(self, email):
-        return self.create(email=email, code=generate_code())
+        return self.create(email=email.lower(), code=generate_code())
 
 
 class Code(models.Model):
