@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 02:41+0300\n"
-"PO-Revision-Date: 2015-07-19 14:38+0300\n"
+"POT-Creation-Date: 2015-08-30 08:54+0300\n"
+"PO-Revision-Date: 2015-08-30 08:55+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.4\n"
 
 msgid "Required field"
 msgstr "שדה חובה"
@@ -79,8 +79,17 @@ msgstr "לחצ/י להתחלת שאלון ההרשמה"
 msgid "Choose projects"
 msgstr "בחירת פרוייקטים"
 
-msgid "This section will open during August."
-msgstr "רשימת הפרויקטים תפתח לעיון במהלך חודש אוגוסט"
+msgid "Pending your review"
+msgstr "ממתינים לסקירתך"
+
+msgid "Done!"
+msgstr "זה הכל!"
+
+msgid "Reviewed by you"
+msgstr "נסקרו על ידך"
+
+msgid "What are you waiting for?"
+msgstr "קדימה!"
 
 msgid "Send"
 msgstr "שלח/י"
@@ -109,6 +118,9 @@ msgstr "משתמשים"
 msgid "Save"
 msgstr "שמירה"
 
+msgid "Personal Details"
+msgstr "פרטים אישיים"
+
 msgid "Personal details saved successfully."
 msgstr "הפרטים נשמרו בהצלחה."
 
@@ -125,6 +137,9 @@ msgstr "'%s' נשמר בהצלחה."
 
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "נמצאו בעיות בטופס. אנא תקנ/י את הבעיות, ונסה/י שנית"
+
+#~ msgid "This section will open during August."
+#~ msgstr "רשימת הפרויקטים תפתח לעיון במהלך חודש אוגוסט"
 
 #~ msgid "Invited"
 #~ msgstr "הוזמן"

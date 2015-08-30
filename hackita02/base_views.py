@@ -36,7 +36,7 @@ class PermissionMixin(views.LoginRequiredMixin,
             request, *args, **kwargs)
 
 
-class UIMixin(ProtectedViewMixin):
+class UIMixin(object):
     page_title = None
 
     def get_page_title(self):

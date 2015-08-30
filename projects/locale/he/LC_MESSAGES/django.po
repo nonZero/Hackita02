@@ -1,0 +1,112 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-30 08:54+0300\n"
+"PO-Revision-Date: 2015-08-30 08:27+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.4\n"
+
+msgid "Bad URL"
+msgstr "כתובת בלתי תקינה"
+
+msgid "google doc url"
+msgstr "כתובת המסמך (url)"
+
+msgid "is published"
+msgstr "פורסם?"
+
+msgid "title"
+msgstr "כותרת"
+
+msgid "slug"
+msgstr "סלאג"
+
+msgid "summary"
+msgstr "סיכום"
+
+msgid "content text"
+msgstr "תוכן (טקסט)"
+
+msgid "content html"
+msgstr "תוכן (html)"
+
+msgid "uninterested"
+msgstr "לא מעוניינ/ת"
+
+msgid "neutral"
+msgstr "אין לי דעה"
+
+msgid "interested"
+msgstr "מעוניינ/ת"
+
+msgid "very interested"
+msgstr "מעוניינ/ת מאוד"
+
+msgid "created at"
+msgstr "מועד יצירה"
+
+msgid "public"
+msgstr "פומבי - הערתך תוצג בפני כל המשתמשים"
+
+msgid "private"
+msgstr "פרטי - הערתך תוצג בפני צוות האתר בלבד"
+
+msgid "content"
+msgstr "תוכן"
+
+msgid "is reviewed"
+msgstr "ההערכה נסקרה על ידי הצוות"
+
+msgid "reviewed at"
+msgstr "מועד הסקירה"
+
+msgid "Projects"
+msgstr "פרוייקטים"
+
+msgid "Unpublished"
+msgstr "טרם פורסם"
+
+msgid "Would you like to work on this project?"
+msgstr "האם ברצונך לעבוד על פרויקט זה?"
+
+msgid "Vote!"
+msgstr "שמירה"
+
+msgid "Saved sucessfully."
+msgstr "ההצבעה נשמרה בהצלחה."
+
+msgid "Login"
+msgstr "כניסה"
+
+msgid "Register"
+msgstr "הרשמה"
+
+msgid "Update Project"
+msgstr "עדכון פרויקט"
+
+msgid "Create Project"
+msgstr "יצירת פרויקט"
+
+msgid "Save"
+msgstr "שמירה"
+
+msgid "Go Fetch!"
+msgstr "לך תביא!"
+
+msgid "EDIT ME"
+msgstr "ערוך אותי!!!"
+
+#~ msgid "Error in form submission. Please try again."
+#~ msgstr "שגיאה במילוי הטופס. נא לנסות שנית."

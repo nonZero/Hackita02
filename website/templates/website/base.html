@@ -1,7 +1,7 @@
+{% load i18n %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html class="no-js" lang="en" dir="rtl">
-<!--<![endif]-->
 
 <head>
     <meta charset="utf-8">
@@ -33,7 +33,8 @@
 
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="icon" type="image/png"/>
 
-    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static "img/hackita-02-screenshot.png" %}" />
+    <meta property="og:image" content="{{ request.scheme }}://
+            {{ request.get_host }}{% static "img/hackita-02-screenshot.png" %}"/>
 
 </head>
 <body dir="rtl">
@@ -59,8 +60,13 @@
             </a>
         </div>
 
-        <div class="collapse navbar-collapse"
-             id="bs-example-navbar-collapse-1">
+        {% if not user.id %}
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url "users:login" %}">{% trans "Login" %}</a></li>
+            </ul>
+        {% endif %}
+
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li{% if view.name == 'program' %} class="active"{% endif %}>
                     <a href="{% url 'program' %}">על התכנית</a>
@@ -72,6 +78,9 @@
                 </li>
                 <li{% if view.name == 'faq' %} class="active"{% endif %}>
                     <a href="{% url 'faq' %}">שאלות ותשובות</a>
+                </li>
+                <li{% if view.name == 'projects' %} class="active"{% endif %}>
+                    <a href="{% url 'projects:list' %}">{% trans "Projects" %}</a>
                 </li>
             </ul>
             <a id="registration-btn" class="btn btn-primary navbar-btn"

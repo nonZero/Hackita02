@@ -19,10 +19,24 @@ class NewProjectForm(forms.ModelForm):
             'doc_id',
         )
 
+
 class UpdateProjectForm(forms.ModelForm):
     class Meta:
         model = models.Project
         fields = (
             'title',
+            'slug',
             'summary',
+            'is_published',
         )
+
+
+class VoteForm(forms.ModelForm):
+    class Meta:
+        model = models.ProjectVote
+        fields = (
+            'score',
+        )
+        widgets = {
+            'score': forms.RadioSelect(),
+        }

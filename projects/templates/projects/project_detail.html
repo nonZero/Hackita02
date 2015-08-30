@@ -1,11 +1,88 @@
-{% load hackita %}
-<h1>{{ object|u }}</h1>
-<p>{{ object.created_by }}</p>
+{% extends 'users/base.html' %}
+{% load i18n humanize hackita staticfiles %}
 
-<blockquote>
-    {{ object.content_text|linebreaksbr }}
-</blockquote>
-<hr/>
-<blockquote>
-    {{ object.content_html|safe }}
-</blockquote>
+{% block page_title %}
+    {{ object.title }}
+    |
+    {% trans "Projects" %}
+    |
+{% endblock %}
+
+{% block content %}
+
+    <ol class="breadcrumb">
+        <li>
+            <a href="{% url "projects:list" %}">
+                {% trans "Projects" %}
+            </a>
+        </li>
+    </ol>
+
+    <h1>
+        {% if perms.projects.create_project %}
+            <a href="{{ object.get_update_url }}"
+               class="btn btn-warning pull-right">
+                <i class="fa fa-edit"></i>
+            </a>
+        {% endif %}
+
+        {{ object|u }}
+    </h1>
+
+    {% if not object.is_published %}
+        <div class="alert alert-danger">
+            <i class="fa fa-exclamation-triangle"></i>
+            {% trans "Unpublished" %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{ object.content_html|safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    {% trans "Would you like to work on this project?" %}
+                </div>
+                <div class="panel-body">
+                    {% if vote_form %}
+                        <form method="post" id="voteform">
+                            {% csrf_token %}
+                            {{ vote_form.score }}
+                            <div class="save collapse">
+                                <button class="btn btn-primary">{% trans "Vote!" %}</button>
+                                <span class="loader collapse">
+                                    <i class="fa fa-spin fa-spinner"></i>
+                                </span>
+                            </div>
+                            <div class="ok collapse text-success">
+                                <i class="fa fa-check"></i>
+                                {% trans "Saved sucessfully." %}
+                            </div>
+                        </form>
+                    {% else %}
+                        <a href="{% url "users:login" %}?from={{ request.path }}"
+                           class="btn btn-primary btn-block">
+                            {% trans "Login" %} / {% trans "Register" %}
+                        </a>
+
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "vendor/jquery.form.js" %}"></script>
+    <script src="{% static "js/project_detail.js" %}"></script>
+{% endblock %}
+

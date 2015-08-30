@@ -1,4 +1,5 @@
 import logging
+from bs4 import BeautifulSoup
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
@@ -11,6 +12,7 @@ from apiclient.discovery import build
 logger = logging.getLogger(__name__)
 
 PREFIX = "https://docs.google.com/document/d/"
+
 
 class DriveError(Exception):
     pass
@@ -49,3 +51,11 @@ def retrieve_doc_content(doc_id, api_key=None):
         'text': download(info['exportLinks']['text/plain']),
         'html': download(info['exportLinks']['text/html']),
     }
+
+
+def extract_body(html):
+    """Extracts body tag, dropping everything else, from a google docs html"""
+    soup = BeautifulSoup(html, 'html.parser')
+    body = soup.body
+    body.name = 'div'
+    return str(body)

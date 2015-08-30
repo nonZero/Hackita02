@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^terms/$', views.TermsView.as_view(), name='terms'),
     # url(r'^$', views.CreateProjectView.as_view(), name='home'),
     # url(r'^blog/', include('blog.urls')),
-    # i("projects"),
+    i("projects"),
     i("users"),
     i("student_applications", "sa"),
 

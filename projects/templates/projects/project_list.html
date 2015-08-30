@@ -1,10 +1,55 @@
-{% load hackita %}
-<a href="{% url "projects:create" %}">Create</a>
-<ul>
-    {% for object in object_list %}
-        <li>
-            <b>{{ object|u }}</b>
-            {{ object.created_by }}
-        </li>
-    {% endfor %}
-</ul>
+{% extends 'users/base.html' %}
+{% load i18n humanize hackita %}
+
+{% block content %}
+
+    <h1>
+        {% trans "Projects" %}
+    </h1>
+
+    <ul class="list-group">
+
+        {% for object in published %}
+            <li class="list-group-item{% if object.vote %} list-group-item-warning{% endif %}">
+                {% if object.vote %}
+                    <div class="label label-{{ object.vote.get_score_label }} pull-right">
+                        {{ object.vote.get_score_display }}
+                    </div>
+                {% endif %}
+                <h4 class="list-group-item-heading">
+                    {{ object|u }}
+                </h4>
+
+                <p class="list-group-item-text">
+                    {{ object.summary }}
+                </p>
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    {% if perms.projects.view_project %}
+
+        <ul class="list-group">
+
+            {% for object in object_list.unpublished %}
+                <li class="list-group-item{% if not object.is_published %} list-group-item-danger{% endif %}">
+                    <h4 class="list-group-item-heading">
+                        <a href="{{ object.get_update_url }}">{{ object }}</a>
+
+                    </h4>
+
+                    <p class="list-group-item-text">
+                        {{ object.summary }}
+                    </p>
+                </li>
+            {% endfor %}
+
+            <li class="list-group-item list-group-item-warning">
+                <a href="{% url "projects:create" %}">{% trans "Create Project" %}</a>
+            </li>
+
+        </ul>
+    {% endif %}
+
+{% endblock %}

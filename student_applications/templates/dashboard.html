@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n %}
+{% load i18n hackita %}
 
 {% block content %}
 
@@ -75,12 +75,58 @@
             </li>
 
             <li class="list-group-item">
-                <i class="fa {% if True %}fa-square-o{% else %}fa-check{% endif %}"></i>
-                {% trans "Part" %} 3:
-                {% trans "Choose projects" %}
-                <div class="registration-step">
-                    {% trans "This section will open during August." %}
-                </div>
+                <p>
+                    <i class="fa {% if registered and not pending %}fa-check{% else %}fa-square-o{% endif %}"></i>
+
+                    {% trans "Part" %} 3:
+                    {% trans "Choose projects" %}
+                </p>
+
+                {% if registered %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{% trans "Pending your review" %}</h3>
+                                </div>
+                                <ul class="list-group">
+                                    {% for p in pending %}
+                                        <li class="list-group-item">
+                                            {{ p|u }}
+                                        </li>
+                                    {% empty %}
+                                        <li class="list-group-item">
+                                            {% trans "Done!" %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        {% trans "Reviewed by you" %}
+                                    </h3>
+                                </div>
+                                <ul class="list-group">
+                                    {% for p in processed %}
+                                        <li class="list-group-item">
+                                            <div class="label label-{{ p.vote.get_score_label }} pull-right">
+                                                {{ p.vote.get_score_display }}
+                                            </div>
+                                            {{ p|u }}
+                                        </li>
+                                    {% empty %}
+                                        <li class="list-group-item">
+                                            {% trans "What are you waiting for?" %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
 
             </li>
 

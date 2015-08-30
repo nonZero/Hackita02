@@ -8,7 +8,7 @@ register = template.Library()
 
 
 @register.filter(needs_autoescape=True)
-def u(instance, title_attr='__unicode__', autoescape=None):
+def u(instance, title_attr='__str__', autoescape=None):
     if autoescape:
         esc = conditional_escape
     else:

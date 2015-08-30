@@ -16,6 +16,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
 
 from . import models
+from projects.models import Project
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES
 from users.base_views import ProtectedMixin, StaffOnlyMixin
@@ -46,6 +47,14 @@ class Dashboard(UserViewMixin, TemplateView):
         d['registered'] = get_user_next_form(self.request.user) is None
         d['needs_personal_details'] = not hasattr(self.request.user,
                                                   'personalinfo')
+        if d['registered']:
+            projects = Project.objects.published().random().with_votes(
+                self.request.user)
+            d['pending'] = [p for p in projects if not p.vote]
+            d['processed'] = sorted([p for p in projects if p.vote],
+                                    key=lambda p: p.vote.score,
+                                    reverse=True)
+
         return d
 
 
@@ -155,7 +164,7 @@ class RegisterView(UserViewMixin, FormView):
     def get_summary_email(self, u):
         url = self.request.build_absolute_uri(reverse('sa:app_detail',
                                                       args=(
-                                                      u.application.id,)))
+                                                          u.application.id,)))
         html = loader.render_to_string(
             "student_applications/application_summary_email.html", {
                 'u': u,
@@ -187,7 +196,6 @@ class ApplicationListView(StaffOnlyMixin, ListView):
 
 class ApplicationDetailView(StaffOnlyMixin, DetailView):
     model = models.Application
-
 
 # class UserCohortUpdateView(StaffOnlyMixin, InlineFormSetView):
 #     model = HackitaUser
