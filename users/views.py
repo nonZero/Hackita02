@@ -143,6 +143,7 @@ class UserListView(PermissionMixin, ListView):
 class UserDetailView(PermissionMixin, DetailView):
     permission_required = "users.view_user"
     model = models.User
+    context_object_name = 'theuser'
 
     def get_note_form(self, data=None):
         return forms.UserNoteForm(data)
