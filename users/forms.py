@@ -90,3 +90,15 @@ class UserDisplayNamesForm(forms.ModelForm):
             'hebrew_display_name',
             'english_display_name',
         )
+
+
+class UserNoteForm(forms.ModelForm):
+    # send_to_user = forms.BooleanField(required=False, label=_("send to user by email"))
+
+    class Meta:
+        model = models.UserNote
+        fields = (
+            'content',
+            'visible_to_user',
+            'is_open',
+        )

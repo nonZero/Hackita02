@@ -7,11 +7,14 @@ from django.contrib.auth import update_session_auth_hash, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse_lazy
-from django.http.response import HttpResponseBadRequest, HttpResponse
+from django.http.response import HttpResponseBadRequest, HttpResponse, \
+    JsonResponse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView, TemplateView, View, UpdateView
+from django.views.generic import FormView, TemplateView, View, UpdateView, \
+    DetailView, ListView
 from django.utils.translation import ugettext_lazy as _
 
 from . import forms
@@ -130,6 +133,65 @@ class UserDisplayNamesView(ProtectedViewMixin, UpdateView):
     def form_valid(self, form):
         messages.success(self.request, _("Profile saved successfully."))
         return super().form_valid(form)
+
+
+class UserListView(PermissionMixin, ListView):
+    permission_required = "users.view_user"
+    model = models.User
+
+
+class UserDetailView(PermissionMixin, DetailView):
+    permission_required = "users.view_user"
+    model = models.User
+
+    def get_note_form(self, data=None):
+        return forms.UserNoteForm(data)
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['note_form'] = self.get_note_form()
+        return d
+
+    def handle_note_form(self):
+        form = self.get_note_form(self.request.POST)
+        if not form.is_valid():
+            return False
+
+        note = form.instance
+        note.user = self.object
+        note.author = self.request.user
+        form.save()
+
+        url = self.request.build_absolute_uri(note.get_absolute_url())
+
+        subject = "{} {} {} {}".format(
+            _("User note posted to"),
+            self.object,
+            _("By"),
+            self.request.user,
+        )
+        message = "{}\n\n[{}]\n{}\n\n{} ({})".format(
+            url,
+            _('visible to user') if note.visible_to_user else _(
+                'hidden from user'),
+            note.content,
+            self.object,
+            self.object.email,
+        )
+        mail_managers(subject, message)
+
+        response = render_to_string("users/_user_note.html",
+                                    {'note': note},
+                                    request=self.request)
+        return response
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        result = self.handle_note_form()
+
+        return JsonResponse({'result': result}, safe=False,
+                            status=200 if result else 400)
 
 
 class AllEmailsView(PermissionMixin, View):

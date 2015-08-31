@@ -76,6 +76,34 @@
                     {% endif %}
                 </div>
             </div>
+            {% if perms.projects.view_projectvote %}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        {% trans "Votes" %}
+                    </div>
+
+                    {% regroup project.votes.desc by get_score_display as groups %}
+
+                    <ul class="list-group">
+                        {% for group in groups %}
+                            <li class="list-group-item">
+                                <b class="list-group-item-heading">
+                                    {{ group.grouper }}
+                                </b>
+                                <div class="list-group-item-body">
+                                    <ul class="list-inline">
+                                        {% for item in group.list %}
+                                            <li>{{ item.user|u }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -88,7 +116,7 @@
 
         <ul class="list-group" id="comments">
             {% for c in object.comments.asc %}
-                {%  include "projects/_project_comment.html" %}
+                {% include "projects/_project_comment.html" %}
             {% endfor %}
 
             <li class="list-group-item">
@@ -109,7 +137,8 @@
 
                                 <div class="controls">
                                     {{ user }}
-                                    <a href="{% url "users:set_names" %}" title="{% trans "Edit" %}">
+                                    <a href="{% url "users:set_names" %}"
+                                       title="{% trans "Edit" %}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </div>
@@ -140,10 +169,6 @@
             </li>
         </ul>
     </div>
-
-
-
-
 
 {% endblock %}
 

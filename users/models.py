@@ -144,3 +144,48 @@ class Code(models.Model):
             '{}:\n{}'.format(_("To login to Hackita 02, click here"), url),
             settings.EMAIL_FROM, [self.email]
         )
+
+
+class UserNote(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='notes')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               related_name='notes_authored')
+    created_at = models.DateTimeField(auto_now_add=True)
+    visible_to_user = models.BooleanField(default=False)
+    content = models.TextField(_("content"), blank=False)
+
+    sent_to_user_at = models.DateTimeField(null=True)
+    is_open = models.BooleanField()
+    closed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                  blank=True, related_name="+")
+    closed_at = models.DateTimeField(_("closed at"), null=True, blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = _("user note")
+        verbose_name_plural = _("user notes")
+
+    # def __str__(self):
+    #     return "[#{}] {} - {}: {}".format(
+    #         self.id,
+    #         self.user,
+    #         self.project,
+    #         self.content,
+    #     )
+    #
+    # def is_visible_to(self, user):
+    #     if user.is_staff:
+    #         return True
+    #     if not self.is_published:
+    #         return False
+    #     if self.scope == self.Visibility.PUBLIC:
+    #         return True
+    #     return self.user == user
+    #
+
+    def get_absolute_url(self):
+        return "{}#note-{}".format(
+            self.user.get_absolute_url(),
+            self.id,
+        )

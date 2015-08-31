@@ -16,6 +16,9 @@ urlpatterns = [
         name='validate'),
     url(r'^logout/$', views.LogoutView.as_view(), name='logout'),
 
+    url(r'^$', views.UserListView.as_view(), name='list'),
+    url(r'^(?P<pk>\d+)/$', views.UserDetailView.as_view(), name='detail'),
+
     url(r'^all-emails/$', views.AllEmailsView.as_view(), name='list_emails'),
 
     # url(r'^$', views.UserListView.as_view(),

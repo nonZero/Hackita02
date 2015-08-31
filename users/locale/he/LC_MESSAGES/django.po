@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-31 11:11+0300\n"
-"PO-Revision-Date: 2015-08-31 11:11+0300\n"
+"POT-Creation-Date: 2015-09-01 00:02+0300\n"
+"PO-Revision-Date: 2015-09-01 00:04+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -105,6 +105,27 @@ msgstr "קישור הכניסה שלך לאתר הכיתהHackita02"
 msgid "To login to Hackita 02, click here"
 msgstr "על מנת להכנס לאתר הכיתה 02 Hackita, יש ללחוץ כאן"
 
+msgid "content"
+msgstr "תוכן"
+
+msgid "closed at"
+msgstr "מועד סגירה"
+
+msgid "user note"
+msgstr "הערות עבור המשתמש"
+
+msgid "user notes"
+msgstr "הערות עבור המשתמש"
+
+msgid "Private"
+msgstr "פרטי"
+
+msgid "Open"
+msgstr "פתוחה"
+
+msgid "Closed by"
+msgstr "נסגר על ידי"
+
 msgid "Sign Out"
 msgstr "יציאה"
 
@@ -162,6 +183,27 @@ msgstr "כניסה / הרשמה מהירה ללא סיסמא"
 msgid "Send me a quick login link"
 msgstr "שלח לי קישור לכניסה מהירה ללא סיסמא"
 
+msgid "Users"
+msgstr "משתמשים"
+
+msgid "Application"
+msgstr "מועמדות"
+
+msgid "Notes"
+msgstr "הערות"
+
+msgid "Add Note"
+msgstr "הוספת הערה"
+
+msgid "Add"
+msgstr "הוספה"
+
+msgid "Saved sucessfully."
+msgstr "נשמר בהצלחה."
+
+msgid "Project Votes"
+msgstr "הצבעות לפרויקט"
+
 msgid "Validation email sent"
 msgstr "נשלחה אליך הודעה עם קישור לכניסה מהירה לאתר."
 
@@ -200,6 +242,18 @@ msgstr "הסיסמא נקבעה בהצלחה."
 
 msgid "Profile saved successfully."
 msgstr "הפרופיל נשמר בהצלחה."
+
+msgid "User note posted to"
+msgstr "הערת משתמש נכתבה על"
+
+msgid "By"
+msgstr "על ידי"
+
+msgid "visible to user"
+msgstr "נראה למשתמש"
+
+msgid "hidden from user"
+msgstr "נסתר מהמשתמש"
 
 #~ msgid "Email"
 #~ msgstr "דואל"

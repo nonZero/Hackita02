@@ -59,6 +59,11 @@ class Project(models.Model):
         return d
 
 
+class ProjectVoteQuerySet(models.QuerySet):
+    def desc(self):
+        return self.order_by('-score')
+
+
 class ProjectVote(models.Model):
     class Score:
         UNINTERESTED = -1
@@ -79,10 +84,13 @@ class ProjectVote(models.Model):
             (VERY_INTERESTED, 'success'),
         ))
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='project_votes')
     project = models.ForeignKey(Project, related_name='votes')
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     score = models.IntegerField(choices=Score.choices)
+
+    objects = ProjectVoteQuerySet.as_manager()
 
     class Meta:
         ordering = ['-created_at']
@@ -105,6 +113,9 @@ class ProjectCommentQuerySet(models.QuerySet):
     def asc(self):
         return self.order_by('created_at')
 
+    def desc(self):
+        return self.order_by('-created_at')
+
 
 class ProjectComment(models.Model):
     class Scope:
@@ -115,7 +126,8 @@ class ProjectComment(models.Model):
             (PRIVATE, _("private")),
         )
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='project_comments')
     project = models.ForeignKey(Project, related_name='comments')
     in_reply_to = models.ForeignKey('self', null=True, blank=True)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
