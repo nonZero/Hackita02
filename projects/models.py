@@ -22,8 +22,6 @@ class ProjectQuerySet(models.QuerySet):
         return self
 
 
-
-
 class Project(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -101,6 +99,11 @@ class ProjectVote(models.Model):
         return self.Score.labels[self.score]
 
 
+class ProjectCommentQuerySet(models.QuerySet):
+    def asc(self):
+        return self.order_by('created_at')
+
+
 class ProjectComment(models.Model):
     class Scope:
         PUBLIC = 1
@@ -111,10 +114,10 @@ class ProjectComment(models.Model):
         )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    project = models.ForeignKey(Project)
+    project = models.ForeignKey(Project, related_name='comments')
     in_reply_to = models.ForeignKey('self', null=True)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
-    scope = models.IntegerField(choices=Scope.choices)
+    scope = models.IntegerField(_('comment view scope'), choices=Scope.choices)
     content = models.TextField(_("content"), blank=False)
 
     is_published = models.BooleanField(_("is published"), default=True)
@@ -122,6 +125,8 @@ class ProjectComment(models.Model):
     reviewed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                     related_name="project_comments_reviewed")
     reviewed_at = models.DateTimeField(_("reviewed at"), null=True)
+
+    objects = ProjectCommentQuerySet.as_manager()
 
     class Meta:
         ordering = ['-created_at']
@@ -132,4 +137,17 @@ class ProjectComment(models.Model):
             self.user,
             self.project,
             self.content,
+        )
+
+    def is_visible_to(self, user):
+        if self.is_published:
+            if self.scope == self.Scope.PUBLIC:
+                return True
+            return self.user == user
+        return user.is_staff
+
+    def get_absolute_url(self):
+        return "{}#comment-{}".format(
+            self.project.get_absolute_url(),
+            self.id,
         )

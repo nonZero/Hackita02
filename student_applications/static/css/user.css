@@ -3,6 +3,10 @@ h2 {
     color: black;
 }
 
+.deleted {
+    text-decoration: line-through;
+}
+
 .alert-error {
   color: #a94442;
   background-color: #f2dede;

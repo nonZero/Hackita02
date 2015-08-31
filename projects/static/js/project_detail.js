@@ -3,7 +3,6 @@ $(function () {
 
     var original = $("#voteform").serialize();
 
-
     var refresh = function() {
         $("#voteform .save").toggle($("#voteform").serialize() != original)
     };
@@ -29,3 +28,47 @@ $(function () {
         }
     })
 });
+
+$(function () {
+    "use strict";
+
+    var form = $("#commentform");
+    
+    var refresh = function() {
+        var valid = form.get(0).checkValidity();
+        form.find("button").prop('disabled', !valid);
+    };
+
+    form.find("textarea,select").on('input', refresh);
+
+    form.ajaxForm({
+        success: function(resp) {
+            form.find(':input').prop('disabled', false);
+            form.get(0).reset();
+            form.find('.loader').hide();
+            var el = $(resp.result.trim());
+            $("#comments>li:last").before(el);
+            el.hide().slideDown();
+            refresh();
+        },
+        beforeSubmit: function() {
+            form.find(':input').prop('disabled', true);
+            form.find('.loader').show();
+        },
+        error: function() {
+            alert("Unexpected error. Please reload page.");
+        }
+    })
+});
+
+$(function () {
+    "use strict";
+    $('body').on('click', '.review', function() {
+        var el = $(this);
+        $.post(el.data('url'), function() {
+            el.html('<i class="fa fa-check"></i>');
+        });
+        el.html('<i class="fa fa-spin fa-spinner"></i>');
+    });
+});
+

@@ -63,8 +63,19 @@ class User(AbstractEmailUser):
         return self.password and not self.password.startswith(
             UNUSABLE_PASSWORD_PREFIX)
 
-    def __unicode__(self):
-        return self.email
+    def __str__(self):
+        if self.hebrew_display_name:
+            return self.hebrew_display_name
+        try:
+            if self.personalinfo.hebrew_first_name:
+                return "{} {}".format(
+                    self.personalinfo.hebrew_first_name,
+                    self.personalinfo.hebrew_last_name,
+                )
+        except PersonalInfo.DoesNotExist:
+            pass
+
+        return "{} #{}".format(_("Anonymouse User"), self.id)
 
 
 class PersonalInfo(models.Model):
@@ -100,6 +111,10 @@ class PersonalInfo(models.Model):
     skype_username = models.CharField(
         _("skype username"), max_length=100, null=True, blank=True,
         help_text=_("optional, for conducting a video interview."))
+
+    class Meta:
+        verbose_name = _("pesronal info")
+        verbose_name_plural = _("pesronal infos")
 
 
 def generate_code(length=32):

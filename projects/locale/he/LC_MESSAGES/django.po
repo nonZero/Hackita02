@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-30 08:54+0300\n"
-"PO-Revision-Date: 2015-08-30 08:27+0300\n"
+"POT-Creation-Date: 2015-08-31 11:12+0300\n"
+"PO-Revision-Date: 2015-08-31 11:12+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -63,6 +63,9 @@ msgstr "פומבי - הערתך תוצג בפני כל המשתמשים"
 msgid "private"
 msgstr "פרטי - הערתך תוצג בפני צוות האתר בלבד"
 
+msgid "comment view scope"
+msgstr "מי יוכל לצפות בהערה?"
+
 msgid "content"
 msgstr "תוכן"
 
@@ -71,6 +74,18 @@ msgstr "ההערכה נסקרה על ידי הצוות"
 
 msgid "reviewed at"
 msgstr "מועד הסקירה"
+
+msgid "Private"
+msgstr "פרטי"
+
+msgid "Deleted"
+msgstr "נמחק"
+
+msgid "Reviewed by"
+msgstr "נסקר על ידי"
+
+msgid "Unreviewed"
+msgstr "טרם נסקר"
 
 msgid "Projects"
 msgstr "פרוייקטים"
@@ -93,6 +108,21 @@ msgstr "כניסה"
 msgid "Register"
 msgstr "הרשמה"
 
+msgid "Comments"
+msgstr "הערות"
+
+msgid "Add Comment"
+msgstr "הוספת הערה חדשה"
+
+msgid "Your public name is:"
+msgstr "שמך יופיע בפני שאר המשתמשים כך:"
+
+msgid "Edit"
+msgstr "עריכה"
+
+msgid "Add"
+msgstr "הוספה"
+
 msgid "Update Project"
 msgstr "עדכון פרויקט"
 
@@ -104,6 +134,15 @@ msgstr "שמירה"
 
 msgid "Go Fetch!"
 msgstr "לך תביא!"
+
+msgid "Edit Comment"
+msgstr "עריכת הערה"
+
+msgid "Latest Comments"
+msgstr "הערות אחרונות"
+
+msgid "Comment posted"
+msgstr "ההערה נשמרה"
 
 msgid "EDIT ME"
 msgstr "ערוך אותי!!!"

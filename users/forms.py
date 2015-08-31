@@ -81,3 +81,12 @@ class SetPasswordForm(forms.Form):
                     code='password_mismatch',
                 )
         return password2
+
+
+class UserDisplayNamesForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = (
+            'hebrew_display_name',
+            'english_display_name',
+        )

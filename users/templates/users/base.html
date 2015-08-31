@@ -32,6 +32,10 @@
                                 &nbsp;
                             </div>
                         {% endif %}
+                        <div class="pull-right">
+                            <a href="{% url "users:set_names" %}">{% trans "My Profile" %}</a>
+                            &nbsp;
+                        </div>
                         {% if user.is_staff %}
                             <div class="pull-right text-danger">
                                 <a href="{% url "sa:app_list" %}">{% trans "Applications" %}</a>
@@ -44,8 +48,13 @@
                                 {# &bull;#}
                                 {# <a href="{% url "users_log" %}">{% trans "Log" %}</a>#}
                                 {# &bull;#}
+                                <a href="{% url "projects:list_comments" %}">
+                                    {% trans "Project Comments" %}
+                                </a>
+                                &bull;
                                 <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
-                            &nbsp;
+                                &bull;
+                                &nbsp;
                             </div>
                         {% endif %}
 
@@ -80,11 +89,12 @@
                 {% block content %}
                 {% endblock %}
             </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        לעיונך, הנה <a href="{% url 'terms' %}">הצהרת הפרטיות</a> שלנו.
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    לעיונך, הנה <a href="{% url 'terms' %}">הצהרת הפרטיות</a>
+                    שלנו.
                 </div>
+            </div>
 
         </div>
     </div>

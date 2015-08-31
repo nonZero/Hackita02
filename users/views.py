@@ -11,11 +11,12 @@ from django.http.response import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView, TemplateView, View
+from django.views.generic import FormView, TemplateView, View, UpdateView
 from django.utils.translation import ugettext_lazy as _
 
 from . import forms
 from . import models
+from hackita02.base_views import ProtectedViewMixin
 
 
 class LoginView(authtools.views.LoginView):
@@ -114,4 +115,18 @@ class SetPasswordView(FormView):
         self.request.user.save()
         update_session_auth_hash(self.request, self.request.user)
         messages.success(self.request, _("Password was set succesfully"))
+        return super().form_valid(form)
+
+
+class UserDisplayNamesView(ProtectedViewMixin, UpdateView):
+    template_name = "users/set-names.html"
+    form_class = forms.UserDisplayNamesForm
+    page_title = _("My Profile")
+    success_url = reverse_lazy("sa:dashboard")
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Profile saved successfully."))
         return super().form_valid(form)

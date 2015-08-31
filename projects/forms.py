@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 import floppyforms.__future__ as forms
+
 from . import models
 from projects.drive import id_from_url
 
@@ -31,7 +32,7 @@ class UpdateProjectForm(forms.ModelForm):
         )
 
 
-class VoteForm(forms.ModelForm):
+class ProjectVoteForm(forms.ModelForm):
     class Meta:
         model = models.ProjectVote
         fields = (
@@ -40,3 +41,27 @@ class VoteForm(forms.ModelForm):
         widgets = {
             'score': forms.RadioSelect(),
         }
+
+
+class ProjectCommentForm(forms.ModelForm):
+    class Meta:
+        model = models.ProjectComment
+        fields = (
+            # 'in_reply_to',
+            'scope',
+            'content',
+        )
+        # widgets = {
+        #     'in_reply_to': forms.HiddenInput(),
+        # }
+
+
+class ProjectCommentEditForm(forms.ModelForm):
+    class Meta:
+        model = models.ProjectComment
+        fields = (
+            # 'in_reply_to',
+            'is_published',
+            'scope',
+            'content',
+        )

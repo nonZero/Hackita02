@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-22 02:41+0300\n"
-"PO-Revision-Date: 2015-07-22 02:41+0300\n"
+"POT-Creation-Date: 2015-08-31 11:11+0300\n"
+"PO-Revision-Date: 2015-08-31 11:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.4\n"
 
 msgid "Password"
 msgstr "סיסמא"
@@ -41,6 +41,9 @@ msgstr "שם לתצוגה בעברית"
 
 msgid "display name (English)"
 msgstr "שם לתצוגה באנגלית"
+
+msgid "Anonymouse User"
+msgstr "משתמש אנונימי"
 
 msgid "first name (Hebrew)"
 msgstr "שם פרטי בעברית"
@@ -90,6 +93,12 @@ msgstr "שם משתמש ב-skype"
 msgid "optional, for conducting a video interview."
 msgstr "אופציונלי, לשם קיום ראיון בשיחת וידאו"
 
+msgid "pesronal info"
+msgstr "פרטים אישיים"
+
+msgid "pesronal infos"
+msgstr "פרטים אישיים"
+
 msgid "Your Hackita 02 Login Link"
 msgstr "קישור הכניסה שלך לאתר הכיתהHackita02"
 
@@ -102,8 +111,14 @@ msgstr "יציאה"
 msgid "Set password"
 msgstr "קביעת סיסמא"
 
+msgid "My Profile"
+msgstr "הפרופיל שלי"
+
 msgid "Applications"
 msgstr "מועמדים"
+
+msgid "Project Comments"
+msgstr "הערות לפרויקטים"
 
 msgid "Admin"
 msgstr "אדמין"
@@ -135,6 +150,9 @@ msgstr "פרטים אישיים"
 msgid "Send"
 msgstr "שלח"
 
+msgid "Save"
+msgstr "שמירה"
+
 msgid "Set Password"
 msgstr "קביעת סיסמא"
 
@@ -156,6 +174,12 @@ msgstr "אנא בדוק את תיבת הדואר שלך."
 msgid "Mail was sent from"
 msgstr "ההודעה נשלחה מהכתובת"
 
+msgid "Signup"
+msgstr "הרשמה"
+
+msgid "Validation Sent"
+msgstr "האישור נשלח"
+
 msgid "validation code too old. Please generate a new code"
 msgstr "הקישור ישן מדי - אנא צור/צרי קישור כניסה חדש דרך מסך ההרשמה."
 
@@ -173,6 +197,9 @@ msgstr "שלום! ניתן לקבוע סיסמא דרך הקישור בתפרי�
 
 msgid "Password was set succesfully"
 msgstr "הסיסמא נקבעה בהצלחה."
+
+msgid "Profile saved successfully."
+msgstr "הפרופיל נשמר בהצלחה."
 
 #~ msgid "Email"
 #~ msgstr "דואל"
