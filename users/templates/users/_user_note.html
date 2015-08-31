@@ -37,10 +37,7 @@
                 </div>
             {% endif %}
         {% endif %}
-        {{ note.user }},
-        {% if user.is_staff %}
-            ({{ note.user|u:'email' }})
-        {% endif %}
+        {{ note.author|u }},
         <span title="{{ note.created_at }}">{{ note.created_at|naturaltime }}</span>:
 
 
