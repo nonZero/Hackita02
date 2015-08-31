@@ -38,6 +38,8 @@ class Project(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        verbose_name = _("project")
+        verbose_name_plural = _("projects")
 
     def __str__(self):
         return self.title
@@ -115,7 +117,7 @@ class ProjectComment(models.Model):
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     project = models.ForeignKey(Project, related_name='comments')
-    in_reply_to = models.ForeignKey('self', null=True)
+    in_reply_to = models.ForeignKey('self', null=True, blank=True)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     scope = models.IntegerField(_('comment view scope'), choices=Scope.choices)
     content = models.TextField(_("content"), blank=False)
@@ -123,13 +125,16 @@ class ProjectComment(models.Model):
     is_published = models.BooleanField(_("is published"), default=True)
     is_reviewed = models.BooleanField(_("is reviewed"), default=False)
     reviewed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                    blank=True,
                                     related_name="project_comments_reviewed")
-    reviewed_at = models.DateTimeField(_("reviewed at"), null=True)
+    reviewed_at = models.DateTimeField(_("reviewed at"), null=True, blank=True)
 
     objects = ProjectCommentQuerySet.as_manager()
 
     class Meta:
         ordering = ['-created_at']
+        verbose_name = _("project comment")
+        verbose_name_plural = _("project comments")
 
     def __str__(self):
         return "[#{}] {} - {}: {}".format(
@@ -140,11 +145,13 @@ class ProjectComment(models.Model):
         )
 
     def is_visible_to(self, user):
-        if self.is_published:
-            if self.scope == self.Scope.PUBLIC:
-                return True
-            return self.user == user
-        return user.is_staff
+        if user.is_staff:
+            return True
+        if not self.is_published:
+            return False
+        if self.scope == self.Scope.PUBLIC:
+            return True
+        return self.user == user
 
     def get_absolute_url(self):
         return "{}#comment-{}".format(

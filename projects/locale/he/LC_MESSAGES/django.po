@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-31 11:12+0300\n"
-"PO-Revision-Date: 2015-08-31 11:12+0300\n"
+"POT-Creation-Date: 2015-08-31 14:43+0300\n"
+"PO-Revision-Date: 2015-08-31 14:44+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -42,6 +42,12 @@ msgstr "תוכן (טקסט)"
 msgid "content html"
 msgstr "תוכן (html)"
 
+msgid "project"
+msgstr "פרוייקט"
+
+msgid "projects"
+msgstr "פרוייקטים"
+
 msgid "uninterested"
 msgstr "לא מעוניינ/ת"
 
@@ -74,6 +80,12 @@ msgstr "ההערכה נסקרה על ידי הצוות"
 
 msgid "reviewed at"
 msgstr "מועד הסקירה"
+
+msgid "project comment"
+msgstr "הערה לפרויקט"
+
+msgid "project comments"
+msgstr "הערות לפרויקט"
 
 msgid "Private"
 msgstr "פרטי"
