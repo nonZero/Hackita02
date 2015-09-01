@@ -25,9 +25,7 @@
                                 <div class="user-answer-title">
                                     <b>{{ field.label }}</b>
                                 </div>
-                                <div class="user-answer-content">
-                                    {{ field.html|urlize|linebreaksbr }}
-                                </div>
+                                <div class="user-answer-content">{{ field.html|urlize|linebreaksbr }}</div>
                             </div>
                         {% endif %}
                     {% endfor %}

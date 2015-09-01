@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n hackita %}
+{% load i18n hackita staticfiles %}
 
 {% block content %}
 
@@ -29,7 +29,7 @@
                             {% csrf_token %}
                             {{ form }}
                             <div class="form-actions">
-                                <input class="btn btn-primary btn-lg"
+                                <input class="btn btn-primary btn-block"
                                        type="submit"
                                        value="{% trans "Send" %}"/>
                             </div>
@@ -46,4 +46,13 @@
 
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "js/fix-code.js" %}"></script>
+    <script>
+    $(function() {
+        $(".user-answer-content").fixCode();
+    })
+    </script>
 {% endblock %}
