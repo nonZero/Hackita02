@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 11:44+0300\n"
-"PO-Revision-Date: 2015-09-01 11:45+0300\n"
+"POT-Creation-Date: 2015-09-01 13:30+0300\n"
+"PO-Revision-Date: 2015-09-01 13:31+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -36,6 +36,9 @@ msgstr "לפחות 6 תווים"
 
 msgid "password confirmation"
 msgstr "סיסמא (פעם שניה)"
+
+msgid "tags"
+msgstr "תגים"
 
 msgid "display name (Hebrew)"
 msgstr "שם לתצוגה בעברית"
@@ -106,6 +109,22 @@ msgstr "קישור הכניסה שלך לאתר הכיתהHackita02"
 msgid "To login to Hackita 02, click here"
 msgstr "על מנת להכנס לאתר הכיתה 02 Hackita, יש ללחוץ כאן"
 
+msgctxt "userlog"
+msgid "Other"
+msgstr "אחר"
+
+msgctxt "userlog"
+msgid "Add"
+msgstr "הוספה"
+
+msgctxt "userlog"
+msgid "Change"
+msgstr "שינוי"
+
+msgctxt "userlog"
+msgid "Remove"
+msgstr "הסרה"
+
 msgid "visible to user"
 msgstr "נראה למשתמש"
 
@@ -124,8 +143,29 @@ msgstr "הערות עבור המשתמש"
 msgid "user notes"
 msgstr "הערות עבור המשתמש"
 
-msgid "Application"
-msgstr "מועמדות"
+msgid "red"
+msgstr "אדום"
+
+msgid "gray"
+msgstr "אפור"
+
+msgid "bronze"
+msgstr "ברונזה"
+
+msgid "silver"
+msgstr "כסף"
+
+msgid "gold"
+msgstr "זהב"
+
+msgid "name"
+msgstr "שם"
+
+msgid "group"
+msgstr "קבוצה"
+
+msgid "tag"
+msgstr "תג"
 
 msgid "Private"
 msgstr "פרטי"
@@ -135,6 +175,9 @@ msgstr "פתוחה"
 
 msgid "Closed by"
 msgstr "נסגר על ידי"
+
+msgid "Edit Tags"
+msgstr "עריכת תגים"
 
 msgid "Sign Out"
 msgstr "יציאה"
@@ -264,6 +307,9 @@ msgstr "על ידי"
 
 msgid "hidden from user"
 msgstr "נסתר מהמשתמש"
+
+#~ msgid "Application"
+#~ msgstr "מועמדות"
 
 #~ msgid "Notes"
 #~ msgstr "הערות"

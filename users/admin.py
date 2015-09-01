@@ -33,3 +33,6 @@ class UserAdmin(UA):
     date_hierarchy = "last_login"
 
 admin.site.register(models.User, UserAdmin)
+
+admin.site.register(models.Tag)
+

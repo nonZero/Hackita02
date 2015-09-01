@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n humanize hackita sa %}
+{% load i18n humanize hackita sa users %}
 
 {% block content %}
 
@@ -43,6 +43,8 @@
                     <span title="{{ app.last_form_filled }}">
                         {{ app.last_form_filled|naturaltime }}
                     </span>
+
+                    {% user_tags app.user %}
 
                 </li>
             {% endwith %}

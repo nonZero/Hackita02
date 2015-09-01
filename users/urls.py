@@ -18,6 +18,7 @@ urlpatterns = [
 
     url(r'^$', views.UserListView.as_view(), name='list'),
     url(r'^(?P<pk>\d+)/$', views.UserDetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>\d+)/tags/$', views.UserTagsEditView.as_view(), name='tags'),
 
     url(r'^all-emails/$', views.AllEmailsView.as_view(), name='list_emails'),
 

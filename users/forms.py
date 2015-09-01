@@ -102,3 +102,10 @@ class UserNoteForm(forms.ModelForm):
             'visible_to_user',
             'is_open',
         )
+
+
+class TagsForm(forms.Form):
+    tags = forms.ModelMultipleChoiceField(models.Tag.objects.all(),
+                                          widget=forms.CheckboxSelectMultiple,
+                                          required=False,
+                                          label=_("tags"))

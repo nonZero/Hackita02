@@ -19,6 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import forms
 from . import models
+from django.views.generic.detail import SingleObjectMixin
 from hackita02.base_views import ProtectedViewMixin, PermissionMixin
 
 
@@ -163,6 +164,11 @@ class UserDetailView(PermissionMixin, DetailView):
         note.author = self.request.user
         form.save()
 
+        models.UserLog.objects.create(user=self.object,
+                                      created_by=self.request.user,
+                                      content_object=note,
+                                      operation=models.UserLogOperation.ADD)
+
         url = self.request.build_absolute_uri(note.get_absolute_url())
 
         subject = "{} {} {} {}".format(
@@ -193,6 +199,35 @@ class UserDetailView(PermissionMixin, DetailView):
 
         return JsonResponse({'result': result}, safe=False,
                             status=200 if result else 400)
+
+
+class UserTagsEditView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
+                       FormView):
+    permission_required = "users.change_user"
+    form_class = forms.TagsForm
+    template_name = "users/user_tags.html"
+    model = models.User
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
+    def pre_dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().pre_dispatch(request, *args, **kwargs)
+
+    def get_initial(self):
+        return {'tags': [ut.tag for ut in self.object.tags.all()]}
+
+    def form_valid(self, form):
+        user = self.object
+        tags = set(form.cleaned_data['tags'])
+        current = set([ut.tag for ut in user.tags.all()])
+        for tag in tags - current:
+            models.UserTag.objects.tag(user, tag, self.request.user)
+        for tag in current - tags:
+            models.UserTag.objects.untag(user, tag, self.request.user)
+
+        return super().form_valid(form)
 
 
 class AllEmailsView(PermissionMixin, View):

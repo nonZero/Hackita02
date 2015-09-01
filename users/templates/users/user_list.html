@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n humanize hackita staticfiles sa %}
+{% load i18n humanize hackita staticfiles sa users %}
 
 {% block page_title %}
     {% trans "Users" %}
@@ -27,6 +27,7 @@
                         {% app_status app %}
                     {% endif %}
                     </span>
+                    {% user_tags u %}
                 </li>
             {% endwith %}
         {% endfor %}

@@ -4,11 +4,13 @@ import random
 from authtools.models import AbstractNamedUser, AbstractEmailUser
 from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
 from django.contrib.auth.models import BaseUserManager
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.db import models
+from django.db import models, transaction
+from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
-from django.utils.translation import ugettext_lazy as _
 from hackita02 import settings
 
 
@@ -146,6 +148,36 @@ class Code(models.Model):
         )
 
 
+class UserLogOperation(object):
+    OTHER = 0
+    ADD = 1
+    CHANGE = 2
+    REMOVE = 3
+
+    choices = (
+        (OTHER, pgettext_lazy('userlog', 'Other')),
+        (ADD, pgettext_lazy('userlog', 'Add')),
+        (CHANGE, pgettext_lazy('userlog', 'Change')),
+        (REMOVE, pgettext_lazy('userlog', 'Remove')),
+    )
+
+
+class UserLog(models.Model):
+    user = models.ForeignKey(User, related_name="logs")
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User, related_name="logs_created",
+                                   null=True)
+    message = models.TextField(null=True)
+    content_type = models.ForeignKey(ContentType, null=True)
+    object_id = models.PositiveIntegerField(null=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+    operation = models.IntegerField(choices=UserLogOperation.choices,
+                                    default=UserLogOperation.OTHER)
+
+    class Meta:
+        ordering = ['-created_at']
+
+
 class UserNote(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              related_name='notes')
@@ -188,4 +220,73 @@ class UserNote(models.Model):
         return "{}#note-{}".format(
             self.user.get_absolute_url(),
             self.id,
+        )
+
+
+class TagGroup(object):
+    NEGATIVE = -100
+    NEUTRAL = 0
+    BRONZE = 100
+    SILVER = 200
+    GOLD = 300
+
+    choices = (
+        (NEGATIVE, _('red')),
+        (NEUTRAL, _('gray')),
+        (BRONZE, _('bronze')),
+        (SILVER, _('silver')),
+        (GOLD, _('gold')),
+    )
+
+
+class Tag(models.Model):
+    name = models.CharField(_("name"), max_length=100)
+    group = models.IntegerField(_("group"), choices=TagGroup.choices,
+                                default=TagGroup.NEUTRAL)
+
+    class Meta:
+        ordering = ['-group', 'name']
+        verbose_name = _("tag")
+        verbose_name_plural = _("tags")
+
+    def __str__(self):
+        return self.name
+
+
+class UserTagManager(models.Manager):
+    def tag(self, user, tag, by):
+        with transaction.atomic():
+            o, created = self.get_or_create(user=user, tag=tag,
+                                            defaults={'created_by': by})
+            if created:
+                UserLog.objects.create(user=user, created_by=by,
+                                       content_object=tag,
+                                       operation=UserLogOperation.ADD)
+        return o
+
+    def untag(self, user, tag, by):
+        with transaction.atomic():
+            try:
+                o = self.get(user=user, tag=tag)
+                o.delete()
+                UserLog.objects.create(user=user, created_by=by,
+                                       content_object=tag,
+                                       operation=UserLogOperation.REMOVE)
+                return True
+            except UserTag.DoesNotExist:
+                return False
+
+
+class UserTag(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="tags")
+    tag = models.ForeignKey(Tag, related_name='users')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                   related_name="tags_created")
+
+    objects = UserTagManager()
+
+    class Meta:
+        unique_together = (
+            ('user', 'tag'),
         )

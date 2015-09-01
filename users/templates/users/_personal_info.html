@@ -1,4 +1,4 @@
-{% load i18n sa %}
+{% load i18n sa users %}
 
 {% with info=u.personalinfo %}
     <div class="well">
@@ -16,12 +16,14 @@
             {{ info.skype_username }}
         {% endif %}
 
-        {% with app=object.application %}
+        {% with app=u.application %}
             {% if app %}
                 &bull;
-                {% app_status app %}
+                {% app_status app edit=True %}
             {% endif %}
         {% endwith %}
+
+        {% user_tags u edit=True %}
 
     </div>
 {% endwith %}

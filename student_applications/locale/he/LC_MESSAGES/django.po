@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 11:46+0300\n"
-"PO-Revision-Date: 2015-09-01 11:46+0300\n"
+"POT-Creation-Date: 2015-09-01 13:31+0300\n"
+"PO-Revision-Date: 2015-09-01 13:31+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -205,6 +205,9 @@ msgstr "שלח/י"
 msgid "Registration Details"
 msgstr "פרטי ההרשמה"
 
+msgid "Edit Status"
+msgstr "עריכת סטטוס"
+
 msgid "Questionnare"
 msgstr "שאלון"
 
@@ -213,6 +216,12 @@ msgstr "מתוך"
 
 msgid "Applications"
 msgstr "מועמדים"
+
+msgid "Change Status"
+msgstr "שינוי סטטוס"
+
+msgid "Save"
+msgstr "שמירה"
 
 msgid "Total"
 msgstr "סך הכל"
@@ -228,9 +237,6 @@ msgstr "דבוקות"
 
 msgid "Users"
 msgstr "משתמשים"
-
-msgid "Save"
-msgstr "שמירה"
 
 msgid "Personal Details"
 msgstr "פרטים אישיים"

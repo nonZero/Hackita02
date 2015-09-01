@@ -244,9 +244,17 @@ class ApplicationReviewCreateView(ApplicationReviewMixin, CreateView):
         super().pre_dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.application = self.application
-        return super().form_valid(form)
+        with transaction.atomic():
+            form.instance.user = self.request.user
+            form.instance.application = self.application
+            resp = super().form_valid(form)
+            models.UserLog.objects.create(user=self.application.object,
+                                          created_by=self.request.user,
+                                          content_object=form.instance,
+                                          operation=models.UserLogOperation.ADD
+                                          )
+
+        return resp
 
 
 class ApplicationReviewUpdateView(ApplicationReviewMixin, UpdateView):
@@ -270,10 +278,15 @@ class ApplicationStatusUpdateView(StaffOnlyMixin, UpdateView):
     def form_valid(self, form):
         with transaction.atomic():
             form.instance.set_status(form.instance.status, self.request.user)
-            form.instance.add_status_log()
+            log = form.instance.add_status_log()
+            models.UserLog.objects.create(
+                user=form.instance.user,
+                created_by=self.request.user,
+                content_object=log,
+                operation=models.UserLogOperation.CHANGE
+            )
             resp = super().form_valid(form)
         return resp
-
 
 # class CohortDetailView(StaffOnlyMixin, UsersOperationsMixin, DetailView):
 #     model = Cohort
