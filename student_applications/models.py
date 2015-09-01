@@ -64,7 +64,7 @@ class Application(models.Model):
                                  default=Status.NEW)
     status_changed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                           related_name="+")
-    status_changed_at = models.DateTimeField(null=True)
+    status_changed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.user)
