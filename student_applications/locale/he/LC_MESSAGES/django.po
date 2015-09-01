@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 00:02+0300\n"
-"PO-Revision-Date: 2015-08-30 08:55+0300\n"
+"POT-Creation-Date: 2015-09-01 11:46+0300\n"
+"PO-Revision-Date: 2015-09-01 11:46+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -51,6 +51,114 @@ msgstr "9"
 
 msgid "10 - Full control of the technology"
 msgstr "10 - שליטה מוחלטת"
+
+msgid "n/a"
+msgstr "לא רלוונטי"
+
+msgid "new (incomplete application)"
+msgstr "בהרשמה"
+
+msgid "registered"
+msgstr "נרשם"
+
+msgid "under discussion"
+msgstr "בדיון"
+
+msgid "to reject"
+msgstr "מועמד לדחיה"
+
+msgid "invite to interview"
+msgstr "להזמין לראיון"
+
+msgid "invited to interview"
+msgstr "הוזמן לראיון"
+
+msgid "to accept"
+msgstr "מועמד לקבלה"
+
+msgid "accepted"
+msgstr "התקבל"
+
+msgid "accepted and approved"
+msgstr "התקבל ואישר השתתפות"
+
+msgid "accepted and declined"
+msgstr "התקבל ודחה השתתפות"
+
+msgid "rejected"
+msgstr "נדחה"
+
+msgid "status"
+msgstr "סטטוס"
+
+msgid "created at"
+msgstr "מועד יצירה"
+
+msgid "last edited at"
+msgstr "מועד עריכה אחרונה"
+
+msgid "no answer supplied"
+msgstr "-- אין תשובה --"
+
+msgid "too low"
+msgstr "נמוכה"
+
+msgid "average"
+msgstr "ממוצעת"
+
+msgid "high"
+msgstr "גבוהה"
+
+msgid "very high"
+msgstr "גבוהה מאוד"
+
+msgid "does not fit"
+msgstr "לא מתאימ/ה"
+
+msgid "undecided / neutral"
+msgstr "ניטרלי / לא הוחלט"
+
+msgid "fit"
+msgstr "מתאימ/ה"
+
+msgid "highly fits"
+msgstr "מתאימ/ה מאוד"
+
+msgid "programming experience"
+msgstr "רקע ונסיון בפיתוח תוכנה"
+
+msgid "web development experience"
+msgstr "רקע ונסיון בפיתוח WEB"
+
+msgid "involvement in activism"
+msgstr "מעורבות באקטיביזם / אוריינות סדנאית"
+
+msgid "present and future availability"
+msgstr "זמינות בזמן התכנית ובעתיד"
+
+msgid "background in humanism"
+msgstr "רקע בהומניזם"
+
+msgid "communication skills"
+msgstr "יכולת תקשורת"
+
+msgid "overall_impression"
+msgstr "התרשמות כללית"
+
+msgid "Does the candidate fit the program?"
+msgstr "האם המועמד/ת מתאימ/ה לתכנית?"
+
+msgid "review comments"
+msgstr "הערות להערכה"
+
+msgid "Consider adding a user note instead "
+msgstr "הערות כלליות למשתמש יש להוסיף דרך \"הערות משתמש\""
+
+msgid "application review"
+msgstr "הערכה"
+
+msgid "application reviews"
+msgstr "הערכות"
 
 msgid "Registration"
 msgstr "הרשמה"
@@ -106,6 +214,12 @@ msgstr "מתוך"
 msgid "Applications"
 msgstr "מועמדים"
 
+msgid "Total"
+msgstr "סך הכל"
+
+msgid "Review Application"
+msgstr "הערת מועמד"
+
 msgid "Edit"
 msgstr "עריכה"
 
@@ -150,20 +264,8 @@ msgstr "נמצאו בעיות בטופס. אנא תקנ/י את הבעיות, ו
 #~ msgid "Available"
 #~ msgstr "פנוי"
 
-#~ msgid "Invited to interview"
-#~ msgstr "מוזמן לראיון"
-
-#~ msgid "Rejected"
-#~ msgstr "נדחה"
-
-#~ msgid "Accepted"
-#~ msgstr "התקבל"
-
 #~ msgid "Accepted to another cohort"
 #~ msgstr "התקבל לדבוקה אחרת"
-
-#~ msgid "Registered"
-#~ msgstr "נרשם"
 
 #~ msgid "In process"
 #~ msgstr "במסלול"

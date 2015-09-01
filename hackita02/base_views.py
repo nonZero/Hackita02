@@ -10,7 +10,9 @@ from django.utils.translation import ugettext as _
 class ProtectedViewMixin(object):
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
-        self.pre_dispatch(request, *args, **kwargs)
+        resp = self.pre_dispatch(request, *args, **kwargs)
+        if resp:
+            return resp
         return super(ProtectedViewMixin, self).dispatch(request, *args,
                                                         **kwargs)
 

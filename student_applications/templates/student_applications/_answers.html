@@ -1,40 +1,46 @@
 {% load i18n %}
 
-{% for answer in u.answers.all %}
-    {% with a=answer.get_pretty %}
+<div id="answers">
+    {% for answer in u.answers.all %}
+        {% with a=answer.get_pretty %}
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    {{ a.title }}
-                </h3>
-            </div>
-            <div class="panel-body">
+            <div class="panel panel-default">
 
-                {% for field in a.fields %}
-                    {% if field.html %}
-                        <div class="user-answer">
-                            <div class="user-answer-title">
-                                <b>{{ field.label }}</b>
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a data-toggle="collapse"
+                           {% if accordion %}data-parent="#answers"{% endif %}
+
+                           href="#answer-{{ answer.q13e_slug }}">
+                            {{ a.title }}
+                        </a>
+                    </h3>
+                </div>
+
+                <div id="answer-{{ answer.q13e_slug }}" class="panel-body collapse{% if not accordion %} in{% endif %}">
+
+                    {% for field in a.fields %}
+                        {% if field.html %}
+                            <div class="user-answer">
+                                <div class="user-answer-title">
+                                    <b>{{ field.label }}</b>
+                                </div>
+                                <div class="user-answer-content">
+                                    {{ field.html|urlize|linebreaksbr }}
+                                </div>
                             </div>
-                            <div class="user-answer-content">
-                                {{ field.html|urlize|linebreaksbr }}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                        {% endif %}
+                    {% endfor %}
 
-                <p>
-                    <i>{{ answer.created_at }}</i>
-                </p>
+                    <p>
+                        <i>{{ answer.created_at }}</i>
+                    </p>
+
+                </div>
+
 
             </div>
+        {% endwith %}
 
-
-        </div>
-    {% endwith %}
-
-{% endfor %}
-</ul>
-
+    {% endfor %}
 </div>

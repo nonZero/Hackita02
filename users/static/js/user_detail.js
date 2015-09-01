@@ -16,7 +16,7 @@ $(function () {
             form.get(0).reset();
             form.find('.loader').hide();
             var el = $(resp.result.trim());
-            $("#notes>li:first").after(el);
+            $("#notes").prepend(el);
             el.hide().slideDown();
             refresh();
         },

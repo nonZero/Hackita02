@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 00:02+0300\n"
-"PO-Revision-Date: 2015-09-01 00:04+0300\n"
+"POT-Creation-Date: 2015-09-01 11:44+0300\n"
+"PO-Revision-Date: 2015-09-01 11:45+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Bookmarks: -1,-1,-1,-1,60,-1,-1,-1,-1,-1\n"
 
 msgid "Password"
 msgstr "סיסמא"
@@ -105,8 +106,14 @@ msgstr "קישור הכניסה שלך לאתר הכיתהHackita02"
 msgid "To login to Hackita 02, click here"
 msgstr "על מנת להכנס לאתר הכיתה 02 Hackita, יש ללחוץ כאן"
 
+msgid "visible to user"
+msgstr "נראה למשתמש"
+
 msgid "content"
 msgstr "תוכן"
+
+msgid "open"
+msgstr "פתוח (לטיפול)"
 
 msgid "closed at"
 msgstr "מועד סגירה"
@@ -116,6 +123,9 @@ msgstr "הערות עבור המשתמש"
 
 msgid "user notes"
 msgstr "הערות עבור המשתמש"
+
+msgid "Application"
+msgstr "מועמדות"
 
 msgid "Private"
 msgstr "פרטי"
@@ -137,6 +147,9 @@ msgstr "הפרופיל שלי"
 
 msgid "Applications"
 msgstr "מועמדים"
+
+msgid "Users"
+msgstr "משתמשים"
 
 msgid "Project Comments"
 msgstr "הערות לפרויקטים"
@@ -183,14 +196,14 @@ msgstr "כניסה / הרשמה מהירה ללא סיסמא"
 msgid "Send me a quick login link"
 msgstr "שלח לי קישור לכניסה מהירה ללא סיסמא"
 
-msgid "Users"
-msgstr "משתמשים"
+msgid "Application Reviews"
+msgstr "הערכות"
 
-msgid "Application"
-msgstr "מועמדות"
+msgid "Review"
+msgstr "הערכה"
 
-msgid "Notes"
-msgstr "הערות"
+msgid "User Notes"
+msgstr "הערות עבור המשתמש"
 
 msgid "Add Note"
 msgstr "הוספת הערה"
@@ -249,11 +262,11 @@ msgstr "הערת משתמש נכתבה על"
 msgid "By"
 msgstr "על ידי"
 
-msgid "visible to user"
-msgstr "נראה למשתמש"
-
 msgid "hidden from user"
 msgstr "נסתר מהמשתמש"
+
+#~ msgid "Notes"
+#~ msgstr "הערות"
 
 #~ msgid "Email"
 #~ msgstr "דואל"

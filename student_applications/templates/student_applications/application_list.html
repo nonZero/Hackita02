@@ -1,29 +1,49 @@
 {% extends 'users/base.html' %}
-{% load i18n humanize %}
+{% load i18n humanize hackita sa %}
 
 {% block content %}
-    
+
     <h1 class="page-title">
         {% trans "Applications" %}
     </h1>
-    
+
+    <ul class="list-inline">
+        <li>
+            <a href="{% url "sa:app_list" %}"
+               class="label label-{% if not view.status %}primary{% else %}default{% endif %}">{% trans "Total" %}: {{ object_list.count }}</a>
+        </li>
+        {% for group in agg %}
+            <li>
+                <a href="{% url "sa:app_list" %}?status={{ group.status }}"
+                   class="label label-{% if view.status == group.status %}primary{% else %}default{% endif %}">{{ group.label }}: {{ group.count }}</a>
+            </li>
+
+        {% endfor %}
+
+    </ul>
+
     <ul class="list-group">
         {% for app in object_list %}
             {% with app.user as u %}
 
                 <li class="list-group-item">
 
-                    <span class="badge">{{ app.forms_filled }}</span>
-
-                    <a href="{% url "sa:app_detail" app.id %}"
-                       title="#{{ u.id }} {{ u.email }}">
-                        <span dir="rtl">{{ u.hebrew_display_name }}</span>
-                        <span dir="ltr">&lt;{{ u.email }}&gt;</span>
+                    <a class="badge"
+                       href="{{ app.get_absolute_url }}">{{ app.forms_filled }}
                     </a>
+
+                    {{ app.user|u }}
+
+                    <span dir="ltr">&lt;{{ u.email }}&gt;</span>
+
+                    {% app_status app %}
+
+                    &nbsp;
 
                     <span title="{{ app.last_form_filled }}">
                         {{ app.last_form_filled|naturaltime }}
                     </span>
+
                 </li>
             {% endwith %}
         {% endfor %}

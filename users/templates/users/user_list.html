@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n humanize hackita staticfiles %}
+{% load i18n humanize hackita staticfiles sa %}
 
 {% block page_title %}
     {% trans "Users" %}
@@ -17,18 +17,16 @@
             {% with app=u.application %}
                 <li class="list-group-item">
 
-                    {% if u.hebrew_display_name%}
+                    {% if u.hebrew_display_name %}
                         <span dir="rtl">{{ u.hebrew_display_name }}</span>
                     {% endif %}
 
                     <span dir="ltr">&lt;{{ u|u:'email' }}&gt;</span>
                     <span dir="rtl">&nbsp;</span>
                     {% if app %}
-                        <a class="label label-info" href="{% url "sa:app_detail" app.id %}">
-                            {{ app.forms_filled }}
-                        </a>
+                        {% app_status app %}
                     {% endif %}
-                </span>
+                    </span>
                 </li>
             {% endwith %}
         {% endfor %}

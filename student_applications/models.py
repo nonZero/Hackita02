@@ -1,17 +1,116 @@
 from django.conf import settings
-from django.db import models
+from django.core.urlresolvers import reverse
+from django.db import models, transaction
+from django.utils import timezone
 from django_extensions.db.fields.json import JSONField
+from django.utils.translation import ugettext_lazy as _
+
 from . import consts
+
+
 
 # from users.models import UserLogOperation, UserLog
 from q13es.forms import get_pretty_answer
 
 
 class Application(models.Model):
+    class Status:
+        NA = -1
+
+        NEW = 1
+        REGISTERED = 2
+
+        UNDER_DISCUSSION = 10
+        TO_REJECT = 11
+
+        INVITE_TO_INTERVIEW = 20
+        INVITED_TO_INTERVIEW = 21
+
+        TO_ACCEPT = 50
+        ACCEPTED = 51
+
+        ACCEPTED_AND_APPROVED = 100
+
+        ACCEPTED_AND_DECLINED = 200
+        REJECTED = 201
+
+        choices = (
+            (NA, _("n/a")),
+            (NEW, _("new (incomplete application)")),
+            (REGISTERED, _("registered")),
+
+            (UNDER_DISCUSSION, _("under discussion")),
+            (TO_REJECT, _("to reject")),
+            (INVITE_TO_INTERVIEW, _("invite to interview")),
+            (INVITED_TO_INTERVIEW, _("invited to interview")),
+
+            (TO_ACCEPT, _("to accept")),
+
+            (ACCEPTED, _("accepted")),
+
+            (ACCEPTED_AND_APPROVED, _("accepted and approved")),
+            (ACCEPTED_AND_DECLINED, _("accepted and declined")),
+
+            (REJECTED, _("rejected")),
+        )
+
+        labels = dict(choices)
+
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     forms_filled = models.IntegerField(default=0, db_index=True)
     last_form_filled = models.DateTimeField(null=True, blank=True,
                                             db_index=True)
+    status = models.IntegerField(_("status"), choices=Status.choices,
+                                 default=Status.NEW)
+    status_changed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                          related_name="+")
+    status_changed_at = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return str(self.user)
+
+    def get_absolute_url(self):
+        return reverse("sa:app_detail", args=(self.id,))
+
+    def set_status(self, value, user):
+        self.status = value
+        self.status_changed_at = timezone.now()
+        self.status_changed_by = user
+
+    def add_status_log(self):
+        return self.status_logs.create(
+            value=self.status,
+            value_changed_by=self.status_changed_by,
+            value_changed_at=self.status_changed_at,
+        )
+
+    def set_and_log_status(self, value, user):
+        with transaction.atomic():
+            self.set_status(value, user)
+            self.add_status_log()
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.id:
+            super().save(force_insert, force_update, using, update_fields)
+            return
+
+        with transaction.atomic():
+            super().save(force_insert, force_update, using, update_fields)
+            self.add_status_log()
+
+
+class ApplicationStatusLog(models.Model):
+    application = models.ForeignKey(Application, related_name="status_logs")
+    value = models.IntegerField(choices=Application.Status.choices)
+    value_changed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                                         related_name="+")
+    value_changed_at = models.DateTimeField()
+
+    class Meta:
+        ordering = (
+            '-value_changed_at',
+        )
 
 
 class Answer(models.Model):
@@ -34,6 +133,120 @@ class Answer(models.Model):
     def get_pretty(self):
         form = consts.FORMS[self.q13e_slug]
         return dict(get_pretty_answer(form, self.data), answer=self)
+
+
+class ApplicationReview(models.Model):
+    application = models.ForeignKey(Application, related_name="reviews")
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name="application_reviews")
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    last_edited_at = models.DateTimeField(_("last edited at"),
+                                          auto_now_add=True)
+
+    class Level:
+        SKIP = None
+        TOO_LOW = -1
+        AVERAGE = 0
+        HIGH = 1
+        VERY_HIGH = 2
+
+        choices = (
+            ('', _("no answer supplied")),
+            (TOO_LOW, _("too low")),
+            (AVERAGE, _("average")),
+            (HIGH, _("high")),
+            (VERY_HIGH, _("very high")),
+        )
+
+        fit_choices = (
+            ('', _("no answer supplied")),
+            (TOO_LOW, _("does not fit")),
+            (AVERAGE, _("undecided / neutral")),
+            (HIGH, _("fit")),
+            (VERY_HIGH, _("highly fits")),
+        )
+
+        non_negative_choices = choices[0:1] + choices[2:]
+
+        # labels = dict((
+        #     (UNINTERESTED, 'warning'),
+        #     (NEUTRAL, 'default'),
+        #     (INTERESTED, 'primary'),
+        #     (VERY_INTERESTED, 'success'),
+        # ))
+
+    programming_exp = models.IntegerField(
+        _("programming experience"),
+        null=True, blank=True, default=None,
+        choices=Level.choices
+    )
+    webdev_exp = models.IntegerField(
+        _("web development experience"),
+        null=True, blank=True,
+        choices=Level.non_negative_choices
+    )
+    activism_level = models.IntegerField(
+        _("involvement in activism"),
+        null=True, blank=True,
+        choices=Level.non_negative_choices
+    )
+    availability = models.IntegerField(
+        _("present and future availability"),
+        null=True, blank=True,
+        choices=Level.choices
+    )
+    humanism_background = models.IntegerField(
+        _("background in humanism"),
+        null=True, blank=True,
+        choices=Level.non_negative_choices
+    )
+    comm_skills = models.IntegerField(
+        _("communication skills"),
+        null=True, blank=True,
+        choices=Level.non_negative_choices
+    )
+
+    overall_impression = models.IntegerField(
+        _("overall_impression"),
+        null=True, blank=True,
+        choices=Level.fit_choices,
+        help_text=_("Does the candidate fit the program?")
+    )
+
+    comments = models.TextField(
+        _("review comments"),
+        blank=True,
+        help_text=_("Consider adding a user note instead ")
+    )
+
+    class Meta:
+        unique_together = (
+            ('application', 'user'),
+        )
+        ordering = (
+            '-created_at',
+        )
+        verbose_name = _("application review")
+        verbose_name_plural = _("application reviews")
+
+    detail_fields = (
+        'programming_exp',
+        'webdev_exp',
+        'activism_level',
+        'availability',
+        'humanism_background',
+        'comm_skills',
+        'overall_impression',
+    )
+
+    def get_details(self):
+        return (
+            (
+                self._meta.get_field(fld).verbose_name,
+                getattr(self, "get_{}_display".format(fld))()
+            ) for fld in self.detail_fields
+            if getattr(self, fld) is not None
+        )
 
 #
 #

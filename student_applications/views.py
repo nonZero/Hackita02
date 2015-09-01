@@ -7,15 +7,18 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
-from django.shortcuts import redirect
+from django.db.models import Count
+from django.shortcuts import redirect, get_object_or_404
 from django.template import loader
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
 
 from . import models
+from . import forms
+from hackita02.base_views import ProtectedViewMixin
 from projects.models import Project
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES
@@ -150,6 +153,7 @@ class RegisterView(UserViewMixin, FormView):
         app.save()
 
         if get_user_next_form(u) is None:
+            app.set_and_log_status(app.Status.REGISTERED, None)
             messages.success(self.request,
                              _("Registration completed! Thank you very much!"))
             text, html = self.get_summary_email(u)
@@ -193,28 +197,84 @@ class ApplicationListView(StaffOnlyMixin, ListView):
     page_title = _("Applications")
     ordering = ('-forms_filled', '-last_form_filled')
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.status = None
+        if 'status' in self.request.GET:
+            try:
+                self.status = int(self.request.GET['status'])
+                qs = qs.filter(status=self.status)
+            except ValueError:
+                pass
+        return qs
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['agg'] = models.Application.objects.values('status').order_by(
+            'status').annotate(count=Count('id'))
+        for g in d['agg']:
+            g['label'] = models.Application.Status.labels[g['status']]
+        return d
+
 
 class ApplicationDetailView(StaffOnlyMixin, DetailView):
     model = models.Application
 
-# class UserCohortUpdateView(StaffOnlyMixin, InlineFormSetView):
-#     model = HackitaUser
-#     inline_model = UserCohort
-#     template_name = 'student_applications/usercohort_formset.html'
-#     extra = 0
-#     can_delete = False
-#     fields = ('status',)
-#
-#     def get_success_url(self):
-#         if 'from' in self.request.POST:
-#             return self.request.POST['from']
-#         return self.get_object().get_absolute_url()
-#
-#
-# class CohortListView(StaffOnlyMixin, ListView):
-#     model = Cohort
-#
-#
+
+class ApplicationReviewMixin(StaffOnlyMixin, ProtectedViewMixin):
+    model = models.ApplicationReview
+    form_class = forms.ApplicationReviewForm
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['application'] = self.application
+        return d
+
+    def get_success_url(self):
+        return self.application.user.get_absolute_url()
+
+
+class ApplicationReviewCreateView(ApplicationReviewMixin, CreateView):
+    def pre_dispatch(self, request, *args, **kwargs):
+        self.application = get_object_or_404(models.Application,
+                                             id=int(kwargs['pk']))
+        review = self.application.reviews.filter(user=request.user).first()
+        if review:
+            return redirect('sa:app_review_update', review.id)
+        super().pre_dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.application = self.application
+        return super().form_valid(form)
+
+
+class ApplicationReviewUpdateView(ApplicationReviewMixin, UpdateView):
+    def get_success_url(self):
+        return self.object.application.user.get_absolute_url()
+
+    def pre_dispatch(self, request, *args, **kwargs):
+        self.application = self.get_object().application
+        super().pre_dispatch(request, *args, **kwargs)
+
+
+class ApplicationStatusUpdateView(StaffOnlyMixin, UpdateView):
+    model = models.Application
+    form_class = forms.ApplicationStatusForm
+
+    def get_success_url(self):
+        if 'from' in self.request.POST:
+            return self.request.POST['from']
+        return self.object.user.get_absolute_url()
+
+    def form_valid(self, form):
+        with transaction.atomic():
+            form.instance.set_status(form.instance.status, self.request.user)
+            form.instance.add_status_log()
+            resp = super().form_valid(form)
+        return resp
+
+
 # class CohortDetailView(StaffOnlyMixin, UsersOperationsMixin, DetailView):
 #     model = Cohort
 #     slug_field = 'code'

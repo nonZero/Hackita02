@@ -152,11 +152,11 @@ class UserNote(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                related_name='notes_authored')
     created_at = models.DateTimeField(auto_now_add=True)
-    visible_to_user = models.BooleanField(default=False)
+    visible_to_user = models.BooleanField(_("visible to user"), default=False)
     content = models.TextField(_("content"), blank=False)
 
     sent_to_user_at = models.DateTimeField(null=True)
-    is_open = models.BooleanField()
+    is_open = models.BooleanField(_("open"))
     closed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                   blank=True, related_name="+")
     closed_at = models.DateTimeField(_("closed at"), null=True, blank=True)

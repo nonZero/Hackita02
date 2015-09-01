@@ -1,3 +1,5 @@
+{% load i18n sa %}
+
 {% with info=u.personalinfo %}
     <div class="well">
         {{ info.hebrew_first_name }} {{ info.hebrew_last_name }}
@@ -13,5 +15,13 @@
             <i class="fa fa-skype"></i>
             {{ info.skype_username }}
         {% endif %}
+
+        {% with app=object.application %}
+            {% if app %}
+                &bull;
+                {% app_status app %}
+            {% endif %}
+        {% endwith %}
+
     </div>
 {% endwith %}
