@@ -10,7 +10,7 @@
     <ul class="list-inline">
         <li>
             <a href="{% url "sa:app_list" %}"
-               class="label label-{% if not view.status %}primary{% else %}default{% endif %}">{% trans "Total" %}: {{ object_list.count }}</a>
+               class="label label-{% if not view.status %}primary{% else %}default{% endif %}">{% trans "Total" %}: {{ total }}</a>
         </li>
         {% for group in agg %}
             <li>

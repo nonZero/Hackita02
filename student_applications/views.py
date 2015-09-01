@@ -210,6 +210,7 @@ class ApplicationListView(StaffOnlyMixin, ListView):
 
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
+        d['total'] = models.Application.objects.count()
         d['agg'] = models.Application.objects.values('status').order_by(
             'status').annotate(count=Count('id'))
         for g in d['agg']:
