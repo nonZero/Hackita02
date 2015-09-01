@@ -56,16 +56,16 @@ class SurveyAnswerView(SingleObjectTemplateResponseMixin,
         o.answered_at = timezone.now()
         o.save()
 
-        message = "\n\n".join(u"{label}:\n {html}".format(**fld) for fld in
+        user_url = self.request.build_absolute_uri(o.user.get_absolute_url())
+        message = "{} <{}>\n{}\n\n".format(o.user, o.user.email, user_url)
+
+        message += "\n\n".join(u"{label}:\n  {html}".format(**fld) for fld in
                               get_pretty_answer(form, data)['fields'])
 
         url = self.request.build_absolute_uri(o.survey.get_absolute_url())
-        message += "\n%s" % url
+        message += "\n\n%s" % url
 
-        user_url = self.request.build_absolute_uri(o.user.get_absolute_url())
-        message += "\n{} <{}>\n{}".format(o.user, o.user.email, user_url)
-
-        mail_managers(u"{}: {}".format(form.form_title, o.user), message)
+        mail_managers("{}: {}".format(o.survey.email_subject, o.user), message)
 
         messages.success(self.request, _("Thank you!"))
 
