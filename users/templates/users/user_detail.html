@@ -55,6 +55,11 @@
                                             </li>
                                         {% endfor %}
                                     </ul>
+                                    {% if review.comments %}
+                                        <blockquote>
+                                        {{ review.comments|linebreaksbr }}
+                                        </blockquote>
+                                    {% endif %}
                                 </li>
                             {% endfor %}
                             <li class="list-group-item">
