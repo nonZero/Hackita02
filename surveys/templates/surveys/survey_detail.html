@@ -1,0 +1,109 @@
+{% extends 'users/base.html' %}
+{% load i18n humanize hackita %}
+
+{% block content %}
+
+    <h2>
+        {{ object }}
+    </h2>
+
+    {% if object.email_content %}
+        <div class="panel htmlcontent">
+            {{ object.email_content|safe }}
+        </div>
+    {% endif %}
+
+
+    {% if object.answers.count %}
+
+        <div class="row">
+
+            <div class="col-lg-8">
+                <ul class="list-group">
+
+                    {% for a in object.answers.all %}
+                        <li class="list-group-item">
+                            <div class="list-group-item-heading">
+                                <input class="user-email" type="checkbox"
+                                       value="{{ a.user.email }}"
+                                        {% if not a.answered_at %}
+                                       checked="1"
+                                        {% endif %}
+                                        />
+
+                                {{ a.user|u }}
+
+
+                                {% if a.answered_at %}
+                                    <a data-toggle="collapse"
+                                       href="#answer-{{ a.id }}"
+                                       title="{{ a.answered_at }}">{{ a.answered_at|naturaltime }}</a>
+                                {% endif %}
+                            </div>
+
+                            {% if a.answered_at %}
+                                <div class="list-group-item-body">
+
+                                    <div class="collapse"
+                                         id="answer-{{ a.id }}">
+                                        {% with a.get_pretty as a %}
+                                            {% for field in a.fields %}
+                                                {% if field.html %}
+                                                    <div class="user-answer">
+                                                        <div class="user-answer-title">
+                                                            {{ field.label }}
+                                                        </div>
+                                                        <div class="user-answer-content">
+                                                            {{ field.html|urlize|linebreaksbr }}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </li>
+                        {% if forloop.last %}
+                            </ol>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+            <div class="col-lg-4">
+                <form>
+                <textarea id="emails" dir="ltr"
+                          style="text-align: left; width:100%"></textarea>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        $(function () {
+
+            function refreshEmails() {
+                $('#emails').val($('.user-email:checked').map(function () {
+                    return $(this).val();
+                }).get().join('\n'));
+            }
+
+            $('.user-email').change(refreshEmails);
+
+            $('.toggle-content').click(function () {
+                $(this).next().toggle();
+            });
+
+            refreshEmails();
+        });
+    </script>
+
+{% endblock %}

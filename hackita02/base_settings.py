@@ -28,6 +28,7 @@ INSTALLED_APPS = (
     'projects',
     'q13es',
     'student_applications',
+    'surveys',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -18,13 +18,16 @@ from django.views.generic.edit import FormView, CreateView
 
 from . import models
 from . import forms
+from floppyforms import ChoiceField
+from floppyforms.models import ModelChoiceField
 from hackita02.base_views import ProtectedViewMixin
 from projects.models import Project
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES
+from surveys.models import Survey
 from users.base_views import ProtectedMixin, StaffOnlyMixin
 from users.forms import PersonalInfoForm
-from users.models import PersonalInfo, UserLog, UserLogOperation
+from users.models import PersonalInfo, UserLog, UserLogOperation, User
 
 logger = logging.getLogger(__name__)
 
@@ -215,7 +218,54 @@ class ApplicationListView(StaffOnlyMixin, ListView):
             'status').annotate(count=Count('id'))
         for g in d['agg']:
             g['label'] = models.Application.Status.labels[g['status']]
+        d['surveys'] = ModelChoiceField(Survey.objects.all()).widget.render(
+            'survey', None)
+        d['statuses'] = ChoiceField(
+            (('', "---"),) + models.Application.Status.choices,
+            False).widget.render(
+            'status', None)
         return d
+
+    def get_base_url(self):
+        return self.request.build_absolute_uri('/')[:-1]
+
+    def get_user_ids(self):
+        return [int(x) for x in self.request.POST.getlist('users')]
+
+    def send_survey(self):
+        base_url = self.get_base_url()
+        survey = Survey.objects.get(pk=int(self.request.POST['survey']))
+        for uid in self.get_user_ids():
+            user = User.objects.get(pk=uid)
+            o, created = survey.add_user(user)
+            if created:
+                o.send(base_url)
+
+            msg = "{}: {}".format(user,
+                                  _("Sent") if created else _("Already sent"))
+            messages.success(self.request, msg)
+
+        return survey
+
+    def post(self, request, *args, **kwargs):
+
+        if request.POST.get('status'):
+            status = int(request.POST.get('status'))
+            for uid in self.get_user_ids():
+                user = User.objects.get(pk=uid)
+                if user.application.status != status:
+                    user.application.set_and_log_status(status,
+                                                        self.request.user)
+                    messages.success(
+                        request, "%s: %s" % (
+                            user, user.application.get_status_display())
+                    )
+
+        # Send surveys
+        if request.POST.get('survey'):
+            return redirect(self.send_survey())
+
+        assert False, "oops"
 
 
 class ApplicationDetailView(StaffOnlyMixin, DetailView):
@@ -250,10 +300,10 @@ class ApplicationReviewCreateView(ApplicationReviewMixin, CreateView):
             form.instance.application = self.application
             resp = super().form_valid(form)
             UserLog.objects.create(user=self.application.user,
-                                          created_by=self.request.user,
-                                          content_object=form.instance,
-                                          operation=UserLogOperation.ADD
-                                          )
+                                   created_by=self.request.user,
+                                   content_object=form.instance,
+                                   operation=UserLogOperation.ADD
+                                   )
 
         return resp
 

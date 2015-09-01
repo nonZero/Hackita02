@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 13:31+0300\n"
-"PO-Revision-Date: 2015-09-01 13:31+0300\n"
+"POT-Creation-Date: 2015-09-02 01:14+0300\n"
+"PO-Revision-Date: 2015-09-02 01:14+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -226,6 +226,12 @@ msgstr "שמירה"
 msgid "Total"
 msgstr "סך הכל"
 
+msgid "Bulk Operations"
+msgstr "ביצוע פעולות"
+
+msgid "Send survey"
+msgstr "שלח סקר"
+
 msgid "Review Application"
 msgstr "הערת מועמד"
 
@@ -258,6 +264,12 @@ msgstr "'%s' נשמר בהצלחה."
 msgid "Problems detected in form. Please fix your errors and try again."
 msgstr "נמצאו בעיות בטופס. אנא תקנ/י את הבעיות, ונסה/י שנית"
 
+msgid "Sent"
+msgstr "נשלח"
+
+msgid "Already sent"
+msgstr "כבר נשלח"
+
 #~ msgid "This section will open during August."
 #~ msgstr "רשימת הפרויקטים תפתח לעיון במהלך חודש אוגוסט"
 
@@ -281,12 +293,6 @@ msgstr "נמצאו בעיות בטופס. אנא תקנ/י את הבעיות, ו
 
 #~ msgid "New User"
 #~ msgstr "משתמש חדש"
-
-#~ msgid "Sent"
-#~ msgstr "נשלח"
-
-#~ msgid "Already sent"
-#~ msgstr "כבר נשלח"
 
 #~ msgid "Already invited"
 #~ msgstr "כבר נשלח"
