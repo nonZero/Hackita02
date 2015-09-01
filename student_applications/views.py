@@ -24,7 +24,7 @@ from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES
 from users.base_views import ProtectedMixin, StaffOnlyMixin
 from users.forms import PersonalInfoForm
-from users.models import PersonalInfo
+from users.models import PersonalInfo, UserLog, UserLogOperation
 
 logger = logging.getLogger(__name__)
 
@@ -248,10 +248,10 @@ class ApplicationReviewCreateView(ApplicationReviewMixin, CreateView):
             form.instance.user = self.request.user
             form.instance.application = self.application
             resp = super().form_valid(form)
-            models.UserLog.objects.create(user=self.application.object,
+            UserLog.objects.create(user=self.application.user,
                                           created_by=self.request.user,
                                           content_object=form.instance,
-                                          operation=models.UserLogOperation.ADD
+                                          operation=UserLogOperation.ADD
                                           )
 
         return resp
@@ -279,11 +279,11 @@ class ApplicationStatusUpdateView(StaffOnlyMixin, UpdateView):
         with transaction.atomic():
             form.instance.set_status(form.instance.status, self.request.user)
             log = form.instance.add_status_log()
-            models.UserLog.objects.create(
+            UserLog.objects.create(
                 user=form.instance.user,
                 created_by=self.request.user,
                 content_object=log,
-                operation=models.UserLogOperation.CHANGE
+                operation=UserLogOperation.CHANGE
             )
             resp = super().form_valid(form)
         return resp

@@ -87,6 +87,7 @@ class Application(models.Model):
     def set_and_log_status(self, value, user):
         with transaction.atomic():
             self.set_status(value, user)
+            self.save()
             self.add_status_log()
 
     def save(self, force_insert=False, force_update=False, using=None,
