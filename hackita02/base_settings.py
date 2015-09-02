@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'q13es',
     'student_applications',
     'surveys',
+    'events',
 )
 
 MIDDLEWARE_CLASSES = (

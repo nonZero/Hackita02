@@ -19,6 +19,7 @@ urlpatterns = [
     i("users"),
     i("student_applications", "sa"),
     i("surveys"),
+    i("events"),
 
     url('^social/',
         include('social.apps.django_app.urls', namespace='social')),

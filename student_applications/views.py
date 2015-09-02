@@ -15,11 +15,12 @@ from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, CreateView
+from floppyforms import ChoiceField
+from floppyforms.models import ModelChoiceField
 
 from . import models
 from . import forms
-from floppyforms import ChoiceField
-from floppyforms.models import ModelChoiceField
+from events.models import Event
 from hackita02.base_views import ProtectedViewMixin
 from projects.models import Project
 from student_applications.consts import get_user_progress, FORMS, \
@@ -218,12 +219,16 @@ class ApplicationListView(StaffOnlyMixin, ListView):
             'status').annotate(count=Count('id'))
         for g in d['agg']:
             g['label'] = models.Application.Status.labels[g['status']]
-        d['surveys'] = ModelChoiceField(Survey.objects.all()).widget.render(
-            'survey', None)
+
         d['statuses'] = ChoiceField(
             (('', "---"),) + models.Application.Status.choices,
             False).widget.render(
             'status', None)
+        d['surveys'] = ModelChoiceField(Survey.objects.all(), required=False).widget.render(
+            'survey', None)
+        d['events'] = ModelChoiceField(Event.objects.all(), required=False).widget.render(
+            'event', None)
+
         return d
 
     def get_base_url(self):
@@ -247,6 +252,19 @@ class ApplicationListView(StaffOnlyMixin, ListView):
 
         return survey
 
+    def send_invites(self):
+        event = Event.objects.get(pk=int(self.request.POST['event']))
+
+        for uid in self.get_user_ids():
+            user = User.objects.get(pk=uid)
+            o, created = event.invite_user(user, self.request.user, self.get_base_url())
+            messages.success(self.request, u"%s: %s" % (user,
+                                                   _(
+                                                       "Invited") if created else _(
+                                                       "Already invited")))
+
+        return event
+
     def post(self, request, *args, **kwargs):
 
         if request.POST.get('status'):
@@ -265,7 +283,10 @@ class ApplicationListView(StaffOnlyMixin, ListView):
         if request.POST.get('survey'):
             return redirect(self.send_survey())
 
-        assert False, "oops"
+        if request.POST.get('event'):
+            return redirect(self.send_invites())
+
+        return redirect(request.path)
 
 
 class ApplicationDetailView(StaffOnlyMixin, DetailView):

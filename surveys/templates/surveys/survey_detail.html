@@ -19,11 +19,22 @@
         <div class="row">
 
             <div class="col-lg-8">
-                <ul class="list-group">
+                <ul class="list-group answers">
 
                     {% for a in object.answers.all %}
                         <li class="list-group-item">
                             <div class="list-group-item-heading">
+                                {% if a.answered_at %}
+                                    <a class="badge pull-right"
+                                       data-toggle="collapse"
+                                       href="#answer-{{ a.id }}"
+                                       title="{{ a.answered_at }}">
+                                        {{ a.answered_at|naturaltime }}
+
+                                        <i class="fa fa-angle-down"></i>
+
+                                    </a>
+                                {% endif %}
                                 <input class="user-email" type="checkbox"
                                        value="{{ a.user.email }}"
                                         {% if not a.answered_at %}
@@ -33,11 +44,19 @@
 
                                 {{ a.user|u }}
 
-
                                 {% if a.answered_at %}
-                                    <a data-toggle="collapse"
-                                       href="#answer-{{ a.id }}"
-                                       title="{{ a.answered_at }}">{{ a.answered_at|naturaltime }}</a>
+                                    {% with a.get_pretty as a %}
+                                        {% for field in a.fields %}
+                                            {% if field.html %}
+                                                <span class="label label-info key-{{ field.key }}"
+                                                      title="{{ field.label }}"
+                                                      data-key="{{ field.key }}"
+                                                      data-value="{{ field.html }}"
+                                                        >{{ field.html|truncatechars:20 }}</span>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endwith %}
+
                                 {% endif %}
                             </div>
 
@@ -103,6 +122,23 @@
             });
 
             refreshEmails();
+
+            $('.answers').on('click', '.label', function () {
+                // Filter by similar results
+                var k = $(this).data('key');
+                var v = $(this).data('value');
+
+                $(".answers .key-" + k).filter(function () {
+                    return $(this).data('value') === v;
+                }).toggleClass('label-info').toggleClass('label-primary');
+
+                $(".answers>li").filter(function () {
+                    return $(this).find('.key-' + k).data('value') !== v;
+                }).toggle($(this).hasClass('label-info'));
+
+
+            });
+
         });
     </script>
 

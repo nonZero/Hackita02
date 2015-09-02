@@ -1,0 +1,107 @@
+{% extends 'users/base.html' %}
+{% load i18n humanize %}
+
+{% block content %}
+
+    <h1>
+        {{ object.title }}
+    </h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {% trans "at" %}: {{ object.location }}
+                </li>
+                <li class="list-group-item">
+                    {% trans "From" %}: {{ object.starts_at|date:"d/n/Y H:i" }}
+                </li>
+                <li class="list-group-item">
+                    {% trans "To" %}: {{ object.ends_at|date:"d/n/Y H:i" }}
+                </li>
+                {% if object.registration_ends_at %}
+                    <li class="list-group-item">
+                        {% trans "Registartion ends at" %}:
+                        {{ object.registration_ends_at|date:"d/n/Y H:i" }}
+                    </li>
+                {% endif %}
+            </ul>
+
+            {% regroup object.invitations.all by get_status_display as groups %}
+
+            {% for group in groups %}
+                <h4>
+                    {{ group.grouper }}
+                </h4>
+                <ul class="list-group">
+                    {% for i in group.list %}
+                        <li class="list-group-item">
+                            <span class="badge">{{ forloop.counter }}</span>
+
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-xs"
+                                   href="{% url "events:invitation_edit" i.slug %}?from={{ request.get_full_path }}"><i
+                                        class="fa fa-pencil"
+                                        title="{% trans "Edit" %}"></i></a>
+                                &nbsp;
+                            </div>
+
+                            <input class="user-email" type="checkbox"
+                                   value="{{ i.user.email }}"
+                                    {% if i.status == i.statuses.APPROVED %}
+                                   checked="1"{% endif %}/>
+                            <a href="{{ i.user.get_absolute_url }}"
+                               title="{{ i.created_at }}">{{ i.user }}</a>
+                            {% if i.attendance %}
+                                ({{ i.get_attendance_display }})
+                            {% endif %}
+                            {% if i.note %}
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        {{ i.note|linebreaksbr }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+
+            <div>
+                 <textarea id="emails" dir="ltr" style="text-align: left;">
+                 </textarea>
+            </div>
+
+        </div>
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {{ object.description|urlize|linebreaksbr }}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        $(function () {
+
+            function refreshEmails() {
+                $('#emails').val($('.user-email:checked').map(function () {
+                    return $(this).val();
+                }).get().join('\n'));
+            }
+
+            $('.user-email').change(refreshEmails);
+
+            refreshEmails();
+        });
+    </script>
+
+{% endblock %}
