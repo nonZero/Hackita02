@@ -196,37 +196,18 @@ class AllFormsView(TemplateView, ProtectedMixin):
         return d
 
 
-class ApplicationListView(StaffOnlyMixin, ListView):
-    model = models.Application
-    page_title = _("Applications")
-    ordering = ('-forms_filled', '-last_form_filled')
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        self.status = None
-        if 'status' in self.request.GET:
-            try:
-                self.status = int(self.request.GET['status'])
-                qs = qs.filter(status=self.status)
-            except ValueError:
-                pass
-        return qs
-
+class ApplicationBulkOpsMixin(object):
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
-        d['total'] = models.Application.objects.count()
-        d['agg'] = models.Application.objects.values('status').order_by(
-            'status').annotate(count=Count('id'))
-        for g in d['agg']:
-            g['label'] = models.Application.Status.labels[g['status']]
-
         d['statuses'] = ChoiceField(
             (('', "---"),) + models.Application.Status.choices,
             False).widget.render(
             'status', None)
-        d['surveys'] = ModelChoiceField(Survey.objects.all(), required=False).widget.render(
+        d['surveys'] = ModelChoiceField(Survey.objects.all(),
+                                        required=False).widget.render(
             'survey', None)
-        d['events'] = ModelChoiceField(Event.objects.all(), required=False).widget.render(
+        d['events'] = ModelChoiceField(Event.objects.all(),
+                                       required=False).widget.render(
             'event', None)
 
         return d
@@ -257,11 +238,12 @@ class ApplicationListView(StaffOnlyMixin, ListView):
 
         for uid in self.get_user_ids():
             user = User.objects.get(pk=uid)
-            o, created = event.invite_user(user, self.request.user, self.get_base_url())
+            o, created = event.invite_user(user, self.request.user,
+                                           self.get_base_url())
             messages.success(self.request, u"%s: %s" % (user,
-                                                   _(
-                                                       "Invited") if created else _(
-                                                       "Already invited")))
+                                                        _(
+                                                            "Invited") if created else _(
+                                                            "Already invited")))
 
         return event
 
@@ -286,7 +268,34 @@ class ApplicationListView(StaffOnlyMixin, ListView):
         if request.POST.get('event'):
             return redirect(self.send_invites())
 
-        return redirect(request.path)
+        return redirect(request.get_full_path())
+
+
+class ApplicationListView(StaffOnlyMixin, ApplicationBulkOpsMixin, ListView):
+    model = models.Application
+    page_title = _("Applications")
+    ordering = ('-forms_filled', '-last_form_filled')
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        self.status = None
+        if 'status' in self.request.GET:
+            try:
+                self.status = int(self.request.GET['status'])
+                qs = qs.filter(status=self.status)
+            except ValueError:
+                pass
+        return qs
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['total'] = models.Application.objects.count()
+        d['agg'] = models.Application.objects.values('status').order_by(
+            'status').annotate(count=Count('id'))
+        for g in d['agg']:
+            g['label'] = models.Application.Status.labels[g['status']]
+
+        return d
 
 
 class ApplicationDetailView(StaffOnlyMixin, DetailView):

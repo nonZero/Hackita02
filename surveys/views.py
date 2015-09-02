@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.core.mail import mail_managers
+from django.db import transaction
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +10,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
 
 from q13es.forms import get_pretty_answer
+from student_applications.views import ApplicationBulkOpsMixin
 from surveys.models import SurveyAnswer, Survey
 from users.base_views import StaffOnlyMixin
 
@@ -17,8 +19,21 @@ class SurveyListView(StaffOnlyMixin, ListView):
     model = Survey
 
 
-class SurveyDetailView(StaffOnlyMixin, DetailView):
+class SurveyDetailView(StaffOnlyMixin, ApplicationBulkOpsMixin, DetailView):
     model = Survey
+
+    def post(self, request, *args, **kwargs):
+        with transaction.atomic():
+            if request.POST.get('close'):
+                o = self.get_object()
+                for uid in self.get_user_ids():
+                    a = o.answers.get(user_id=uid)
+                    if a.is_open:
+                        a.is_open = False
+                        a.save()
+
+            resp = super().post(request, *args, **kwargs)
+        return resp
 
 
 class SurveyAnswerView(SingleObjectTemplateResponseMixin,
@@ -60,7 +75,7 @@ class SurveyAnswerView(SingleObjectTemplateResponseMixin,
         message = "{} <{}>\n{}\n\n".format(o.user, o.user.email, user_url)
 
         message += "\n\n".join(u"{label}:\n  {html}".format(**fld) for fld in
-                              get_pretty_answer(form, data)['fields'])
+                               get_pretty_answer(form, data)['fields'])
 
         url = self.request.build_absolute_uri(o.survey.get_absolute_url())
         message += "\n\n%s" % url

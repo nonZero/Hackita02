@@ -46,12 +46,20 @@ class SurveyAnswer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(default=generate_code)
     answered_at = models.DateTimeField(null=True, blank=True)
+    is_open = models.BooleanField(_("open"), default=True, db_index=True)
     data = JSONField(null=True, blank=True)
 
     class Meta:
+        ordering = (
+            '-is_open',
+            '-answered_at',
+            '-created_at',
+        )
         unique_together = (
             ('survey', 'user'),
         )
+        verbose_name = _("survey answer")
+        verbose_name_plural = _("survey answers")
 
     def __str__(self):
         return "%s: %s (%s)" % (self.survey, self.user, self.created_at)
