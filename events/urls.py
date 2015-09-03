@@ -6,6 +6,10 @@ urlpatterns = (
     url(r'^$', views.EventListView.as_view(), name='list'),
     url(r'^(?P<slug>[-\w]+)/$', views.EventDetailView.as_view(),
         name='detail'),
+
+    url(r'^(?P<slug>[-\w]+)/contacts/$', views.EventContactsView.as_view(),
+        name='contacts'),
+
     url(r'^invitation/(?P<slug>\w+)/$',
         views.InvitationDetailView.as_view(), name='invitation'),
 

@@ -1,0 +1,50 @@
+{% load i18n humanize %}
+
+{% block content %}
+
+    <div dir="rtl">
+        <h1>
+            {{ object.title }}
+        </h1>
+
+        {% regroup object.invitations.all by get_status_display as groups %}
+
+        {% for group in groups %}
+            <h2>
+                {{ group.grouper }}
+            </h2>
+
+            <table border="1" cellpadding="5" cellspacing="0" width="100%">
+                {% for i in group.list %}
+                    {% with info=i.user.personalinfo %}
+
+                        <tr>
+                            <td>
+                                {{ forloop.counter }}.
+
+                                {% if info %}
+                                    {{ info.hebrew_first_name }}
+                                    {{ info.hebrew_last_name }}
+                                    {% if info.main_phone %}
+                                        ({{ info.main_phone }})
+                                    {% endif %}
+                                {% else %}
+                                    {{ i.user }}
+                                {% endif %}
+
+
+                                {% if i.note %}r
+                                    <blockquote>
+                                        {{ i.note|linebreaksbr }}
+                                    </blockquote>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    {% endwith %}
+                {% endfor %}
+            </table>
+
+        {% endfor %}</div>
+{% endblock %}
+

@@ -25,6 +25,11 @@ class EventDetailView(StaffOnlyMixin, DetailView):
         return "{} | {}".format(self.object, _("Events"))
 
 
+class EventContactsView(StaffOnlyMixin, DetailView):
+    model = Event
+    template_name = "events/event_contacts.html"
+
+
 class InvitationDetailView(DetailView):
     model = EventInvitation
 
@@ -53,7 +58,7 @@ class InvitationDetailView(DetailView):
                     o.note = note
                     o.save()
                     subject = u"%s: %s - %s" % (
-                    o.user, o.get_status_display(), o.event)
+                        o.user, o.get_status_display(), o.event)
                     message = u"%s (%s): %s - %s\n%s" % (o.user, o.user.email,
                                                          o.get_status_display(),
                                                          o.event,
