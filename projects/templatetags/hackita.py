@@ -57,4 +57,15 @@ def upload_doc_url(instance):
     return reverse("dms:create", args=(ct.id, instance.id))
 
 
+@register.filter
+def page(request, page):
+    d = request.GET.copy()
+    d['page'] = page
+    return d.urlencode()
 
+
+@register.filter
+def pages_around(paginator, num, margin=3):
+    start = max(1, num - margin)
+    end = min(paginator.num_pages, num + margin)
+    return range(start, end + 1)

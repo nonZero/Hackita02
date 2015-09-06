@@ -7,6 +7,7 @@ from django.contrib.auth import update_session_auth_hash, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.db import transaction
 from django.http.response import HttpResponseBadRequest, HttpResponse, \
     JsonResponse
 from django.shortcuts import redirect
@@ -187,7 +188,6 @@ class UserDetailView(PermissionMixin, DetailView):
                                     request=self.request)
         return response
 
-
     def send_note_to_user(self, note):
         base_url = self.get_base_url()
         subject = "{} {}".format(
@@ -208,8 +208,7 @@ class UserDetailView(PermissionMixin, DetailView):
 
         result = self.handle_note_form()
 
-        return JsonResponse({'result': result}, safe=False,
-                            status=200 if result else 400)
+        return JsonResponse({'result': result}, status=200 if result else 400)
 
 
 class UserTagsEditView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
@@ -247,3 +246,44 @@ class AllEmailsView(PermissionMixin, View):
     def get(self, request, *args, **kwargs):
         text = "\n".join(x.email for x in models.User.objects.all())
         return HttpResponse(text, content_type='text/plain')
+
+
+class UserNoteListView(PermissionMixin, ListView):
+    permission_required = "users.view_usernote"
+    model = models.UserNote
+    paginate_by = 10
+    page_title = _("Users Notes")
+
+
+class OpenUserNoteListView(UserNoteListView):
+    page_title = _("Open Users Notes")
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_open=True)
+
+
+class UserNoteCloseView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
+                        View):
+    permission_required = "users.change_usernote"
+    model = models.UserNote
+
+    def post(self, request, *args, **kwargs):
+        o = self.get_object()
+        assert isinstance(o, models.UserNote)
+        if o.is_open:
+            with transaction.atomic():
+                o.is_open = False
+                o.closed_at = timezone.now()
+                o.closed_by = self.request.user
+                o.save()
+                models.UserLog.objects.create(
+                    user=o.user,
+                    created_by=self.request.user,
+                    content_object=o,
+                    operation=models.UserLogOperation.CHANGE
+                )
+        html = render_to_string("users/_user_note.html",
+                                {'note': o},
+                                request=self.request)
+
+        return JsonResponse({'result': html})

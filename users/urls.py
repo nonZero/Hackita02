@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+
 from . import views
 
 urlpatterns = [
@@ -21,6 +22,13 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/tags/$', views.UserTagsEditView.as_view(), name='tags'),
 
     url(r'^all-emails/$', views.AllEmailsView.as_view(), name='list_emails'),
+
+    url(r'^notes/$', views.UserNoteListView.as_view(), name='list_notes'),
+    url(r'^notes/open/$', views.OpenUserNoteListView.as_view(),
+        name='list_notes_open'),
+
+    url(r'^notes/(?P<pk>\d+)/close/$', views.UserNoteCloseView.as_view(),
+        name='close_note'),
 
     # url(r'^$', views.UserListView.as_view(),
     #     name='users'),

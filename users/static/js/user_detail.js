@@ -30,14 +30,14 @@ $(function () {
     })
 });
 
-//$(function () {
-//    "use strict";
-//    $('body').on('click', '.review', function() {
-//        var el = $(this);
-//        $.post(el.data('url'), function() {
-//            el.html('<i class="fa fa-check"></i>');
-//        });
-//        el.html('<i class="fa fa-spin fa-spinner"></i>');
-//    });
-//});
-//
+$(function () {
+    "use strict";
+    $('body').on('click', '.close', function() {
+        var el = $(this);
+        $.post(el.data('url'), function(resp) {
+            el.closest('li').replaceWith($(resp.result.trim()));
+        });
+        el.html('<i class="fa fa-spin fa-spinner"></i>');
+    });
+});
+

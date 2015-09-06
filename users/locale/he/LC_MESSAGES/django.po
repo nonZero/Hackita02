@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-06 23:06+0300\n"
-"PO-Revision-Date: 2015-09-06 21:59+0300\n"
+"POT-Creation-Date: 2015-09-06 23:45+0300\n"
+"PO-Revision-Date: 2015-09-06 23:45+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -206,6 +206,12 @@ msgstr "אירועים"
 msgid "Surveys"
 msgstr "סקרים"
 
+msgid "Users Notes"
+msgstr "הערות משתמשים"
+
+msgid "All"
+msgstr "הכל"
+
 msgid "Project Comments"
 msgstr "הערות לפרויקטים"
 
@@ -287,6 +293,9 @@ msgstr "כתב/ה"
 msgid "To respond click here"
 msgstr "לכתיבת תגובה או הערה נוספת יש ללחוץ כאן"
 
+msgid "of"
+msgstr "מתוך"
+
 msgid "Validation email sent"
 msgstr "נשלחה אליך הודעה עם קישור לכניסה מהירה לאתר."
 
@@ -328,6 +337,9 @@ msgstr "הפרופיל נשמר בהצלחה."
 
 msgid "Hackita02: New note from"
 msgstr "הכיתה02: קיבלת הערה חדשה מאת"
+
+msgid "Open Users Notes"
+msgstr "הערות משתמשים פתוחות"
 
 #~ msgid "Application"
 #~ msgstr "מועמדות"

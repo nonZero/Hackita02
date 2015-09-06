@@ -40,14 +40,19 @@
                             <div class="pull-right text-danger">
                                 <a href="{% url "sa:app_list" %}">{% trans "Applications" %}</a>
                                 &bull;
-{#                                <a href="{% url "users:list" %}">{% trans "Users" %}</a>#}
-{#                                &bull;#}
-                                 <a href="{% url "events:list" %}">{% trans "Events" %}</a>
-                                 &bull;
-                                 <a href="{% url "surveys:list" %}">{% trans "Surveys" %}</a>
-                                 &bull;
+                                {#                                <a href="{% url "users:list" %}">{% trans "Users" %}</a>#}
+                                {#                                &bull;#}
+                                <a href="{% url "events:list" %}">{% trans "Events" %}</a>
+                                &bull;
+                                <a href="{% url "surveys:list" %}">{% trans "Surveys" %}</a>
+                                &bull;
                                 {# <a href="{% url "users_log" %}">{% trans "Log" %}</a>#}
                                 {# &bull;#}
+                                <a href="{% url "users:list_notes_open" %}">
+                                    {% trans "Users Notes" %}
+                                </a>
+                                (<a href="{% url "users:list_notes" %}">{% trans "All" %}</a>)
+                                &bull;
                                 <a href="{% url "projects:list_comments" %}">
                                     {% trans "Project Comments" %}
                                 </a>
