@@ -8,8 +8,10 @@ from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
 from django.db.models import Count
+from django.http import JsonResponse
 from django.shortcuts import redirect, get_object_or_404
 from django.template import loader
+from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views.generic import DetailView, ListView, UpdateView
@@ -28,7 +30,8 @@ from student_applications.consts import get_user_progress, FORMS, \
 from surveys.models import Survey
 from users.base_views import ProtectedMixin, StaffOnlyMixin
 from users.forms import PersonalInfoForm
-from users.models import PersonalInfo, UserLog, UserLogOperation, User
+from users.models import PersonalInfo, UserLog, UserLogOperation, User, \
+    UserNote
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +52,9 @@ class Dashboard(UserViewMixin, TemplateView):
     template_name = 'dashboard.html'
     page_title = _("Registration")
 
+    def get_note_form(self, data=None):
+        return forms.DashboardNoteForm(data)
+
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
         d['registered'] = get_user_next_form(self.request.user) is None
@@ -62,7 +68,46 @@ class Dashboard(UserViewMixin, TemplateView):
                                     key=lambda p: p.vote.score,
                                     reverse=True)
 
+        d['note_form'] = self.get_note_form()
+        d['notes'] = self.request.user.notes.filter(visible_to_user=True)
+
         return d
+
+    def get_base_url(self):
+        return self.request.build_absolute_uri('/')[:-1]
+
+    def handle_note_form(self):
+        form = self.get_note_form(self.request.POST)
+        if not form.is_valid():
+            return False
+
+        note = form.instance
+        assert isinstance(note, UserNote)
+        user = self.request.user
+        note.user = user
+        note.author = user
+        note.visible_to_user = True
+        note.is_open = True
+        form.save()
+
+        UserLog.objects.create(user=user,
+                               created_by=user,
+                               content_object=note,
+                               operation=UserLogOperation.ADD)
+
+        note.notify_managers(self.get_base_url())
+
+        response = render_to_string(
+            "student_applications/_dashboard_note.html",
+            {'note': note},
+            request=self.request)
+        return response
+
+    def post(self, request, *args, **kwargs):
+        result = self.handle_note_form()
+
+        return JsonResponse({'result': result}, safe=False,
+                            status=200 if result else 400)
 
 
 class PersonalDetailsView(UserViewMixin, CreateView):

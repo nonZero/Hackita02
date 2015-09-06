@@ -177,7 +177,7 @@ class UserDetailView(PermissionMixin, DetailView):
         send_to_user = (form.cleaned_data['visible_to_user'] and
                         form.cleaned_data['send_to_user'])
 
-        self.send_note_to_managers(note, send_to_user)
+        note.notify_managers(self.get_base_url(), send_to_user)
 
         if send_to_user:
             self.send_note_to_user(note)
@@ -187,32 +187,16 @@ class UserDetailView(PermissionMixin, DetailView):
                                     request=self.request)
         return response
 
-    def send_note_to_managers(self, note, sent_to_user):
-        subject = "{} {} {} {}".format(
-            _("User note posted to"),
-            self.object,
-            _("By"),
-            self.request.user.real_name_or_email(),
-        )
-        url = note.get_absolute_url()
-        html_message = render_to_string("users/usernote_email.html", {
-            'base_url': self.get_base_url(),
-            'managers': True,
-            'sent_to_user': sent_to_user,
-            'title': subject,
-            'note': note,
-            'url': url,
-        }, request=self.request)
-        mail_managers(subject, '', html_message=html_message)
 
     def send_note_to_user(self, note):
+        base_url = self.get_base_url()
         subject = "{} {}".format(
             _("Hackita02: New note from"),
             self.request.user,
         )
         url = reverse("sa:dashboard")
         html_message = render_to_string("users/usernote_email.html", {
-            'base_url': self.get_base_url(),
+            'base_url': base_url,
             'title': subject,
             'note': note,
             'url': url,

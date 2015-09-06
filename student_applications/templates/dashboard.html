@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n hackita %}
+{% load i18n hackita humanize staticfiles %}
 
 {% block content %}
 
@@ -133,8 +133,49 @@
         </ul>
     </div>
 
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                {% trans "Notes" %}
+            </h3>
+        </div>
 
+        <div id="addnote" class="panel-body">
+            <div class="list-group-item-heading">
+                <b>{% trans "Send note to the staff" %}</b>
+            </div>
 
+            <div class="list-group-item-body">
+                <form method="post" id="noteform">
+                    {% csrf_token %}
+                    {{ note_form }}
+                    <button class="btn btn-primary"
+                            disabled="1">{% trans "Add" %}</button>
+                    <div class="save">
+                            <span class="loader collapse">
+                                <i class="fa fa-spin fa-spinner"></i>
+                            </span>
+                    </div>
+                    <div class="ok collapse text-success">
+                        <i class="fa fa-check"></i>
+                        {% trans "Saved sucessfully." %}
+                    </div>
+                </form>
+            </div>
+        </div>
 
+        <ul class="list-group" id="notes">
+            {% for note in notes %}
+                {% include "student_applications/_dashboard_note.html" %}
+            {% endfor %}
 
+        </ul>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "js/csrf.js" %}"></script>
+    <script src="{% static "vendor/jquery.form.js" %}"></script>
+    <script src="{% static "js/dashboard.js" %}"></script>
 {% endblock %}

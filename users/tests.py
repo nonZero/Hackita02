@@ -34,6 +34,7 @@ class UsersTests(TestCase):
         resp = self.client.post(url)
         self.assertEquals(resp.status_code, 400)
 
+        mail.outbox = []
         resp = self.client.post(url, {
             'content': 'xyzzy',
         })
@@ -41,11 +42,10 @@ class UsersTests(TestCase):
         d = json.loads(resp.content.decode('utf8'))
         self.assertIn('result', d)
         self.assertRegex(d['result'], 'id="note-\d+"')
-
         self.assertEquals(len(mail.outbox), len(settings.MANAGERS))
-        # print(msg.message().as_bytes().decode('utf8'))
-        mail.outbox = []
 
+        # Do not send if not visible to user
+        mail.outbox = []
         resp = self.client.post(url, {
             'content': 'xyzzy',
             'send_to_user': '1',
@@ -54,5 +54,16 @@ class UsersTests(TestCase):
         d = json.loads(resp.content.decode('utf8'))
         self.assertIn('result', d)
         self.assertRegex(d['result'], 'id="note-\d+"')
+        self.assertEquals(len(mail.outbox), len(settings.MANAGERS))
 
+        mail.outbox = []
+        resp = self.client.post(url, {
+            'content': 'xyzzy',
+            'visible_to_user': '1',
+            'send_to_user': '1',
+        })
+        self.assertEquals(resp.status_code, 200)
+        d = json.loads(resp.content.decode('utf8'))
+        self.assertIn('result', d)
+        self.assertRegex(d['result'], 'id="note-\d+"')
         self.assertEquals(len(mail.outbox), len(settings.MANAGERS) + 1)

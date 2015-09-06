@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-06 21:59+0300\n"
+"POT-Creation-Date: 2015-09-06 23:06+0300\n"
 "PO-Revision-Date: 2015-09-06 21:59+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -145,6 +145,12 @@ msgstr "הערות עבור המשתמש"
 
 msgid "user notes"
 msgstr "הערות עבור המשתמש"
+
+msgid "User note posted to"
+msgstr "הערת משתמש נכתבה על"
+
+msgid "By"
+msgstr "על ידי"
 
 msgid "red"
 msgstr "אדום"
@@ -319,12 +325,6 @@ msgstr "הסיסמא נקבעה בהצלחה."
 
 msgid "Profile saved successfully."
 msgstr "הפרופיל נשמר בהצלחה."
-
-msgid "User note posted to"
-msgstr "הערת משתמש נכתבה על"
-
-msgid "By"
-msgstr "על ידי"
 
 msgid "Hackita02: New note from"
 msgstr "הכיתה02: קיבלת הערה חדשה מאת"

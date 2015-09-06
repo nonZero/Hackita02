@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import floppyforms.__future__ as forms
 
 from . import models
+from users.models import UserNote
 
 
 class ApplicationStatusForm(forms.ModelForm):
@@ -25,4 +26,12 @@ class ApplicationReviewForm(forms.ModelForm):
             'comm_skills',
             'overall_impression',
             'comments',
+        )
+
+
+class DashboardNoteForm(forms.ModelForm):
+    class Meta:
+        model = UserNote
+        fields = (
+            'content',
         )

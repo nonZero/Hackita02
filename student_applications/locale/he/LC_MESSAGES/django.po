@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-06 10:11+0300\n"
-"PO-Revision-Date: 2015-09-06 10:11+0300\n"
+"POT-Creation-Date: 2015-09-06 23:06+0300\n"
+"PO-Revision-Date: 2015-09-06 23:06+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -208,6 +208,18 @@ msgstr "נסקרו על ידך"
 msgid "What are you waiting for?"
 msgstr "קדימה!"
 
+msgid "Notes"
+msgstr "הערות"
+
+msgid "Send note to the staff"
+msgstr "שליחת הערה לצוות התכנית"
+
+msgid "Add"
+msgstr "הוספה"
+
+msgid "Saved sucessfully."
+msgstr "נשמר בהצלחה."
+
 msgid "Send"
 msgstr "שלח/י"
 
@@ -222,6 +234,9 @@ msgstr "ביצוע פעולות"
 
 msgid "Go"
 msgstr "בצע"
+
+msgid "You"
+msgstr "את/ה"
 
 msgid "Questionnare"
 msgstr "שאלון"

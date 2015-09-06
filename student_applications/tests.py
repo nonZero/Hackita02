@@ -1,3 +1,6 @@
+import json
+
+from django.conf import settings
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.forms.utils import ErrorDict
@@ -6,15 +9,18 @@ from django.test import TestCase
 from users.models import User, PersonalInfo
 
 
-class RegiterTest(TestCase):
+class StudentApplicationsTests(TestCase):
     def setUp(self):
         self.u_password = "foobar"
         self.u = User.objects.create_user("foo@bar.com",
                                           self.u_password)
         self.staff = User.objects.create_user("staff@bar.com", "staff")
 
-    def test_personal_details(self):
+    def login(self):
         self.client.login(email=self.u.email, password=self.u_password)
+
+    def test_personal_details(self):
+        self.login()
         self.assertFalse(hasattr(self.u, 'personalinfo'))
         url = reverse('sa:personal_details')
         r = self.client.get(url)
@@ -82,38 +88,30 @@ class RegiterTest(TestCase):
         self.assertEquals(302, r.status_code)
         self.assertEquals(1, self.u.answers.count())
         self.assertEquals(1, self.u.application.forms_filled)
-        #
-        # def test_tagging(self):
-        #     cool = Tag.objects.create(name="Cool", group=TagGroup.SILVER)
-        #     yuck = Tag.objects.create(name="Yuck", group=TagGroup.NEGATIVE)
-        #
-        #     self.assertEquals(0, self.u.tags.count())
-        #
-        #     UserTag.objects.tag(self.u, cool, self.staff)
-        #
-        #     self.assertEquals(1, self.u.tags.count())
-        #     self.assertEquals(1, self.u.logs.count())
-        #
-        #     UserTag.objects.tag(self.u, yuck, self.staff)
-        #
-        #     self.assertEquals(2, self.u.tags.count())
-        #     self.assertEquals(2, self.u.logs.count())
-        #
-        #     UserTag.objects.tag(self.u, yuck, self.staff)
-        #
-        #     self.assertEquals(2, self.u.tags.count())
-        #     self.assertEquals(2, self.u.logs.count())
-        #
-        #     UserTag.objects.untag(self.u, cool, self.staff)
-        #
-        #     self.assertEquals(1, self.u.tags.count())
-        #     self.assertEquals(3, self.u.logs.count())
-        #     UserTag.objects.untag(self.u, yuck, self.staff)
-        #
-        #     self.assertEquals(0, self.u.tags.count())
-        #     self.assertEquals(4, self.u.logs.count())
-        #
-        #     UserTag.objects.untag(self.u, yuck, self.staff)
-        #
-        #     self.assertEquals(0, self.u.tags.count())
-        #     #     self.assertEquals(4, self.u.logs.count())
+
+    def test_dashboard(self):
+        url = reverse('sa:dashboard')
+
+        resp = self.client.get(url)
+        self.assertEquals(resp.status_code, 302)
+
+        self.login()
+        resp = self.client.get(url)
+        self.assertContains(resp, self.u.email)
+        self.assertNotContains(resp, 'xyzzy1')
+
+        resp = self.client.post(url)
+        self.assertEquals(resp.status_code, 400)
+
+        mail.outbox = []
+        resp = self.client.post(url, {
+            'content': 'xyzzy1',
+        })
+        self.assertEquals(resp.status_code, 200)
+        d = json.loads(resp.content.decode('utf8'))
+        self.assertIn('result', d)
+        self.assertRegex(d['result'], 'xyzzy1')
+        self.assertEquals(len(mail.outbox), len(settings.MANAGERS))
+
+        resp = self.client.get(url)
+        self.assertContains(resp, 'xyzzy1')

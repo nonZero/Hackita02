@@ -6,9 +6,10 @@ from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.core.mail import send_mail
+from django.core.mail import send_mail, mail_managers
 from django.core.urlresolvers import reverse
 from django.db import models, transaction
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _, pgettext_lazy
 
 from hackita02 import settings
@@ -230,6 +231,24 @@ class UserNote(models.Model):
             self.user.get_absolute_url(),
             self.id,
         )
+
+    def notify_managers(self, base_url, sent_to_user=False):
+        subject = "{} {} {} {}".format(
+            _("User note posted to"),
+            self.user.real_name_or_email(),
+            _("By"),
+            self.author.real_name_or_email(),
+        )
+        url = self.get_absolute_url()
+        html_message = render_to_string("users/usernote_email.html", {
+            'base_url': base_url,
+            'managers': True,
+            'sent_to_user': sent_to_user,
+            'title': subject,
+            'note': self,
+            'url': url,
+        })
+        mail_managers(subject, '', html_message=html_message)
 
 
 class TagGroup(object):

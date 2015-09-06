@@ -1,0 +1,15 @@
+{% load i18n hackita humanize %}
+
+<li class="list-group-item">
+    <div class="list-group-item-heading">
+        {% if note.author == user %}
+            <b>{% trans "You" %}</b>,
+        {% else %}
+            <b>{{ note.author }}</b>,
+        {% endif %}
+        <span title="{{ note.created_at }}">{{ note.created_at|naturaltime }}</span>:
+    </div>
+    <div class="list-group-item-body">
+        {{ note.content|linebreaksbr }}
+    </div>
+</li>
