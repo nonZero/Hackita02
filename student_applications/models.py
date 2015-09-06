@@ -20,11 +20,16 @@ class Application(models.Model):
         NEW = 1
         REGISTERED = 2
 
+        DECIDED_NOT_TO_PARTICIPATE = 5
+
         UNDER_DISCUSSION = 10
         TO_REJECT = 11
 
         INVITE_TO_INTERVIEW = 20
         INVITED_TO_INTERVIEW = 21
+
+        DID_NOT_ATTEND_INTERVIEW = 25
+        PARTICIPATED_IN_INTERVIEW = 30
 
         TO_ACCEPT = 50
         ACCEPTED = 51
@@ -39,10 +44,15 @@ class Application(models.Model):
             (NEW, _("new (incomplete application)")),
             (REGISTERED, _("registered")),
 
+            (DECIDED_NOT_TO_PARTICIPATE, _("decided not to participate")),
+
             (UNDER_DISCUSSION, _("under discussion")),
             (TO_REJECT, _("to reject")),
             (INVITE_TO_INTERVIEW, _("invite to interview")),
             (INVITED_TO_INTERVIEW, _("invited to interview")),
+
+            (DID_NOT_ATTEND_INTERVIEW, _("did not attend interview")),
+            (PARTICIPATED_IN_INTERVIEW, _("participated in interview")),
 
             (TO_ACCEPT, _("to accept")),
 

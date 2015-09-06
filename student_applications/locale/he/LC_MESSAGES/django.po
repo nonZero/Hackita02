@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-02 01:14+0300\n"
-"PO-Revision-Date: 2015-09-02 01:14+0300\n"
+"POT-Creation-Date: 2015-09-06 10:11+0300\n"
+"PO-Revision-Date: 2015-09-06 10:11+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -61,6 +61,9 @@ msgstr "בהרשמה"
 msgid "registered"
 msgstr "נרשם"
 
+msgid "decided not to participate"
+msgstr "החליט לא להשתתף"
+
 msgid "under discussion"
 msgstr "בדיון"
 
@@ -72,6 +75,12 @@ msgstr "להזמין לראיון"
 
 msgid "invited to interview"
 msgstr "הוזמן לראיון"
+
+msgid "did not attend interview"
+msgstr "לא התייצב ליום מיון"
+
+msgid "participated in interview"
+msgstr "השתתף ביום מיון"
 
 msgid "to accept"
 msgstr "מועמד לקבלה"
@@ -208,6 +217,12 @@ msgstr "פרטי ההרשמה"
 msgid "Edit Status"
 msgstr "עריכת סטטוס"
 
+msgid "Bulk Operations"
+msgstr "ביצוע פעולות"
+
+msgid "Go"
+msgstr "בצע"
+
 msgid "Questionnare"
 msgstr "שאלון"
 
@@ -225,12 +240,6 @@ msgstr "שמירה"
 
 msgid "Total"
 msgstr "סך הכל"
-
-msgid "Bulk Operations"
-msgstr "ביצוע פעולות"
-
-msgid "Send survey"
-msgstr "שלח סקר"
 
 msgid "Review Application"
 msgstr "הערת מועמד"
@@ -270,11 +279,17 @@ msgstr "נשלח"
 msgid "Already sent"
 msgstr "כבר נשלח"
 
+msgid "Invited"
+msgstr "הוזמן"
+
+msgid "Already invited"
+msgstr "כבר נשלח"
+
+#~ msgid "Send survey"
+#~ msgstr "שלח סקר"
+
 #~ msgid "This section will open during August."
 #~ msgstr "רשימת הפרויקטים תפתח לעיון במהלך חודש אוגוסט"
-
-#~ msgid "Invited"
-#~ msgstr "הוזמן"
 
 #~ msgid "Unavailable"
 #~ msgstr "לא פנוי"
@@ -293,9 +308,6 @@ msgstr "כבר נשלח"
 
 #~ msgid "New User"
 #~ msgstr "משתמש חדש"
-
-#~ msgid "Already invited"
-#~ msgstr "כבר נשלח"
 
 #~ msgid "Continue Registration"
 #~ msgstr "המשך בהרשמה"
