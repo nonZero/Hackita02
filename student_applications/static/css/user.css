@@ -7,16 +7,22 @@ h2 {
     text-decoration: line-through;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 .alert-error {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }
+
 .alert-error hr {
-  border-top-color: #e4b9c0;
+    border-top-color: #e4b9c0;
 }
+
 .alert-error .alert-link {
-  color: #843534;
+    color: #843534;
 }
 
 .user-container {
@@ -26,6 +32,7 @@ h2 {
 
 .user-content {
 }
+
 .userpanel > .left {
     margin-top: -7px;
 }
@@ -50,7 +57,7 @@ h2 {
     }
 }
 
-.qprogress p{
+.qprogress p {
     margin-bottom: 0
 }
 
@@ -61,7 +68,7 @@ h2 {
 
 .q13e h1 {
     font-size: 2em;
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
 .q13e .fc {
@@ -113,9 +120,11 @@ h2 {
     padding: 0 0 6px 0;
     line-height: 0.8em;
 }
+
 .q13e .choices > li input {
     width: 1.5em;
 }
+
 .q13e .choices > li label {
     display: inline;
 }
@@ -125,16 +134,15 @@ h2 {
 }
 
 .q13e .form-actions input {
-    margin:0;
+    margin: 0;
 }
 
 .control-legend label {
-    display:inline-block;
+    display: inline-block;
     background: #e0e0e0;
     padding: 3px 2px;
-    margin-left:5px
+    margin-left: 5px
 }
-
 
 .section-container.vertical-tabs > section > .title,
 .section-container.vertical-tabs > .section > .title {
@@ -145,39 +153,38 @@ table.users {
     width: 100%;
 }
 
-table.users td.uid,  table.users td.uanswers {
+table.users td.uid, table.users td.uanswers {
     width: 50px;
 }
 
-table.users td.uemail,  table.users td.uname {
+table.users td.uemail, table.users td.uname {
     width: 250px;
 }
-
 
 .user-answers.section-container.vertical-tabs > section > .content {
     background: #fcfcfc;
 }
 
-.user-answer  {
+.user-answer {
     margin-bottom: 1.4em;
 }
 
-.user-answer-title  {
+.user-answer-title {
     font-weight: bold;
-    margin-bottom:2px;
+    margin-bottom: 2px;
 }
 
-.user-answer-content  {
+.user-answer-content {
     padding: 6px;
     background: white;
     border: 1px solid #ccc;
 }
 
-.cohort-list li a{
+.cohort-list li a {
     background: #f0f0f0;
 }
 
-.cohort-list li.active a{
+.cohort-list li.active a {
     background: none;
     color: black;
 }
@@ -187,11 +194,11 @@ table.users td.uemail,  table.users td.uname {
 }
 
 .tag form {
-    display:inline;
+    display: inline;
 }
 
-.tag form button{
-    margin:0;
+.tag form button {
+    margin: 0;
     color: black;
     background: none;
     border: none;
@@ -203,7 +210,7 @@ table.users td.uemail,  table.users td.uname {
 }
 
 input.user-checkbox {
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
 .ltrfield {
@@ -217,7 +224,7 @@ input.user-checkbox {
 
 .label-control {
     display: block;
-    color:#333;
+    color: #333;
     border: 1px solid black;
     border-radius: 3px;
     white-space: normal;

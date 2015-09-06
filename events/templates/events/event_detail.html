@@ -1,5 +1,5 @@
 {% extends 'users/base.html' %}
-{% load i18n humanize %}
+{% load i18n humanize staticfiles %}
 
 {% block content %}
 
@@ -31,45 +31,49 @@
             {% regroup object.invitations.all by get_status_display as groups %}
 
             {% for group in groups %}
-                <h4>
-                    {{ group.grouper }}
-                </h4>
-                <ul class="list-group">
-                    {% for i in group.list %}
-                        <li class="list-group-item">
-                            <span class="badge">{{ forloop.counter }}</span>
+                <div class="group">
 
-                            <div class="pull-right">
-                                <a class="btn btn-default btn-xs"
-                                   href="{% url "events:invitation_edit" i.slug %}?from={{ request.get_full_path }}"><i
-                                        class="fa fa-pencil"
-                                        title="{% trans "Edit" %}"></i></a>
-                                &nbsp;
-                            </div>
+                    <h2 class="grouper clickable">
+                        {{ group.grouper }}
+                    </h2>
 
-                            <input class="user-email" type="checkbox"
-                                   value="{{ i.user.email }}"
-                                    {% if i.status == i.statuses.APPROVED %}
-                                   checked="1"{% endif %}/>
-                            <a href="{{ i.user.get_absolute_url }}"
-                               title="{{ i.created_at }}">{{ i.user }}</a>
-                            {% if i.attendance %}
-                                ({{ i.get_attendance_display }})
-                            {% endif %}
-                            {% if i.note %}
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        {{ i.note|linebreaksbr }}
-                                    </div>
+                    <ul class="list-group">
+                        {% for i in group.list %}
+                            <li class="list-group-item">
+                                <span class="badge">{{ forloop.counter }}</span>
+
+                                <div class="pull-right">
+                                    <a class="btn btn-default btn-xs"
+                                       href="{% url "events:invitation_edit" i.slug %}?from={{ request.get_full_path }}"><i
+                                            class="fa fa-pencil"
+                                            title="{% trans "Edit" %}"></i></a>
+                                    &nbsp;
                                 </div>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
+
+                                <input class="user-email" type="checkbox"
+                                       value="{{ i.user.email }}"
+                                        {% if i.status == i.statuses.APPROVED %}
+                                       checked="1"{% endif %}/>
+                                <a href="{{ i.user.get_absolute_url }}"
+                                   title="{{ i.created_at }}">{{ i.user }}</a>
+                                {% if i.attendance %}
+                                    ({{ i.get_attendance_display }})
+                                {% endif %}
+                                {% if i.note %}
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            {{ i.note|linebreaksbr }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endfor %}
 
             <div>
-                 <textarea id="emails" dir="ltr" style="text-align: left;">
+                 <textarea id="emails" dir="ltr" style="text-align: left; width:100%">
                  </textarea>
             </div>
 
@@ -89,19 +93,6 @@
 
 {% block scripts %}
 
-    <script>
-        $(function () {
-
-            function refreshEmails() {
-                $('#emails').val($('.user-email:checked').map(function () {
-                    return $(this).val();
-                }).get().join('\n'));
-            }
-
-            $('.user-email').change(refreshEmails);
-
-            refreshEmails();
-        });
-    </script>
+    <script src="{% static "js/event_detail.js" %}"></script>
 
 {% endblock %}
