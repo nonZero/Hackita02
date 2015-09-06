@@ -5,12 +5,8 @@ from django.utils import timezone
 from django_extensions.db.fields.json import JSONField
 from django.utils.translation import ugettext_lazy as _
 
-from . import consts
-
-
-
-# from users.models import UserLogOperation, UserLog
 from q13es.forms import get_pretty_answer
+from . import consts
 
 
 class Application(models.Model):

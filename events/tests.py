@@ -1,7 +1,6 @@
 import datetime
 
 from django.test import TestCase
-
 from django.utils import timezone
 
 from users.models import User
@@ -56,4 +55,5 @@ class EventsTests(TestCase):
         url = self.i1.get_absolute_url()
 
         resp = self.client.get(url)
-        print(resp.content)
+        self.assertContains(resp, "title")
+        # print(resp.content)

@@ -93,7 +93,8 @@ class UserDisplayNamesForm(forms.ModelForm):
 
 
 class UserNoteForm(forms.ModelForm):
-    # send_to_user = forms.BooleanField(required=False, label=_("send to user by email"))
+    send_to_user = forms.BooleanField(required=False,
+                                      label=_("send to user by email"))
 
     class Meta:
         model = models.UserNote

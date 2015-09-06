@@ -65,9 +65,7 @@ class User(AbstractEmailUser):
         return self.password and not self.password.startswith(
             UNUSABLE_PASSWORD_PREFIX)
 
-    def __str__(self):
-        if self.hebrew_display_name:
-            return self.hebrew_display_name
+    def real_hebrew_name(self):
         try:
             if self.personalinfo.hebrew_first_name:
                 return "{} {}".format(
@@ -75,9 +73,20 @@ class User(AbstractEmailUser):
                     self.personalinfo.hebrew_last_name,
                 )
         except PersonalInfo.DoesNotExist:
-            pass
+            return None
 
-        return "{} #{}".format(_("Anonymouse User"), self.id)
+    def real_name_or_email(self):
+        """Allowing staff members to see the real identity"""
+        return self.real_hebrew_name() or self.email
+
+    def anonymous_name(self):
+        return "{} #{}".format(_("Anonymous User"), self.id)
+
+    def __str__(self):
+        if self.hebrew_display_name:
+            return self.hebrew_display_name
+
+        return self.real_hebrew_name() or self.anonymous_name()
 
 
 class PersonalInfo(models.Model):

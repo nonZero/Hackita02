@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash, login
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.http.response import HttpResponseBadRequest, HttpResponse, \
     JsonResponse
 from django.shortcuts import redirect
@@ -16,11 +16,12 @@ from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView, View, UpdateView, \
     DetailView, ListView
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic.detail import SingleObjectMixin
 
 from . import forms
 from . import models
-from django.views.generic.detail import SingleObjectMixin
 from hackita02.base_views import ProtectedViewMixin, PermissionMixin
+from hackita02.mail import send_html_mail
 
 
 class LoginView(authtools.views.LoginView):
@@ -154,12 +155,16 @@ class UserDetailView(PermissionMixin, DetailView):
         d['note_form'] = self.get_note_form()
         return d
 
+    def get_base_url(self):
+        return self.request.build_absolute_uri('/')[:-1]
+
     def handle_note_form(self):
         form = self.get_note_form(self.request.POST)
         if not form.is_valid():
             return False
 
         note = form.instance
+        assert isinstance(note, models.UserNote)
         note.user = self.object
         note.author = self.request.user
         form.save()
@@ -169,28 +174,50 @@ class UserDetailView(PermissionMixin, DetailView):
                                       content_object=note,
                                       operation=models.UserLogOperation.ADD)
 
-        url = self.request.build_absolute_uri(note.get_absolute_url())
+        send_to_user = (form.cleaned_data['visible_to_user'] and
+                        form.cleaned_data['send_to_user'])
 
-        subject = "{} {} {} {}".format(
-            _("User note posted to"),
-            self.object,
-            _("By"),
-            self.request.user,
-        )
-        message = "{}\n\n[{}]\n{}\n\n{} ({})".format(
-            url,
-            _('visible to user') if note.visible_to_user else _(
-                'hidden from user'),
-            note.content,
-            self.object,
-            self.object.email,
-        )
-        mail_managers(subject, message)
+        self.send_note_to_managers(note, send_to_user)
+
+        if send_to_user:
+            self.send_note_to_user(note)
 
         response = render_to_string("users/_user_note.html",
                                     {'note': note},
                                     request=self.request)
         return response
+
+    def send_note_to_managers(self, note, sent_to_user):
+        subject = "{} {} {} {}".format(
+            _("User note posted to"),
+            self.object,
+            _("By"),
+            self.request.user.real_name_or_email(),
+        )
+        url = note.get_absolute_url()
+        html_message = render_to_string("users/usernote_email.html", {
+            'base_url': self.get_base_url(),
+            'managers': True,
+            'sent_to_user': sent_to_user,
+            'title': subject,
+            'note': note,
+            'url': url,
+        }, request=self.request)
+        mail_managers(subject, '', html_message=html_message)
+
+    def send_note_to_user(self, note):
+        subject = "{} {}".format(
+            _("Hackita02: New note from"),
+            self.request.user,
+        )
+        url = reverse("sa:dashboard")
+        html_message = render_to_string("users/usernote_email.html", {
+            'base_url': self.get_base_url(),
+            'title': subject,
+            'note': note,
+            'url': url,
+        }, request=self.request)
+        send_html_mail(subject, html_message, note.user.email)
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
