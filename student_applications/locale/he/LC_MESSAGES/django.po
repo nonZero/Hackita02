@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-06 23:06+0300\n"
-"PO-Revision-Date: 2015-09-06 23:06+0300\n"
+"POT-Creation-Date: 2015-09-07 09:17+0300\n"
+"PO-Revision-Date: 2015-09-07 09:17+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -259,6 +259,15 @@ msgstr "סך הכל"
 msgid "Review Application"
 msgstr "הערת מועמד"
 
+msgid "Change status"
+msgstr "שינוי סטטוס"
+
+msgid "Invite to event"
+msgstr "הזמנה לאירוע"
+
+msgid "Send survey"
+msgstr "שלח סקר"
+
 msgid "Edit"
 msgstr "עריכה"
 
@@ -299,9 +308,6 @@ msgstr "הוזמן"
 
 msgid "Already invited"
 msgstr "כבר נשלח"
-
-#~ msgid "Send survey"
-#~ msgstr "שלח סקר"
 
 #~ msgid "This section will open during August."
 #~ msgstr "רשימת הפרויקטים תפתח לעיון במהלך חודש אוגוסט"

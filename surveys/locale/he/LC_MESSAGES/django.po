@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-02 01:24+0300\n"
-"PO-Revision-Date: 2015-09-02 01:24+0300\n"
+"POT-Creation-Date: 2015-09-07 09:31+0300\n"
+"PO-Revision-Date: 2015-09-07 09:31+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -30,6 +30,21 @@ msgstr "סקר"
 msgid "surveys"
 msgstr "סקרים"
 
+msgid "open"
+msgstr "פתוח (לטיפול)"
+
+msgid "survey answer"
+msgstr "תשובה לסקר"
+
+msgid "survey answers"
+msgstr "תשובות לסקר"
+
+msgid "resend survey"
+msgstr "שלח סקר שוב פעם"
+
+msgid "close marked invites"
+msgstr "סגור פריטים שסומנו"
+
 msgid "Surveys"
 msgstr "סקרים"
 
@@ -38,6 +53,9 @@ msgstr "מילוי הטופס עבור"
 
 msgid "Send"
 msgstr "שליחה"
+
+msgid "Resent survey to"
+msgstr "הסקר נשלח אל"
 
 msgid "Wrong user! Please login with the correct user to continue"
 msgstr "דף זה מיועד למשתמש אחר. אנא התחבר מחדש למערכת עם המשתמש המתאים."

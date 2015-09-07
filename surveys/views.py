@@ -23,6 +23,18 @@ class SurveyDetailView(StaffOnlyMixin, ApplicationBulkOpsMixin, DetailView):
     model = Survey
 
     def post(self, request, *args, **kwargs):
+
+        if request.POST.get('resend'):
+            o = self.get_object()
+            for uid in self.get_user_ids():
+                a = o.answers.get(user_id=uid)
+                a.send(self.get_base_url())
+                messages.success(request, "{} {} <{}>".format(
+                    _("Resent survey to"),
+                    a.user,
+                    a.user.email,
+                ))
+
         with transaction.atomic():
             if request.POST.get('close'):
                 o = self.get_object()
@@ -33,6 +45,7 @@ class SurveyDetailView(StaffOnlyMixin, ApplicationBulkOpsMixin, DetailView):
                         a.save()
 
             resp = super().post(request, *args, **kwargs)
+
         return resp
 
 
