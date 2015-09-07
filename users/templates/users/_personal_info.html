@@ -5,9 +5,14 @@
         {{ info.hebrew_first_name }} {{ info.hebrew_last_name }}
         {{ info.english_first_name }} {{ info.english_last_name }}
         ({{ info.get_gender_display }})
-        <i class="fa fa-phone"></i>
-        {{ info.main_phone }}
-        {% if info.alt_phone %}({{ info.alt_phone }}){% endif %}
+
+        {% if info.main_phone %}
+            <a href="tel://{{ info.main_phone }}"><i
+                    class="fa fa-phone"></i> {{ info.main_phone }}</a>
+        {% endif %}
+        {% if info.alt_phone %}
+            (<a href="tel://{{ info.alt_phone }}">{{ info.alt_phone }}</a>)
+        {% endif %}
         &bull;
         {{ info.address|default:'' }}
         {{ info.city|default:'' }}
@@ -15,15 +20,18 @@
             <i class="fa fa-skype"></i>
             {{ info.skype_username }}
         {% endif %}
+        &nbsp;
+        <a href="{% url "users:vcf" u.id %}"><i class="fa fa-download"></i></a>
+        &nbsp;
 
         {% with app=u.application %}
             {% if app %}
-                &bull;
                 {% app_status app edit=True %}
             {% endif %}
         {% endwith %}
 
         {% user_tags u edit=True %}
+
 
     </div>
 {% endwith %}

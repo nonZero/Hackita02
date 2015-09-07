@@ -211,6 +211,14 @@ class UserDetailView(PermissionMixin, DetailView):
         return JsonResponse({'result': result}, status=200 if result else 400)
 
 
+class UserVCFView(PermissionMixin, DetailView):
+    permission_required = "users.view_user"
+    model = models.User
+    context_object_name = 'u'
+    content_type = "text/vcard"
+    template_name = "users/user_detail.vcf"
+
+
 class UserTagsEditView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
                        FormView):
     permission_required = "users.change_user"
