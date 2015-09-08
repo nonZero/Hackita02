@@ -36,7 +36,7 @@
                             <a href="{% url "users:set_names" %}">{% trans "My Profile" %}</a>
                             &nbsp;
                         </div>
-                        {% if user.is_staff %}
+                        {% if user.team_member %}
                             <div class="pull-right text-danger">
                                 <a href="{% url "sa:app_list" %}">{% trans "Applications" %}</a>
                                 &bull;
@@ -57,8 +57,10 @@
                                     {% trans "Project Comments" %}
                                 </a>
                                 &bull;
-                                <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
-                                &bull;
+                                {% if user.is_staff %}
+                                    <a href="{% url "admin:index" %}">{% trans "Admin" %}</a>
+                                    &bull;
+                                {% endif %}
                                 &nbsp;
                             </div>
                         {% endif %}

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.mail import mail_managers
 from django.db import transaction
 from django.shortcuts import redirect
@@ -12,17 +13,20 @@ from django.views.generic.list import ListView
 from q13es.forms import get_pretty_answer
 from student_applications.views import ApplicationBulkOpsMixin
 from surveys.models import SurveyAnswer, Survey
-from users.base_views import StaffOnlyMixin
+from hackita02.base_views import TeamOnlyMixin
 
 
-class SurveyListView(StaffOnlyMixin, ListView):
+class SurveyListView(TeamOnlyMixin, ListView):
     model = Survey
 
 
-class SurveyDetailView(StaffOnlyMixin, ApplicationBulkOpsMixin, DetailView):
+class SurveyDetailView(TeamOnlyMixin, ApplicationBulkOpsMixin, DetailView):
     model = Survey
 
     def post(self, request, *args, **kwargs):
+
+        if not request.user.has_perms("student_applications.bulk_application"):
+            raise PermissionDenied()
 
         if request.POST.get('resend'):
             o = self.get_object()

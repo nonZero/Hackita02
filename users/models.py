@@ -47,6 +47,8 @@ class User(AbstractEmailUser):
                                             max_length=200, null=True,
                                             blank=True)
 
+    team_member = models.BooleanField(_("team member"), default=False)
+
     objects = UserManager()
 
     class Meta:

@@ -157,7 +157,7 @@ class ProjectComment(models.Model):
         )
 
     def is_visible_to(self, user):
-        if user.is_staff:
+        if user.team_member:
             return True
         if not self.is_published:
             return False

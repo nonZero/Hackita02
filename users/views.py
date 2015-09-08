@@ -21,7 +21,8 @@ from django.views.generic.detail import SingleObjectMixin
 
 from . import forms
 from . import models
-from hackita02.base_views import ProtectedViewMixin, PermissionMixin
+from hackita02.base_views import ProtectedViewMixin, PermissionMixin, \
+    TeamOnlyMixin
 from hackita02.mail import send_html_mail
 
 
@@ -138,13 +139,11 @@ class UserDisplayNamesView(ProtectedViewMixin, UpdateView):
         return super().form_valid(form)
 
 
-class UserListView(PermissionMixin, ListView):
-    permission_required = "users.view_user"
+class UserListView(TeamOnlyMixin, ListView):
     model = models.User
 
 
-class UserDetailView(PermissionMixin, DetailView):
-    permission_required = "users.view_user"
+class UserDetailView(TeamOnlyMixin, DetailView):
     model = models.User
     context_object_name = 'theuser'
 
@@ -211,16 +210,14 @@ class UserDetailView(PermissionMixin, DetailView):
         return JsonResponse({'result': result}, status=200 if result else 400)
 
 
-class UserVCFView(PermissionMixin, DetailView):
-    permission_required = "users.view_user"
+class UserVCFView(TeamOnlyMixin, DetailView):
     model = models.User
     context_object_name = 'u'
     content_type = "text/vcard"
     template_name = "users/user_detail.vcf"
 
 
-class UserTagsEditView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
-                       FormView):
+class UserTagsEditView(PermissionMixin, SingleObjectMixin, FormView):
     permission_required = "users.change_user"
     form_class = forms.TagsForm
     template_name = "users/user_tags.html"
@@ -248,16 +245,13 @@ class UserTagsEditView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
         return super().form_valid(form)
 
 
-class AllEmailsView(PermissionMixin, View):
-    permission_required = "users.view_user"
-
+class AllEmailsView(TeamOnlyMixin, View):
     def get(self, request, *args, **kwargs):
         text = "\n".join(x.email for x in models.User.objects.all())
         return HttpResponse(text, content_type='text/plain')
 
 
-class UserNoteListView(PermissionMixin, ListView):
-    permission_required = "users.view_usernote"
+class UserNoteListView(TeamOnlyMixin, ListView):
     model = models.UserNote
     paginate_by = 10
     page_title = _("Users Notes")
@@ -270,8 +264,7 @@ class OpenUserNoteListView(UserNoteListView):
         return super().get_queryset().filter(is_open=True)
 
 
-class UserNoteCloseView(PermissionMixin, ProtectedViewMixin, SingleObjectMixin,
-                        View):
+class UserNoteCloseView(PermissionMixin, SingleObjectMixin, View):
     permission_required = "users.change_usernote"
     model = models.UserNote
 

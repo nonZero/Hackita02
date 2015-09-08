@@ -5,7 +5,7 @@
     id="note-{{ note.id }}">
     <div class="list-group-item-heading">
 
-        {% if user.is_staff %}
+        {% if user.team_member %}
 
             {% if note.is_open or note.closed_by %}
                 <div class="pull-right">

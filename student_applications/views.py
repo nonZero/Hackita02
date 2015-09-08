@@ -4,6 +4,7 @@ import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.core.mail import mail_managers
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import transaction
@@ -23,12 +24,12 @@ from floppyforms.models import ModelChoiceField
 from . import models
 from . import forms
 from events.models import Event
-from hackita02.base_views import ProtectedViewMixin
+from hackita02.base_views import ProtectedViewMixin, PermissionMixin
 from projects.models import Project
 from student_applications.consts import get_user_progress, FORMS, \
     get_user_next_form, FORM_NAMES
 from surveys.models import Survey
-from users.base_views import ProtectedMixin, StaffOnlyMixin
+from hackita02.base_views import TeamOnlyMixin
 from users.forms import PersonalInfoForm
 from users.models import PersonalInfo, UserLog, UserLogOperation, User, \
     UserNote
@@ -36,7 +37,7 @@ from users.models import PersonalInfo, UserLog, UserLogOperation, User, \
 logger = logging.getLogger(__name__)
 
 
-class UserViewMixin(ProtectedMixin):
+class UserViewMixin(ProtectedViewMixin):
     def get_context_data(self, **kwargs):
         d = super().get_context_data(**kwargs)
 
@@ -232,7 +233,7 @@ class RegisterView(UserViewMixin, FormView):
         return FormView.form_invalid(self, form)
 
 
-class AllFormsView(TemplateView, ProtectedMixin):
+class AllFormsView(TemplateView, ProtectedViewMixin):
     template_name = 'all-forms.html'
 
     def get_context_data(self, **kwargs):
@@ -294,6 +295,9 @@ class ApplicationBulkOpsMixin(object):
 
     def post(self, request, *args, **kwargs):
 
+        if not request.user.has_perms("student_applications.bulk_application"):
+            raise PermissionDenied()
+
         if request.POST.get('status'):
             status = int(request.POST.get('status'))
             for uid in self.get_user_ids():
@@ -316,7 +320,7 @@ class ApplicationBulkOpsMixin(object):
         return redirect(request.get_full_path())
 
 
-class ApplicationListView(StaffOnlyMixin, ApplicationBulkOpsMixin, ListView):
+class ApplicationListView(TeamOnlyMixin, ApplicationBulkOpsMixin, ListView):
     model = models.Application
     page_title = _("Applications")
     ordering = ('-forms_filled', '-last_form_filled')
@@ -343,11 +347,11 @@ class ApplicationListView(StaffOnlyMixin, ApplicationBulkOpsMixin, ListView):
         return d
 
 
-class ApplicationDetailView(StaffOnlyMixin, DetailView):
+class ApplicationDetailView(TeamOnlyMixin, DetailView):
     model = models.Application
 
 
-class ApplicationReviewMixin(StaffOnlyMixin, ProtectedViewMixin):
+class ApplicationReviewMixin(TeamOnlyMixin, ProtectedViewMixin):
     model = models.ApplicationReview
     form_class = forms.ApplicationReviewForm
 
@@ -392,7 +396,8 @@ class ApplicationReviewUpdateView(ApplicationReviewMixin, UpdateView):
         super().pre_dispatch(request, *args, **kwargs)
 
 
-class ApplicationStatusUpdateView(StaffOnlyMixin, UpdateView):
+class ApplicationStatusUpdateView(PermissionMixin, UpdateView):
+    permission_required = 'student_applications.change_application'
     model = models.Application
     form_class = forms.ApplicationStatusForm
 
@@ -414,7 +419,7 @@ class ApplicationStatusUpdateView(StaffOnlyMixin, UpdateView):
             resp = super().form_valid(form)
         return resp
 
-# class CohortDetailView(StaffOnlyMixin, UsersOperationsMixin, DetailView):
+# class CohortDetailView(TeamOnlyMixin, UsersOperationsMixin, DetailView):
 #     model = Cohort
 #     slug_field = 'code'
 #

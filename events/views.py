@@ -7,18 +7,19 @@ from django.utils.translation import ugettext as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
+
 from events import forms
 from events.models import EventInvitation, EventInvitationStatus, Event
-from users.base_views import StaffOnlyMixin
+from hackita02.base_views import TeamOnlyMixin
 from users.models import PersonalInfo
 
 
-class EventListView(StaffOnlyMixin, ListView):
+class EventListView(TeamOnlyMixin, ListView):
     page_title = _("Events")
     model = Event
 
 
-class EventDetailView(StaffOnlyMixin, DetailView):
+class EventDetailView(TeamOnlyMixin, DetailView):
     model = Event
 
     @property
@@ -26,7 +27,7 @@ class EventDetailView(StaffOnlyMixin, DetailView):
         return "{} | {}".format(self.object, _("Events"))
 
 
-class EventContactsView(StaffOnlyMixin, DetailView):
+class EventContactsView(TeamOnlyMixin, DetailView):
     model = Event
     template_name = "events/event_contacts.html"
 
@@ -37,7 +38,7 @@ class EventContactsView(StaffOnlyMixin, DetailView):
             try:
                 info = invite.user.personalinfo
                 return (
-                declined, info.hebrew_first_name, info.hebrew_last_name)
+                    declined, info.hebrew_first_name, info.hebrew_last_name)
             except PersonalInfo.DoesNotExist:
                 return (declined, invite.user.email, "")
 
@@ -90,12 +91,12 @@ class InvitationDetailView(DetailView):
         return redirect(o)
 
 
-class InvitationPreviewView(StaffOnlyMixin, DetailView):
+class InvitationPreviewView(TeamOnlyMixin, DetailView):
     model = EventInvitation
     template_name = "emails/invitation.html"
 
 
-class InvitationUpdateView(StaffOnlyMixin, UpdateView):
+class InvitationUpdateView(TeamOnlyMixin, UpdateView):
     model = EventInvitation
     form_class = forms.EventInvitationForm
 

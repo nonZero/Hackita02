@@ -14,7 +14,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from . import forms, models
 from django.views.generic.detail import SingleObjectMixin
-from hackita02.base_views import UIMixin, PermissionMixin, ProtectedViewMixin
+from hackita02.base_views import UIMixin, PermissionMixin, ProtectedViewMixin, \
+    TeamOnlyMixin
 
 logger = logging.getLogger(__name__)
 
@@ -143,8 +144,7 @@ class ProjectUpdateView(PermissionMixin, UIMixin, UpdateView):
     form_class = forms.UpdateProjectForm
 
 
-class ProjectCommentListView(PermissionMixin, UIMixin, ListView):
-    permission_required = "projects.projectcomment_view"
+class ProjectCommentListView(TeamOnlyMixin, UIMixin, ListView):
     model = models.ProjectComment
     paginate_by = 50
 

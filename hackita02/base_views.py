@@ -1,6 +1,6 @@
 from braces import views
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
+from django.core.exceptions import PermissionDenied, ImproperlyConfigured
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
 from django.utils.decorators import method_decorator
@@ -20,22 +20,44 @@ class ProtectedViewMixin(object):
         pass
 
 
-class PermissionMixin(views.LoginRequiredMixin,
-                      views.PermissionRequiredMixin):
-    def dispatch(self, request, *args, **kwargs):
+class TeamOnlyMixin(ProtectedViewMixin):
+    def pre_dispatch(self, request, *args, **kwargs):
+        if not self.request.user.team_member:
+            raise PermissionDenied()
+        return super().pre_dispatch(request, *args, **kwargs)
+
+
+class PermissionMixin(ProtectedViewMixin, views.PermissionRequiredMixin):
+    permission_required = None  # Default required perms to none
+
+    def get_permission_required(self, request=None):
         """
-        Check to see if the user in the request has the required
-        permission.
+        Get the required permissions and return them.
+
+        Override this to allow for custom permission_required values.
         """
+        if self.permission_required is None:
+            raise ImproperlyConfigured(
+                '{0} requires the "permission_required" attribute to be '
+                'set.'.format(self.__class__.__name__))
+
+        return self.permission_required
+
+    def check_permissions(self, request):
+        """
+        Returns whether or not the user has permissions
+        """
+        perms = self.get_permission_required(request)
+        return request.user.has_perm(perms)
+
+    def pre_dispatch(self, request, *args, **kwargs):
+
         has_permission = self.check_permissions(request)
 
-        if not has_permission:  # If the user lacks the permission
-            if request.user.is_authenticated():
-                raise PermissionDenied  # Return a 403
-            return self.no_permissions_fail(request)
+        if not has_permission:
+            raise PermissionDenied
 
-        return super(PermissionMixin, self).dispatch(
-            request, *args, **kwargs)
+        return super().pre_dispatch(request, *args, **kwargs)
 
 
 class UIMixin(object):

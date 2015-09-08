@@ -27,7 +27,7 @@
                     </span>
                 </div>
             {% endif %}
-            {% if user.is_staff %}
+            {% if user.team_member %}
                 <div class="pull-right">
                     <span class="label label-info" title="{% trans "Reviewed by" %}">
                         <i class="fa fa-binoculars"></i>
@@ -48,7 +48,7 @@
                     {{ c|u:'project' }}:<br/>
                 {% endif %}
                 {{ c.user }},
-                {% if user.is_staff %}
+                {% if user.team_member %}
                     ({{ c.user|u:'email' }})
                 {% endif %}
                 <span title="{{ c.created_at }}">{{ c.created_at|naturaltime }}</span>:
