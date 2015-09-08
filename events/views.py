@@ -10,6 +10,7 @@ from django.views.generic.list import ListView
 from events import forms
 from events.models import EventInvitation, EventInvitationStatus, Event
 from users.base_views import StaffOnlyMixin
+from users.models import PersonalInfo
 
 
 class EventListView(StaffOnlyMixin, ListView):
@@ -28,6 +29,22 @@ class EventDetailView(StaffOnlyMixin, DetailView):
 class EventContactsView(StaffOnlyMixin, DetailView):
     model = Event
     template_name = "events/event_contacts.html"
+
+    def get_context_data(self, **kwargs):
+        def f(invite):
+            assert isinstance(invite, EventInvitation)
+            declined = invite.status == EventInvitationStatus.DECLINED
+            try:
+                info = invite.user.personalinfo
+                return (
+                declined, info.hebrew_first_name, info.hebrew_last_name)
+            except PersonalInfo.DoesNotExist:
+                return (declined, invite.user.email, "")
+
+        d = super().get_context_data(**kwargs)
+        qs = self.object.invitations.all()
+        d['invites'] = sorted(qs, key=f)
+        return d
 
 
 class InvitationDetailView(DetailView):

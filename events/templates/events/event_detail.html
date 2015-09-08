@@ -4,6 +4,11 @@
 {% block content %}
 
     <h1>
+        <div class="pull-right">
+            <a href="{% url "events:contacts" object.slug %}">
+                <i class="fa fa-print"></i>
+            </a>
+        </div>
         {{ object.title }}
     </h1>
 
@@ -73,11 +78,13 @@
             {% endfor %}
 
             <div>
-                 <textarea id="emails" dir="ltr" style="text-align: left; width:100%">
+                 <textarea id="emails" dir="ltr"
+                           style="text-align: left; width:100%">
                  </textarea>
             </div>
 
         </div>
+
         <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -85,7 +92,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
     </div>
 
 

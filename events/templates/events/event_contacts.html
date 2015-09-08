@@ -1,50 +1,61 @@
-{% load i18n humanize %}
+{% load i18n humanize staticfiles hackita %}
+<!DOCTYPE html>
+<html>
 
-{% block content %}
+<head>
+    <link rel="stylesheet"
+          href="{% static "vendor/bootstrap/css/bootstrap-rtl.css" %}">
+    <link rel="stylesheet"
+          href="{% static "vendor/font-awesome/css/font-awesome.css" %}">
+</head>
 
-    <div dir="rtl">
-        <h1>
-            {{ object.title }}
-        </h1>
+<body dir="rtl">
 
-        {% regroup object.invitations.all by get_status_display as groups %}
+<div class="container-fluid">
 
-        {% for group in groups %}
-            <h2>
-                {{ group.grouper }}
-            </h2>
+    <h2>
+        {{ object.title }}
+    </h2>
 
-            <table border="1" cellpadding="5" cellspacing="0" width="100%">
-                {% for i in group.list %}
-                    {% with info=i.user.personalinfo %}
+    <ul class="list-group">
+        {% for i in invites %}
+            {% with info=i.user.personalinfo %}
 
-                        <tr>
-                            <td>
-                                {{ forloop.counter }}.
+                <li class="list-group-item">
+                    <div class="pull-right">
+                        {{ i.get_status_display }}
+                    </div>
+                    {{ forloop.counter }}.
+                    &nbsp;
+                    <i class="fa fa-square-o"></i>
+                    &nbsp;
 
-                                {% if info %}
-                                    {{ info.hebrew_first_name }}
-                                    {{ info.hebrew_last_name }}
-                                    {% if info.main_phone %}
-                                        ({{ info.main_phone }})
-                                    {% endif %}
-                                {% else %}
-                                    {{ i.user }}
-                                {% endif %}
+                    {% if info %}
+                        <b>
+                            {{ info.hebrew_first_name }}
+                            {{ info.hebrew_last_name }}
+                        </b>
+                        {% if info.main_phone %}
+                            ({{ info.main_phone }})
+                        {% endif %}
+                    {% else %}
+                        {{ i.user }}
+                    {% endif %}
 
+                    {% if i.note %}
+                        <br/>
+                        <div style="margin: 0 20px">
+                            {{ i.note|linebreaksbr }}
+                        </div>
+                    {% endif %}
 
-                                {% if i.note %}r
-                                    <blockquote>
-                                        {{ i.note|linebreaksbr }}
-                                    </blockquote>
-                                {% endif %}
-                            </td>
-                        </tr>
+                </li>
 
-                    {% endwith %}
-                {% endfor %}
-            </table>
+            {% endwith %}
+        {% endfor %}
+    </ul>
 
-        {% endfor %}</div>
-{% endblock %}
+</div>
 
+</body>
+</html>
