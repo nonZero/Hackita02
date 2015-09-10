@@ -1,3 +1,5 @@
+import random
+
 from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse, NoReverseMatch
@@ -69,3 +71,10 @@ def pages_around(paginator, num, margin=3):
     start = max(1, num - margin)
     end = min(paginator.num_pages, num + margin)
     return range(start, end + 1)
+
+
+@register.filter
+def shuffle(arg):
+    l = list(arg)
+    random.shuffle(l)
+    return l

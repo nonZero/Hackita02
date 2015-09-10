@@ -5,17 +5,14 @@ from django.core.mail import mail_managers
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.utils import timezone
-
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, \
     View
-
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic.detail import SingleObjectMixin
 
 from . import forms, models
-from django.views.generic.detail import SingleObjectMixin
-from hackita02.base_views import UIMixin, PermissionMixin, ProtectedViewMixin, \
-    TeamOnlyMixin
+from hackita02.base_views import UIMixin, PermissionMixin, TeamOnlyMixin
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +31,11 @@ class ProjectListView(UIMixin, ListView):
                 ).first()
         d['published'] = published
         return d
+
+
+class ProjectVotesView(TeamOnlyMixin, UIMixin, ListView):
+    template_name = "projects/project_list_votes.html"
+    model = models.Project
 
 
 class ProjectDetailView(UIMixin, DetailView):

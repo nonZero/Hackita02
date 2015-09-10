@@ -10,6 +10,9 @@ class ProjectQuerySet(models.QuerySet):
     def random(self):
         return self.order_by('?')
 
+    def by_title(self):
+        return self.order_by('title')
+
     def published(self):
         return self.filter(is_published=True)
 
@@ -62,6 +65,15 @@ class Project(models.Model):
 class ProjectVoteQuerySet(models.QuerySet):
     def desc(self):
         return self.order_by('-score')
+
+    def accepted_users(self):
+        from student_applications.models import Application
+        return self.filter(
+            user__application__status__in=Application.Status.passed_interview,
+        )
+
+    def interested(self):
+        return self.filter(score__gte=ProjectVote.Score.INTERESTED)
 
 
 class ProjectVote(models.Model):

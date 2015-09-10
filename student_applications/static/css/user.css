@@ -3,12 +3,26 @@ h2 {
     color: black;
 }
 
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
 .deleted {
     text-decoration: line-through;
 }
 
 .clickable {
     cursor: pointer;
+}
+
+.panel-heading a {
+    color: white;
 }
 
 .alert-error {
@@ -230,3 +244,47 @@ input.user-checkbox {
     white-space: normal;
     /*margin-bottom: 4px;*/
 }
+
+.blocks {
+    -moz-column-width: 18em;
+    -webkit-column-width: 18em;
+    -moz-column-gap: 1em;
+    -webkit-column-gap: 1em;
+}
+
+.blocks .block {
+    display: inline-block;
+    padding: .25rem;
+    margin: .25rem;
+    width: 100%;
+}
+
+.blocks .block .user {
+    border-radius: 5px;
+    background: #5bc0de;
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+.blocks .block .user a {
+    color: white;
+}
+
+.blocks .block .user.dimmed {
+    background: #ddd ;
+}
+
+.blocks .block .fa-arrows {
+    cursor: move;
+}
+
+.blocks .block.placeholder {
+  position: relative;
+}
+
+.blocks .block.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+
+

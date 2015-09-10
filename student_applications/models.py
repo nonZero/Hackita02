@@ -60,6 +60,12 @@ class Application(models.Model):
             (REJECTED, _("rejected")),
         )
 
+        passed_interview = (
+            TO_ACCEPT,
+            ACCEPTED,
+            ACCEPTED_AND_APPROVED,
+        )
+
         labels = dict(choices)
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL)

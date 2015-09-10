@@ -4,6 +4,15 @@
 {% block content %}
 
     <h1>
+
+        {% if user.team_member %}
+            <div class="pull-right">
+                <a href="{% url "projects:list_votes" %}">
+                    <i class="fa fa-users"></i>
+                </a>
+            </div>
+        {% endif %}
+
         {% trans "Projects" %}
     </h1>
 
