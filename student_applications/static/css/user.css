@@ -21,7 +21,7 @@ body.dragging, body.dragging * {
     cursor: pointer;
 }
 
-.panel-heading a {
+.panel-primary .panel-heading a {
     color: white;
 }
 
