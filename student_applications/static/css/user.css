@@ -288,3 +288,6 @@ input.user-checkbox {
 }
 
 
+#notes .list-group-item {
+    overflow: hidden;
+}
