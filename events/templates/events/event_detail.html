@@ -1,7 +1,7 @@
-{% extends 'users/base.html' %}
+{% extends 'student_applications/bulk_base.html' %}
 {% load i18n humanize staticfiles %}
 
-{% block content %}
+{% block main_content %}
 
     <h1>
         <div class="pull-right">
@@ -13,7 +13,7 @@
     </h1>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-md-4">
 
             <ul class="list-group">
                 <li class="list-group-item">
@@ -56,7 +56,9 @@
                                 </div>
 
                                 <input class="user-email" type="checkbox"
-                                       value="{{ i.user.email }}"
+                                       name="users"
+                                       value="{{ i.user.id }}"
+                                       data-email="{{ i.user.email }}"
                                         {% if i.status == i.statuses.APPROVED %}
                                        checked="1"{% endif %}/>
                                 <a href="{{ i.user.get_absolute_url }}"
@@ -85,7 +87,7 @@
 
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-body">
                     {{ object.description|urlize|linebreaksbr }}
@@ -98,7 +100,24 @@
 
 {% endblock %}
 
-{% block scripts %}
+{% block custom_bulk_ops %}
+    <div class="form-group">
+        <label class="col-sm-4 control-label">{% trans "Invitation Status" %}</label>
+
+        <div class="col-sm-8">
+            {{ event_status }}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4 control-label">{% trans "Attendance" %}</label>
+
+        <div class="col-sm-8">
+            {{ attendance }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_scripts %}
 
     <script src="{% static "js/event_detail.js" %}"></script>
 

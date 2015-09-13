@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.core.mail import mail_managers
+from django.db import transaction
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.utils import timezone
@@ -7,10 +9,13 @@ from django.utils.translation import ugettext as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
+from floppyforms import ChoiceField
 
 from events import forms
-from events.models import EventInvitation, EventInvitationStatus, Event
+from events.models import EventInvitation, EventInvitationStatus, Event, \
+    EventInvitationAttendance
 from hackita02.base_views import TeamOnlyMixin
+from student_applications.views import ApplicationBulkOpsMixin
 from users.models import PersonalInfo
 
 
@@ -19,12 +24,77 @@ class EventListView(TeamOnlyMixin, ListView):
     model = Event
 
 
-class EventDetailView(TeamOnlyMixin, DetailView):
+class EventDetailView(TeamOnlyMixin, ApplicationBulkOpsMixin, DetailView):
     model = Event
 
     @property
     def page_title(self):
         return "{} | {}".format(self.object, _("Events"))
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['event_status'] = ChoiceField(
+            (('', "---"),) + EventInvitationStatus.choices,
+            False).widget.render(
+            'event_status', None)
+        d['attendance'] = ChoiceField(
+            (('', "---"),) + EventInvitationAttendance.choices,
+            False).widget.render(
+            'attendance', None)
+        return d
+
+    def post(self, request, *args, **kwargs):
+
+        if not request.user.has_perms("student_applications.bulk_application"):
+            raise PermissionDenied()
+
+        # if request.POST.get('resend'):
+        #     o = self.get_object()
+        #     for uid in self.get_user_ids():
+        #         a = o.answers.get(user_id=uid)
+        #         a.send(self.get_base_url())
+        #         messages.success(request, "{} {} <{}>".format(
+        #             _("Resent survey to"),
+        #             a.user,
+        #             a.user.email,
+        #         ))
+
+        with transaction.atomic():
+            if request.POST.get('event_status'):
+                try:
+                    code = int(request.POST.get('event_status'))
+                except ValueError:
+                    return HttpResponseBadRequest("bad invitation status code")
+                o = self.get_object()
+                for uid in self.get_user_ids():
+                    i = o.invitations.get(user_id=uid)
+                    if i.status != code:
+                        i.status = code
+                        messages.info(request, "{}: {}".format(
+                            i.user,
+                            i.get_status_display()
+                        ))
+                        i.save()
+
+            if request.POST.get('attendance'):
+                try:
+                    code = int(request.POST.get('attendance'))
+                except ValueError:
+                    return HttpResponseBadRequest("bad attendance code")
+                o = self.get_object()
+                for uid in self.get_user_ids():
+                    i = o.invitations.get(user_id=uid)
+                    if i.attendance != code:
+                        i.attendance = code
+                        messages.info(request, "{}: {}".format(
+                            i.user,
+                            i.get_attendance_display()
+                        ))
+                        i.save()
+
+            resp = super().post(request, *args, **kwargs)
+
+        return resp
 
 
 class EventContactsView(TeamOnlyMixin, DetailView):
