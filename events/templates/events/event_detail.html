@@ -1,5 +1,5 @@
 {% extends 'student_applications/bulk_base.html' %}
-{% load i18n humanize staticfiles %}
+{% load i18n humanize staticfiles sa %}
 
 {% block main_content %}
 
@@ -66,10 +66,16 @@
                                 {% if i.attendance %}
                                     ({{ i.get_attendance_display }})
                                 {% endif %}
+                                {% if i.user.application %}
+                                    {% app_status i.user.application %}
+                                {% endif %}
+
                                 {% if i.note %}
+                                    <br/>
+                                    <br/>
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            {{ i.note|linebreaksbr }}
+                                            <p>{{ i.note|linebreaksbr }}</p>
                                         </div>
                                     </div>
                                 {% endif %}

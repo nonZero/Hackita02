@@ -27,6 +27,9 @@ class Application(models.Model):
         DID_NOT_ATTEND_INTERVIEW = 25
         PARTICIPATED_IN_INTERVIEW = 30
 
+        TO_WAITING_LIST = 40
+        WAITING_LIST = 41
+
         TO_ACCEPT = 50
         ACCEPTED = 51
 
@@ -50,8 +53,10 @@ class Application(models.Model):
             (DID_NOT_ATTEND_INTERVIEW, _("did not attend interview")),
             (PARTICIPATED_IN_INTERVIEW, _("participated in interview")),
 
-            (TO_ACCEPT, _("to accept")),
+            (TO_WAITING_LIST, _("to waiting list")),
+            (WAITING_LIST, _("waiting list")),
 
+            (TO_ACCEPT, _("to accept")),
             (ACCEPTED, _("accepted")),
 
             (ACCEPTED_AND_APPROVED, _("accepted and approved")),
@@ -61,6 +66,8 @@ class Application(models.Model):
         )
 
         passed_interview = (
+            TO_WAITING_LIST,
+            WAITING_LIST,
             TO_ACCEPT,
             ACCEPTED,
             ACCEPTED_AND_APPROVED,

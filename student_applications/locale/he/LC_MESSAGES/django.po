@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-07 09:17+0300\n"
-"PO-Revision-Date: 2015-09-07 09:17+0300\n"
+"POT-Creation-Date: 2015-09-17 12:05+0300\n"
+"PO-Revision-Date: 2015-09-17 12:05+0300\n"
 "Last-Translator: Udi Oron <udioron@gmail.com>\n"
 "Language-Team: \n"
 "Language: he\n"
@@ -81,6 +81,12 @@ msgstr "לא התייצב ליום מיון"
 
 msgid "participated in interview"
 msgstr "השתתף ביום מיון"
+
+msgid "to waiting list"
+msgstr "להעביר לרשימת המתנה"
+
+msgid "waiting list"
+msgstr "ברשימת המתנה"
 
 msgid "to accept"
 msgstr "מועמד לקבלה"

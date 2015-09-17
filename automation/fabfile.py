@@ -5,6 +5,8 @@ from fab_tools.server import *
 from fab_tools.project import *
 from fab_tools import db
 assert db
+from fab_tools import dev
+assert dev
 
 AUTO_DIR = os.path.abspath(os.path.dirname(__file__))
 CONF_DIR = os.path.abspath(os.path.join(AUTO_DIR, 'conf'))
