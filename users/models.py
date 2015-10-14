@@ -199,7 +199,7 @@ class UserNote(models.Model):
     visible_to_user = models.BooleanField(_("visible to user"), default=False)
     content = models.TextField(_("content"), blank=False)
 
-    sent_to_user_at = models.DateTimeField(null=True)
+    sent_to_user_at = models.DateTimeField(null=True, blank=True)
     is_open = models.BooleanField(_("open"))
     closed_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                                   blank=True, related_name="+")
