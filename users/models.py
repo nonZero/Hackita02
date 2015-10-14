@@ -210,14 +210,13 @@ class UserNote(models.Model):
         verbose_name = _("user note")
         verbose_name_plural = _("user notes")
 
-    # def __str__(self):
-    #     return "[#{}] {} - {}: {}".format(
-    #         self.id,
-    #         self.user,
-    #         self.project,
-    #         self.content,
-    #     )
-    #
+    def __str__(self):
+        return "[#{}] {} - {}".format(
+            self.id,
+            self.user,
+            self.created_at,
+        )
+
     # def is_visible_to(self, user):
     #     if user.is_staff:
     #         return True

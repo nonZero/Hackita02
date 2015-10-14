@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
-import copy
 
+import copy
 from authtools.admin import UserAdmin as UA
 from django.contrib import admin
 
@@ -37,6 +37,14 @@ class UserAdmin(UA):
     date_hierarchy = "last_login"
 
 
-admin.site.register(models.User, UserAdmin)
+class UserNoteAdmin(admin.ModelAdmin):
+    search_fields = (
+        'user__email',
+        'user__hebrew_display_name',
+        'user__english_display_name',
+    )
 
+
+admin.site.register(models.User, UserAdmin)
+admin.site.register(models.UserNote, UserNoteAdmin)
 admin.site.register(models.Tag)
