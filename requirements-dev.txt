@@ -2,3 +2,4 @@ nose
 django-nose
 Fabric
 sarge==0.1.4
+notebook
