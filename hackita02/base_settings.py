@@ -1,3 +1,4 @@
+import hackita02.mail
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -235,3 +236,7 @@ LOGGING = {
         },
     }
 }
+
+
+hackita02.mail.fix_django_mail_encoding()
+
