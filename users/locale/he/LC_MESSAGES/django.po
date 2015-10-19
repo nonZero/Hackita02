@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 20:11+0300\n"
-"PO-Revision-Date: 2015-10-19 20:14+0300\n"
+"POT-Creation-Date: 2015-10-19 21:42+0300\n"
+"PO-Revision-Date: 2015-10-19 21:42+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -221,8 +221,17 @@ msgstr "יציאה"
 msgid "Set password"
 msgstr "קביעת סיסמא"
 
+msgid "My Community Profile"
+msgstr "פרופיל הקהילה שלי"
+
 msgid "My Profile"
 msgstr "הפרופיל שלי"
+
+msgid "You are logged in as"
+msgstr "את/ה מחובר/ת למערכת כ-"
+
+msgid "Admin"
+msgstr "אדמין"
 
 msgid "Applications"
 msgstr "מועמדים"
@@ -242,11 +251,8 @@ msgstr "הכל"
 msgid "Project Comments"
 msgstr "הערות לפרויקטים"
 
-msgid "Admin"
-msgstr "אדמין"
-
-msgid "You are logged in as"
-msgstr "את/ה מחובר/ת למערכת כ-"
+msgid "Community"
+msgstr "קהילה"
 
 msgid "Quick passwordless login/registration"
 msgstr "כניסה/הרשמה מהירה ללא סיסמא"
@@ -283,6 +289,9 @@ msgstr "כניסה / הרשמה מהירה ללא סיסמא"
 
 msgid "Send me a quick login link"
 msgstr "שלח לי קישור לכניסה מהירה ללא סיסמא"
+
+msgid "Change profile picture"
+msgstr "שינוי תמונת פרופיל"
 
 msgid "Users"
 msgstr "משתמשים"
@@ -361,9 +370,6 @@ msgstr "הסיסמא נקבעה בהצלחה."
 
 msgid "Profile saved successfully."
 msgstr "הפרופיל נשמר בהצלחה."
-
-msgid "My Community Profile"
-msgstr "פרופיל הקהילה שלי"
 
 msgid "Hackita02: New note from"
 msgstr "הכיתה02: קיבלת הערה חדשה מאת"

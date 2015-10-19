@@ -1,5 +1,5 @@
 {% extends 'website/base.html' %}
-{% load i18n %}
+{% load i18n gravatar %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/user.css">
@@ -32,15 +32,16 @@
                     {% endif %}
                     {% if user.community_member %}
                         <div class="pull-right">
-                            &bull;
-                            <a href="{% url "users:community_profile" %}">{% trans "My Community Profile" %}</a>
+                            <a class="btn-sm btn btn-default" href="{% url "users:community_profile" %}">{% trans "My Community Profile" %}</a>
                             &nbsp;
                         </div>
                     {% endif %}
                     <div class="pull-right">
-                        <a href="{% url "users:set_names" %}">{% trans "My Profile" %}</a>
+                        <a class="btn-sm btn btn-default" href="{% url "users:set_names" %}">{% trans "My Profile" %}</a>
                         &nbsp;
                     </div>
+
+                    {{ user.email|gravatar:32 }}
 
                     {% trans "You are logged in as" %} {{ user.email }}
 
