@@ -26,6 +26,15 @@
             </a>
         {% endif %}
 
+        {% if perms.projects.change_project %}
+            <form method="post" action="{% url "projects:refresh" object.id %}"
+                  class="form form-inline pull-right">
+                {% csrf_token %}
+                <button class="btn btn-warning"><i class="fa fa-refresh"></i>
+                </button>
+            </form>
+        {% endif %}
+
         {{ object|u }}
     </h1>
 
@@ -91,6 +100,7 @@
                                 <b class="list-group-item-heading">
                                     {{ group.grouper }}
                                 </b>
+
                                 <div class="list-group-item-body">
                                     <ul class="list-inline">
                                         {% for item in group.list %}

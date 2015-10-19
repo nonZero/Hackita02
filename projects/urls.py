@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^(?P<slug>\w+)/$', views.ProjectDetailView.as_view(), name='detail'),
     url(r'^(?P<pk>\d+)/edit/$', views.ProjectUpdateView.as_view(),
         name='update'),
+    url(r'^(?P<pk>\d+)/refresh/$', views.ProjectRefreshView.as_view(),
+        name='refresh'),
     url(r'^edit-comment/(?P<pk>\d+)/$',
         views.ProjectCommentUpdateView.as_view(),
         name='update_comment'),

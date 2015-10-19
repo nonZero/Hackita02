@@ -1,14 +1,17 @@
 import logging
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.http import JsonResponse
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, \
     View
 from django.utils.translation import ugettext_lazy as _
+
 from django.views.generic.detail import SingleObjectMixin
 
 from . import forms, models
@@ -123,7 +126,7 @@ class ProjectDetailView(UIMixin, DetailView):
 
 class ProjectCreateView(PermissionMixin, UIMixin, CreateView):
     name = 'projects'
-    permission_required = "projects.project_create"
+    permission_required = "projects.create_project"
     model = models.Project
     form_class = forms.NewProjectForm
 
@@ -141,9 +144,30 @@ class ProjectCreateView(PermissionMixin, UIMixin, CreateView):
 
 
 class ProjectUpdateView(PermissionMixin, UIMixin, UpdateView):
-    permission_required = "projects.project_change"
+    permission_required = "projects.change_project"
     model = models.Project
     form_class = forms.UpdateProjectForm
+
+
+class ProjectRefreshView(PermissionMixin, SingleObjectMixin, View):
+    """Updates content from google drive"""
+    permission_required = "projects.change_project"
+    model = models.Project
+
+    def post(self, request, *args, **kwargs):
+        o = self.get_object()
+        try:
+            o.retrieve_content()
+        except Exception as e:
+            logger.exception("Error updating project #{}".format(o.id))
+            messages.error(self.request, str(e))
+        else:
+            o.refreshed_at = timezone.now()
+            o.full_clean()
+            o.save()
+            messages.success(self.request, _("Project refreshed succssfully."))
+
+        return redirect(o)
 
 
 class ProjectCommentListView(TeamOnlyMixin, UIMixin, ListView):
