@@ -29,6 +29,7 @@ class UserAdmin(UA):
         'hebrew_display_name',
         'english_display_name',
         'team_member',
+        'community_member',
         'community_name',
         'community_email',
         'community_contact_phone',
@@ -39,6 +40,14 @@ class UserAdmin(UA):
     )
 
     date_hierarchy = "last_login"
+
+    list_filter = (
+        'is_superuser',
+        'is_staff',
+        'team_member',
+        'community_member',
+        'is_active',
+    )
 
 
 class UserNoteAdmin(admin.ModelAdmin):
