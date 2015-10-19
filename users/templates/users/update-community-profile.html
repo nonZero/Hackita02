@@ -11,6 +11,15 @@
         <div class="panel-body">
             <form method="post">
                 {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="control-label">
+                        {% trans "name" %}
+                    </label>
+
+                    <p class="form-control-static">{{ user.community_name }}</p>
+                </div>
+
                 {{ form }}
 
                 <div class="text-center">

@@ -92,6 +92,16 @@ class UserDisplayNamesForm(forms.ModelForm):
         )
 
 
+class UserCommunityDetailsForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = (
+            'community_email',
+            'community_contact_phone',
+            'community_personal_info',
+        )
+
+
 class UserNoteForm(forms.ModelForm):
     send_to_user = forms.BooleanField(required=False,
                                       label=_("send to user by email"))

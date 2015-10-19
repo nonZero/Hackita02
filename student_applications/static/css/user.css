@@ -47,6 +47,10 @@ body.dragging, body.dragging * {
 .user-content {
 }
 
+.user-bar .btn {
+    margin-top: -4px;
+}
+
 .userpanel > .left {
     margin-top: -7px;
 }

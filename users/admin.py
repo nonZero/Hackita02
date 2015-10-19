@@ -17,6 +17,7 @@ class UserAdmin(UA):
         'hebrew_display_name',
         'english_display_name',
         'is_active',
+        'community_member',
         'team_member',
         'is_staff',
         'is_superuser',
@@ -28,6 +29,9 @@ class UserAdmin(UA):
         'hebrew_display_name',
         'english_display_name',
         'team_member',
+        'community_name',
+        'community_email',
+        'community_contact_phone',
     )
 
     inlines = (

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-06 23:45+0300\n"
-"PO-Revision-Date: 2015-09-06 23:45+0300\n"
+"POT-Creation-Date: 2015-10-19 20:11+0300\n"
+"PO-Revision-Date: 2015-10-19 20:14+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-Bookmarks: -1,-1,-1,-1,60,-1,-1,-1,-1,-1\n"
 
 msgid "Password"
@@ -48,6 +48,30 @@ msgstr "שם לתצוגה בעברית"
 
 msgid "display name (English)"
 msgstr "שם לתצוגה באנגלית"
+
+msgid "team member"
+msgstr "חבר צוות"
+
+msgid "community member"
+msgstr "חבר קהילה"
+
+msgid "Hebrew name (as seen by community)"
+msgstr "שם בעברית (כפי שיוצג בפני חברי הקהילה)"
+
+msgid "Email (as seen by other community members)"
+msgstr "דואל (כפי שיוצג בפני חברי הקהילה)"
+
+msgid "can be left empty."
+msgstr "ניתן להשאיר ריק."
+
+msgid "Phone number (as seen by other community members)"
+msgstr "מספר טלפון (כפי שיוצג בפני חברי הקהילה)"
+
+msgid "Personal info (as seen by other community members)"
+msgstr "קצת פרטים על עצמי (כפי שיוצגו בפני חברי הקהילה)"
+
+msgid "Share something about yourself!"
+msgstr "זה המקום לשתף משהו על עצמך - אפשר להוסיף גם לינקים."
 
 msgid "Anonymous User"
 msgstr "משתמש אנונימי"
@@ -176,14 +200,17 @@ msgstr "קבוצה"
 msgid "tag"
 msgstr "תג"
 
-msgid "Private"
-msgstr "פרטי"
-
 msgid "Open"
 msgstr "פתוחה"
 
 msgid "Closed by"
 msgstr "נסגר על ידי"
+
+msgid "Close"
+msgstr "סגירה"
+
+msgid "Private"
+msgstr "פרטי"
 
 msgid "Edit Tags"
 msgstr "עריכת תגים"
@@ -334,6 +361,9 @@ msgstr "הסיסמא נקבעה בהצלחה."
 
 msgid "Profile saved successfully."
 msgstr "הפרופיל נשמר בהצלחה."
+
+msgid "My Community Profile"
+msgstr "פרופיל הקהילה שלי"
 
 msgid "Hackita02: New note from"
 msgstr "הכיתה02: קיבלת הערה חדשה מאת"

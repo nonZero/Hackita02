@@ -139,6 +139,23 @@ class UserDisplayNamesView(ProtectedViewMixin, UpdateView):
         return super().form_valid(form)
 
 
+class UserCommunityDetailsUpdateView(PermissionMixin, UpdateView):
+    template_name = "users/update-community-profile.html"
+    form_class = forms.UserCommunityDetailsForm
+    page_title = _("My Community Profile")
+    success_url = reverse_lazy("sa:dashboard")
+
+    def check_permissions(self, request):
+        return request.user.community_member or request.user.is_superuser
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Profile saved successfully."))
+        return super().form_valid(form)
+
+
 class UserListView(TeamOnlyMixin, ListView):
     model = models.User
 

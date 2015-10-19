@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
-import random
 
-from authtools.models import AbstractNamedUser, AbstractEmailUser
+import random
+from authtools.models import AbstractEmailUser
 from django.contrib.auth.hashers import UNUSABLE_PASSWORD_PREFIX
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -48,6 +48,24 @@ class User(AbstractEmailUser):
                                             blank=True)
 
     team_member = models.BooleanField(_("team member"), default=False)
+
+    community_member = models.BooleanField(_("community member"),
+                                           default=False)
+    community_name = models.CharField(
+        _("Hebrew name (as seen by community)"),
+        max_length=120, null=True, blank=True)
+    community_email = models.EmailField(
+        _("Email (as seen by other community members)"),
+        null=True, blank=True,
+        help_text=_("can be left empty."))
+    community_contact_phone = models.CharField(
+        _("Phone number (as seen by other community members)"),
+        max_length=120, null=True, blank=True,
+        help_text=_("can be left empty."))
+    community_personal_info = models.TextField(
+        _("Personal info (as seen by other community members)"), null=True,
+        blank=True,
+        help_text=_("Share something about yourself!"))
 
     objects = UserManager()
 
