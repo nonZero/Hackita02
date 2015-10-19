@@ -24,6 +24,7 @@ from . import models
 from hackita02.base_views import ProtectedViewMixin, PermissionMixin, \
     TeamOnlyMixin
 from hackita02.mail import send_html_mail
+from student_applications.views import ApplicationBulkOpsMixin
 
 
 class LoginView(authtools.views.LoginView):
@@ -144,7 +145,7 @@ class CommunityMixin(PermissionMixin):
         return request.user.community_member or request.user.is_superuser
 
 
-class CommunityListView(CommunityMixin, ListView):
+class CommunityListView(CommunityMixin, ApplicationBulkOpsMixin, ListView):
     queryset = models.User.objects.filter(is_active=True,
                                           community_member=True)
     template_name = "users/community.html"
