@@ -141,14 +141,27 @@ class UserDisplayNamesView(ProtectedViewMixin, UpdateView):
 
 
 class CommunityMixin(PermissionMixin):
+    name = "community"
+
     def check_permissions(self, request):
         return request.user.community_member or request.user.is_superuser
 
 
 class CommunityListView(CommunityMixin, ApplicationBulkOpsMixin, ListView):
-    queryset = models.User.objects.filter(is_active=True,
-                                          community_member=True)
+    queryset = models.User.objects.filter(
+        is_active=True,
+        community_member=True
+    ).order_by('community_name')
     template_name = "users/community.html"
+
+
+class CommunityDetailView(CommunityMixin, DetailView):
+    context_object_name = 'theuser'
+    queryset = models.User.objects.filter(
+        is_active=True,
+        community_member=True
+    )
+    template_name = "users/community_user.html"
 
 
 class UserCommunityDetailsUpdateView(CommunityMixin, UpdateView):

@@ -81,6 +81,13 @@
                 <li{% if view.name == 'projects' %} class="active"{% endif %}>
                     <a href="{% url 'projects:list' %}">{% trans "Projects" %}</a>
                 </li>
+
+                {% if user.community_member %}
+                    <li{% if view.name == 'community' %} class="active"{% endif %}>
+                        <a href="{% url 'users:community' %}">{% trans "Community" %}</a>
+                    </li>
+                {% endif %}
+
                 {% if not user.id %}
                     <li class="hidden-sm hidden-md hidden-lg"><a href="{% url "users:login" %}">{% trans "Login" %}</a></li>
                 {% endif %}

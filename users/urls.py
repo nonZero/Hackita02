@@ -21,6 +21,8 @@ urlpatterns = [
 
     url(r'^community/$', views.CommunityListView.as_view(),
         name='community'),
+    url(r'^community/(?P<pk>\d+)/$', views.CommunityDetailView.as_view(),
+        name='community_user'),
     url(r'^community-profile/$', views.UserCommunityDetailsUpdateView.as_view(),
         name='community_profile'),
 

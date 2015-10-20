@@ -13,8 +13,10 @@
     </h1>
 
     <ul class="list-group">
+
         {% for u in object_list %}
-            <li class="list-group-item">
+
+            <li class="list-group-item  list-group-item-condensed">
                 {% if perms.student_applications.bulk_application %}
                     <span class="pull-right">
                         <input type="checkbox" name="users" value="{{ u.id }}"
@@ -24,19 +26,21 @@
                 {% endif %}
 
                 {{ u.email|gravatar }}
-                {{ u.community_name }}
-                {% if user.team_member %}
-                    {% if u.community_email %}
-                        &bull;
-                        <a href="mailto:{{ u.community_email }}">{{ u.community_email }}</a>
-                    {% endif %}
-                    {% if u.community_contact_phone %}
-                        &bull;
-                        <a href="tel:{{ u.community_contact_phone }}">{{ u.community_contact_phone }}</a>
-                    {% endif %}
+
+                <b><a href="{% url 'users:community_user' u.id %}">{{ u.community_name }}</a></b>
+
+                {% if u.community_email %}
+                    &bull;
+                    <a href="mailto:{{ u.community_email }}">{{ u.community_email }}</a>
+                {% endif %}
+                {% if u.community_contact_phone %}
+                    &bull;
+                    <a href="tel:{{ u.community_contact_phone }}">{{ u.community_contact_phone }}</a>
                 {% endif %}
             </li>
+
         {% endfor %}
+
     </ul>
 
 {% endblock %}

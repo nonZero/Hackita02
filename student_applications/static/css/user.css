@@ -39,6 +39,10 @@ body.dragging, body.dragging * {
     color: #843534;
 }
 
+.list-group-item-condensed {
+    padding: 5px 10px;
+
+}
 .user-container {
     margin-top: 20px;
     border-bottom: 5px solid #f7f7f7;
