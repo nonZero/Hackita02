@@ -20,6 +20,11 @@
 
         {% for object in published %}
             <li class="list-group-item{% if object.vote %} list-group-item-warning{% endif %}">
+                {% if object.bid and object.bid.value %}
+                    <div class="pull-right label label-success">{{ object.bid.value }}
+                            <i class="fa fa-money"></i>
+                    </div>
+                {% endif %}
                 {% if object.vote %}
                     <div class="label label-{{ object.vote.get_score_label }} pull-right">
                         {{ object.vote.get_score_display }}

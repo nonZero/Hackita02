@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-19 13:10+0300\n"
-"PO-Revision-Date: 2015-10-19 13:10+0300\n"
+"POT-Creation-Date: 2015-10-22 14:11+0300\n"
+"PO-Revision-Date: 2015-10-22 14:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -87,6 +87,15 @@ msgstr "הערה לפרויקט"
 msgid "project comments"
 msgstr "הערות לפרויקט"
 
+msgid "updated at"
+msgstr "מועד עדכון"
+
+msgid "project bid"
+msgstr "ניקוד משתמש לפרויקט"
+
+msgid "project bids"
+msgstr "ניקודי משתמש לפרויקט"
+
 msgid "Private"
 msgstr "פרטי"
 
@@ -99,8 +108,14 @@ msgstr "נסקר על ידי"
 msgid "Unreviewed"
 msgstr "טרם נסקר"
 
+msgid "Bid for"
+msgstr "ניקוד משתמש עבור"
+
 msgid "Projects"
 msgstr "פרוייקטים"
+
+msgid "Send"
+msgstr "שליחה"
 
 msgid "Unpublished"
 msgstr "טרם פורסם"
@@ -155,6 +170,12 @@ msgstr "עריכת הערה"
 
 msgid "Latest Comments"
 msgstr "הערות אחרונות"
+
+msgid "Thank you!"
+msgstr "תודה רבה!"
+
+msgid "New bid"
+msgstr "הצבעה חדשה לפרויקטים"
 
 msgid "Comment posted"
 msgstr "ההערה נשמרה"

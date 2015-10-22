@@ -182,3 +182,27 @@ class ProjectComment(models.Model):
             self.project.get_absolute_url(),
             self.id,
         )
+
+
+class ProjectBid(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='project_bids')
+    project = models.ForeignKey(Project, related_name='bids')
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated at"), auto_now=True)
+    value = models.IntegerField()
+
+    class Meta:
+        unique_together = (
+            ('user', 'project'),
+        )
+        ordering = ['-created_at']
+        verbose_name = _("project bid")
+        verbose_name_plural = _("project bids")
+
+    def __str__(self):
+        return "{} - {}: {}".format(
+            self.project,
+            self.user,
+            self.value,
+        )

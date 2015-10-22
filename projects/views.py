@@ -1,9 +1,13 @@
+import json
 import logging
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
+from django.db import transaction
+from django.db.models import Sum
 from django.http import JsonResponse
+from django.http.response import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -16,6 +20,7 @@ from django.views.generic.detail import SingleObjectMixin
 
 from . import forms, models
 from hackita02.base_views import UIMixin, PermissionMixin, TeamOnlyMixin
+from users.views import CommunityMixin
 
 logger = logging.getLogger(__name__)
 
@@ -32,8 +37,49 @@ class ProjectListView(UIMixin, ListView):
                 proj.vote = proj.votes.filter(
                     user=self.request.user,
                 ).first()
+                proj.bid = proj.bids.filter(
+                    user=self.request.user,
+                ).first()
         d['published'] = published
         return d
+
+
+class ProjectBidView(CommunityMixin, ProjectListView):
+    template_name = "projects/project_bid.html"
+
+    def post(self, request, *args, **kwargs):
+        TOTAL = 100
+        try:
+            bid = json.loads(self.request.POST['bid'])
+            bid = [(models.Project.objects.get(id=k), int(v)) for k, v in bid]
+        except (ValueError, KeyError, models.Project.DoesNotExist):
+            return HttpResponseBadRequest("bid not found")
+        if sum(x[1] for x in bid) != TOTAL:
+            return HttpResponseBadRequest("bad bid")
+        with transaction.atomic():
+            for p, v in bid:
+                o, created = models.ProjectBid.objects.get_or_create(
+                    project=p,
+                    user=request.user,
+                    defaults={'value': v}
+                )
+                if not created:
+                    o.value = v
+                    o.save()
+            assert models.ProjectBid.objects.filter(user=request.user
+                                                    ).aggregate(
+                total=Sum('value'))['total'] == TOTAL
+        messages.success(self.request, _("Thank you!"))
+        subject = "{}: {}".format(_("New bid"), request.user.community_name)
+        bids = sorted([x for x in bid if x[1]], key=lambda x: x[1],
+                      reverse=True)
+        html_message = render_to_string("projects/bid_email.html", {
+            'base_url': self.request.build_absolute_uri('/')[:-1],
+            'bid': bids,
+        }, request=self.request)
+        message = "\n".join(["{}: {}".format(p, v) for p, v in bids])
+        mail_managers(subject, message, html_message=html_message)
+        return redirect("projects:list")
 
 
 class ProjectVotesView(TeamOnlyMixin, UIMixin, ListView):
