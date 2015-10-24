@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-22 14:11+0300\n"
-"PO-Revision-Date: 2015-10-22 14:11+0300\n"
+"POT-Creation-Date: 2015-10-24 22:31+0300\n"
+"PO-Revision-Date: 2015-10-24 22:31+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -176,6 +176,12 @@ msgstr "תודה רבה!"
 
 msgid "New bid"
 msgstr "הצבעה חדשה לפרויקטים"
+
+msgid "user"
+msgstr "משתמש"
+
+msgid "bid"
+msgstr "הצעה"
 
 msgid "Comment posted"
 msgstr "ההערה נשמרה"
