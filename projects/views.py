@@ -103,7 +103,7 @@ class ProjectBidsView(TeamOnlyMixin, View):
         for bid in qs:
             w.writerow((bid.project.title, bid.user.community_name, bid.value))
         o.seek(0)
-        return HttpResponse(o, content_type="text/plain")
+        return HttpResponse(o, content_type="text/csv")
 
 
 class ProjectVotesView(TeamOnlyMixin, UIMixin, ListView):
