@@ -1,19 +1,23 @@
+import csv
 import json
 import logging
+import io
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_managers
 from django.db import transaction
 from django.db.models import Sum
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.http.response import HttpResponseBadRequest
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, \
     View
+
 from django.utils.translation import ugettext_lazy as _
 
 from django.views.generic.detail import SingleObjectMixin
@@ -45,17 +49,22 @@ class ProjectListView(UIMixin, ListView):
 
 
 class ProjectBidView(CommunityMixin, ProjectListView):
+    TOTAL = 100
     template_name = "projects/project_bid.html"
 
     def post(self, request, *args, **kwargs):
-        TOTAL = 100
         try:
             bid = json.loads(self.request.POST['bid'])
             bid = [(models.Project.objects.get(id=k), int(v)) for k, v in bid]
         except (ValueError, KeyError, models.Project.DoesNotExist):
             return HttpResponseBadRequest("bid not found")
-        if sum(x[1] for x in bid) != TOTAL:
-            return HttpResponseBadRequest("bad bid")
+
+        if not all(0 <= n <= self.TOTAL for p, n in bid):
+            return HttpResponseBadRequest("bid item not in range")
+
+        if sum(x[1] for x in bid) != self.TOTAL:
+            return HttpResponseBadRequest("wrong total")
+
         with transaction.atomic():
             for p, v in bid:
                 o, created = models.ProjectBid.objects.get_or_create(
@@ -68,7 +77,7 @@ class ProjectBidView(CommunityMixin, ProjectListView):
                     o.save()
             assert models.ProjectBid.objects.filter(user=request.user
                                                     ).aggregate(
-                total=Sum('value'))['total'] == TOTAL
+                total=Sum('value'))['total'] == self.TOTAL
         messages.success(self.request, _("Thank you!"))
         subject = "{}: {}".format(_("New bid"), request.user.community_name)
         bids = sorted([x for x in bid if x[1]], key=lambda x: x[1],
@@ -80,6 +89,21 @@ class ProjectBidView(CommunityMixin, ProjectListView):
         message = "\n".join(["{}: {}".format(p, v) for p, v in bids])
         mail_managers(subject, message, html_message=html_message)
         return redirect("projects:list")
+
+
+class ProjectBidsView(TeamOnlyMixin, View):
+    def get(self, request, *args, **kwargs):
+        qs = models.ProjectBid.objects.order_by(
+            'project__title',
+            'user__community_name'
+        )
+        o = io.StringIO()
+        w = csv.writer(o)
+        w.writerow((_('project'), _('user'), _('bid')))
+        for bid in qs:
+            w.writerow((bid.project.title, bid.user.community_name, bid.value))
+        o.seek(0)
+        return HttpResponse(o, content_type="text/csv")
 
 
 class ProjectVotesView(TeamOnlyMixin, UIMixin, ListView):

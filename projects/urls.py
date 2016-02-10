@@ -7,6 +7,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.ProjectListView.as_view(), name='list'),
     url(r'^bid/$', views.ProjectBidView.as_view(), name='bid'),
+    url(r'^bid/results/$', views.ProjectBidsView.as_view(), name='bid_results'),
     url(r'^show-votes/$', views.ProjectVotesView.as_view(), name='list_votes'),
     url(r'^create-new/$', views.ProjectCreateView.as_view(), name='create'),
     url(r'^(?P<slug>\w+)/$', views.ProjectDetailView.as_view(), name='detail'),
