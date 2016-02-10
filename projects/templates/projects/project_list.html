@@ -54,7 +54,7 @@
                     </h4>
 
                     <p class="list-group-item-text">
-                        {{ object.summary }}
+                        {{ object.summary | urlizetrunc:50 | linebreaks}}
                     </p>
                 </li>
             {% endfor %}
